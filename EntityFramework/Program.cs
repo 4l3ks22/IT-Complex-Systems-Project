@@ -8,13 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Register DbContext with dependency injection
-builder.Services.AddDbContext<DatabaseContext>(options =>
+builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 var app = builder.Build();
-
-// Optional: minimal endpoint
-app.MapGet("/", () => "Hello World!");
 
 // Run the app
 app.Run();

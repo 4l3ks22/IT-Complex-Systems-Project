@@ -7,66 +7,53 @@ namespace EntityFramework.Entities;
 /// <summary>
 /// Generated database entities, relations and context using dotnet ef scaffold 
 /// </summary>
-public partial class DatabaseContext : DbContext
+public partial class MyDbContext : DbContext
 {
 
-    public DatabaseContext(DbContextOptions<DatabaseContext> options)
+    public MyDbContext(DbContextOptions<MyDbContext> options)
         : base(options)
     {
     }
 
-    public virtual DbSet<Crew> Crews { get; set; }
+    public DbSet<Crew> Crews { get; set; }
 
-    public virtual DbSet<Episode> Episodes { get; set; }
+    public DbSet<Episode> Episodes { get; set; }
 
-    public virtual DbSet<Genre> Genres { get; set; }
+    public DbSet<Genre> Genres { get; set; }
 
-    public virtual DbSet<OmdbDatum> OmdbData { get; set; }
+    public DbSet<OmdbDatum> OmdbData { get; set; }
 
-    public virtual DbSet<ParticipatesInTitle> ParticipatesInTitles { get; set; }
+    public DbSet<ParticipatesInTitle> ParticipatesInTitles { get; set; }
 
-    public virtual DbSet<Person> Persons { get; set; }
+    public DbSet<Person> Persons { get; set; }
 
-    public virtual DbSet<PersonProfession> PersonProfessions { get; set; }
+    public DbSet<PersonProfession> PersonProfessions { get; set; }
 
-    public virtual DbSet<PersonRating> PersonRatings { get; set; }
+    public DbSet<PersonRating> PersonRatings { get; set; }
 
-    public virtual DbSet<Profession> Professions { get; set; }
+    public DbSet<Profession> Professions { get; set; }
 
-    public virtual DbSet<Rating> Ratings { get; set; }
+    public DbSet<Rating> Ratings { get; set; }
 
-    public virtual DbSet<Title> Titles { get; set; }
+    public DbSet<Title> Titles { get; set; }
 
-    public virtual DbSet<TitleExtra> TitleExtras { get; set; }
+    public DbSet<TitleExtra> TitleExtras { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 
-    public virtual DbSet<UserBookmark> UserBookmarks { get; set; }
+    public DbSet<UserBookmark> UserBookmarks { get; set; }
 
-    public virtual DbSet<UserRatingHistory> UserRatingHistories { get; set; }
+    public DbSet<UserRatingHistory> UserRatingHistories { get; set; }
 
-    public virtual DbSet<UserSearchHistory> UserSearchHistories { get; set; }
+    public  DbSet<UserSearchHistory> UserSearchHistories { get; set; }
 
-    public virtual DbSet<Version> Versions { get; set; }
+    public DbSet<Version> Versions { get; set; }
 
-    public virtual DbSet<WordIndex> WordIndices { get; set; }
+    public DbSet<WordIndex> WordIndices { get; set; }
     
 
-    protected void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Crew>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("crew");
-
-            entity.Property(e => e.Directors).HasColumnName("directors");
-            entity.Property(e => e.Tconst)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("tconst");
-            entity.Property(e => e.Writers).HasColumnName("writers");
-        });
 
         modelBuilder.Entity<Episode>(entity =>
         {
@@ -103,94 +90,6 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.Genre1)
                 .HasMaxLength(50)
                 .HasColumnName("genre");
-        });
-
-        modelBuilder.Entity<OmdbDatum>(entity =>
-        {
-            entity.HasKey(e => e.Tconst).HasName("omdb_data_pkey");
-
-            entity.ToTable("omdb_data");
-
-            entity.Property(e => e.Tconst)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("tconst");
-            entity.Property(e => e.Actors)
-                .HasMaxLength(256)
-                .HasColumnName("actors");
-            entity.Property(e => e.Awards)
-                .HasMaxLength(80)
-                .HasColumnName("awards");
-            entity.Property(e => e.Boxoffice)
-                .HasMaxLength(100)
-                .HasColumnName("boxoffice");
-            entity.Property(e => e.Country)
-                .HasMaxLength(256)
-                .HasColumnName("country");
-            entity.Property(e => e.Director).HasColumnName("director");
-            entity.Property(e => e.Dvd)
-                .HasMaxLength(80)
-                .HasColumnName("dvd");
-            entity.Property(e => e.Episode)
-                .HasMaxLength(80)
-                .HasColumnName("episode");
-            entity.Property(e => e.Genre)
-                .HasMaxLength(80)
-                .HasColumnName("genre");
-            entity.Property(e => e.Imdbrating)
-                .HasMaxLength(80)
-                .HasColumnName("imdbrating");
-            entity.Property(e => e.Imdbvotes)
-                .HasMaxLength(100)
-                .HasColumnName("imdbvotes");
-            entity.Property(e => e.Language).HasColumnName("language");
-            entity.Property(e => e.Metascore)
-                .HasMaxLength(100)
-                .HasColumnName("metascore");
-            entity.Property(e => e.Plot).HasColumnName("plot");
-            entity.Property(e => e.Poster)
-                .HasMaxLength(180)
-                .HasColumnName("poster");
-            entity.Property(e => e.Production)
-                .HasMaxLength(80)
-                .HasColumnName("production");
-            entity.Property(e => e.Rated)
-                .HasMaxLength(80)
-                .HasColumnName("rated");
-            entity.Property(e => e.Ratings)
-                .HasMaxLength(180)
-                .HasColumnName("ratings");
-            entity.Property(e => e.Released)
-                .HasMaxLength(80)
-                .HasColumnName("released");
-            entity.Property(e => e.Response)
-                .HasMaxLength(80)
-                .HasColumnName("response");
-            entity.Property(e => e.Runtime)
-                .HasMaxLength(80)
-                .HasColumnName("runtime");
-            entity.Property(e => e.Season)
-                .HasMaxLength(80)
-                .HasColumnName("season");
-            entity.Property(e => e.Seriesid)
-                .HasMaxLength(80)
-                .HasColumnName("seriesid");
-            entity.Property(e => e.Title)
-                .HasMaxLength(256)
-                .HasColumnName("title");
-            entity.Property(e => e.Totalseasons)
-                .HasMaxLength(100)
-                .HasColumnName("totalseasons");
-            entity.Property(e => e.Type)
-                .HasMaxLength(80)
-                .HasColumnName("type");
-            entity.Property(e => e.Website)
-                .HasMaxLength(100)
-                .HasColumnName("website");
-            entity.Property(e => e.Writer).HasColumnName("writer");
-            entity.Property(e => e.Year)
-                .HasMaxLength(100)
-                .HasColumnName("year");
         });
 
         modelBuilder.Entity<ParticipatesInTitle>(entity =>
