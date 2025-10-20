@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EntityFramework.Entities;
-
+namespace EntityFramework.Models;
 public partial class UserSearchHistory
 {
     public int UserId { get; set; }

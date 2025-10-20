@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntityFramework.Entities;
+namespace EntityFramework.Models;
 
 /// <summary>
 /// Generated database entities, relations and context using dotnet ef scaffold 
