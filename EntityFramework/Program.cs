@@ -1,3 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using EntityFramework.Entities;
+using Microsoft.EntityFrameworkCore;
 
-Console.WriteLine("Hello, World!");
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Load connection string from appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Register DbContext with dependency injection
+builder.Services.AddDbContext<DatabaseContext>(options =>
+    options.UseNpgsql(connectionString));
+
+var app = builder.Build();
+
+// Optional: minimal endpoint
+app.MapGet("/", () => "Hello World!");
+
+// Run the app
+app.Run();
