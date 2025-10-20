@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using EntityFramework.Models;
 
-var builder = WebApplication.CreateBuilder(args);
+Console.WriteLine("Testing EF Core layer...");
 
-// Load connection string from appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Example: manually configure DbContext (for testing only)
+var optionsBuilder = new DbContextOptionsBuilder<MyDbContext>();
+optionsBuilder.UseNpgsql("Host=localhost;Database=mydb;Username=myuser;Password=mysecret;");
 
-// Register MyDbContext with dependency injection
-builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseNpgsql(connectionString));
+using var context = new MyDbContext(optionsBuilder.Options);
 
-var app = builder.Build();
-
-app.Run();
+var episodes = await context.Episodes.ToListAsync();
+foreach (var e in episodes)
+{
+    Console.WriteLine($"{e.Episodenumber}: {e.Tconst}");
+}
