@@ -15,13 +15,9 @@ public partial class MyDbContext : DbContext
     {
     }
 
-    public DbSet<Crew> Crews { get; set; }
-
     public DbSet<Episode> Episodes { get; set; }
 
     public DbSet<Genre> Genres { get; set; }
-
-    public DbSet<OmdbDatum> OmdbData { get; set; }
 
     public DbSet<ParticipatesInTitle> ParticipatesInTitles { get; set; }
 
