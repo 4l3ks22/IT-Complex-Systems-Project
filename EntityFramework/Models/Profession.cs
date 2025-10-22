@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EntityFramework.Models;
 
-public partial class Profession
+public class Profession
 {
     public int ProfessionId { get; set; }
 

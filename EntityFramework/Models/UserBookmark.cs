@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace EntityFramework.Models;
-public partial class UserBookmark
+public class UserBookmark
 {
     public int BookmarkId { get; set; }
 

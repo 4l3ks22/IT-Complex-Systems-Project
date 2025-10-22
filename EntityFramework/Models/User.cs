@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace EntityFramework.Models;
-public partial class User
+public class User
 {
     public int UserId { get; set; }
 

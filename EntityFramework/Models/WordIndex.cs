@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace EntityFramework.Models;
-public partial class WordIndex
+public class WordIndex
 {
     public string Tconst { get; set; } = null!;
 

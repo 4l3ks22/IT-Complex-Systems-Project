@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EntityFramework.Models;
 
-public partial class PersonProfession
+public class PersonProfession
 {
     public string Nconst { get; set; } = null!;
 

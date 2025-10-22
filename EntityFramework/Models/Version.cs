@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace EntityFramework.Models;
-public partial class Version
+public class Version
 {
     public string Tconst { get; set; } = null!;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EntityFramework.Models;
 
-public partial class Title
+public class Title
 {
     public string Tconst { get; set; } = null!;
 

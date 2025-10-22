@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EntityFramework.Models;
 
-public partial class Rating
+public class Rating
 {
     public string Tconst { get; set; } = null!;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace EntityFramework.Models;
-public partial class UserSearchHistory
+public class UserSearchHistory
 {
     public int UserId { get; set; }
 

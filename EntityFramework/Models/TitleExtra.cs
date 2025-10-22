@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace EntityFramework.Models;
-public partial class TitleExtra
+public class TitleExtra
 {
     public string? Tconst { get; set; }
 

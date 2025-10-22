@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace EntityFramework.Models;
-public partial class UserRatingHistory
+public class UserRatingHistory
 {
     public int RatingId { get; set; }
 

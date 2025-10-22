@@ -3,9 +3,9 @@ using EntityFramework.Models;
 
 Console.WriteLine("Testing EF Core layer...");
 
-// Example: manually configure DbContext (for testing only)
+
 var optionsBuilder = new DbContextOptionsBuilder<MyDbContext>();
-optionsBuilder.UseNpgsql("Host=localhost;Database=mydb;Username=myuser;Password=mysecret;");
+optionsBuilder.UseNpgsql("Host=cit.ruc.dk;Database=cit08;username=cit08;password=;");
 
 using var context = new MyDbContext(optionsBuilder.Options);
 
