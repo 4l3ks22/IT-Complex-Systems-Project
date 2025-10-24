@@ -1,7 +1,4 @@
-﻿// csharp
-using System.Collections.Generic;
-using System.Linq;
-using EntityFramework.Models;
+﻿using EntityFramework.Models;
 using EntityFramework.Models.Interfaces;
 
 namespace EntityFramework.DataServices;
