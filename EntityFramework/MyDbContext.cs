@@ -10,8 +10,7 @@ namespace EntityFramework.Models;
 public partial class MyDbContext : DbContext
 {
 
-    public MyDbContext(DbContextOptions<MyDbContext> options)
-        : base(options)
+    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
     {
     }
 
@@ -80,10 +79,10 @@ public partial class MyDbContext : DbContext
 
             entity.ToTable("genres");
 
-            entity.HasIndex(e => e.Genre1, "genres_genre_key").IsUnique();
+            entity.HasIndex(e => e.GenreName, "genres_genre_key").IsUnique();
 
             entity.Property(e => e.GenreId).HasColumnName("genre_id");
-            entity.Property(e => e.Genre1)
+            entity.Property(e => e.GenreName)
                 .HasMaxLength(50)
                 .HasColumnName("genre");
         });
@@ -478,9 +477,6 @@ public partial class MyDbContext : DbContext
                 .HasForeignKey(d => d.Tconst)
                 .HasConstraintName("fk_tconst_word_index");
         });
-
-        OnModelCreatingPartial(modelBuilder);
+        
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
