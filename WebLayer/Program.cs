@@ -1,26 +1,23 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using EntityFramework.DataServices;
 using EntityFramework.Models.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Basic logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-// register EF Core with Npgsql 
+// register entity framework with the db context 
 builder.Services.AddDbContext<EntityFramework.Models.MyDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// register controllers and service
+// register controllers and services
 builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
+builder.Services.AddScoped<IEpisodeData, EpisodeData>();
 
 var app = builder.Build();
 
