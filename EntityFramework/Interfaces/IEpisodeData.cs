@@ -1,6 +1,8 @@
 ﻿namespace EntityFramework.Models.Interfaces;
 
-public class IEpisodeData
+public interface IEpisodeData
 {
-    
+    public List<Episode> GetEpisodes();
+    public Episode GetById(int id);
 }
+

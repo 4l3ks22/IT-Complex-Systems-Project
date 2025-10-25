@@ -14,7 +14,7 @@ public class GenresController(IGenreData genreData) : ControllerBase
         var genreNames = genreData.GetGenres();
 
         var genreDtos = genreNames
-            .Select(name => new GenreDto { Name = name })
+            .Select(g => new GenreDto { Name = g.GenreName })
             .ToList();
 
         return Ok(genreDtos);
