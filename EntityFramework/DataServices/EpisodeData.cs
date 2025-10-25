@@ -18,6 +18,6 @@ public class EpisodeData(MyDbContext db) : IEpisodeData
        return db.Episodes
            .Where(e => !string.IsNullOrEmpty(e.Tconst))
            .Include(t => t.Parenttconst)
-           .FirstOrDefault(e => e.Tconst == id.ToString());
+           .FirstOrDefault(e => e.Tconst == id.ToString())!;
    }
 }

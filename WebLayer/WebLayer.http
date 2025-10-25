@@ -13,3 +13,10 @@ Accept: application/json
 
 GET {{WebLayer_HostAddress}}/api/episodes
 Accept: application/json
+
+###
+
+GET {{WebLayer_HostAddress}}/api/titles
+Accept: application/json
+
+###

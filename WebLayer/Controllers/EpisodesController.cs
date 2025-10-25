@@ -3,7 +3,7 @@ using EntityFramework.Models;
 using EntityFramework.Models.Interfaces;
 using WebLayer.Dtos;
 
-namespace Controllers
+namespace WebLayer.Controllers
 {
     [ApiController]
     [Route("api/episodes")]

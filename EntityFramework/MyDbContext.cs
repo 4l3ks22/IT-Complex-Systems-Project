@@ -7,7 +7,7 @@ namespace EntityFramework.Models;
 /// <summary>
 /// Generated database entities, relations and context using dotnet ef scaffold 
 /// </summary>
-public partial class MyDbContext : DbContext
+public class MyDbContext : DbContext
 {
 
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)

@@ -18,6 +18,7 @@ builder.Services.AddDbContext<EntityFramework.Models.MyDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
 builder.Services.AddScoped<IEpisodeData, EpisodeData>();
+builder.Services.AddScoped<ITitleData, TitleData>();
 
 var app = builder.Build();
 

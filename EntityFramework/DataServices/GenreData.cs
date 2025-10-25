@@ -3,12 +3,19 @@ using EntityFramework.Models.Interfaces;
 
 namespace EntityFramework.DataServices;
 
-public class GenreData(MyDbContext db) : IGenreData // Default constructor
+public class GenreData(MyDbContext db) : IGenreData 
 {
     public List<Genre> GetGenres()
     {
         return db.Genres
             .Where(g => !string.IsNullOrEmpty(g.GenreName))
             .ToList();
+    }
+    
+    public Genre GetById(int id)
+    {
+        return db.Genres
+            .Where(g => !string.IsNullOrEmpty(g.GenreName))
+            .FirstOrDefault(g => g.GenreId == id);
     }
 }

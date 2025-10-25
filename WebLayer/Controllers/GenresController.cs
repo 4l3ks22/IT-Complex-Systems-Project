@@ -19,4 +19,13 @@ public class GenresController(IGenreData genreData) : ControllerBase
 
         return Ok(genreDtos);
     }
+
+    [HttpGet("{id}")]
+    public ActionResult<GenreDto> GetById(int id)
+    {
+        var genre = genreData.GetById(id);
+
+        return Ok(new GenreDto { Name = genre.GenreName });
+    }
+    
 }

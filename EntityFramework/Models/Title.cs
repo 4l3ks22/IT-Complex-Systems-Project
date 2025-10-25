@@ -13,7 +13,7 @@ public class Title
 
     public string? Originaltitle { get; set; }
 
-    public bool? Isadult { get; set; }
+    public bool Isadult { get; set; }
 
     public string? Startyear { get; set; }
 
