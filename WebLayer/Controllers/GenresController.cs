@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using EntityFramework.Models.Interfaces;
+using WebLayer.Dtos;
 
 namespace WebLayer.Controllers;
 
 [ApiController]
 [Route("api/genres")]
-public class GenresController : ControllerBase
+public class GenresController(IGenreData genreData) : ControllerBase
 {
-    private readonly IGenreData _genreData;
-
-    public GenresController(IGenreData genreData) => _genreData = genreData;
-
     [HttpGet]
-    public ActionResult<IEnumerable<string>> GetGenres()
+    public ActionResult<IEnumerable<GenreDto>> GetGenres()
     {
-        var genres = _genreData.GetGenres();
-        return Ok(genres ?? new List<string>());
+        var genreNames = genreData.GetGenres();
+
+        var genreDtos = genreNames
+            .Select(name => new GenreDto { Name = name })
+            .ToList();
+
+        return Ok(genreDtos);
     }
 }
