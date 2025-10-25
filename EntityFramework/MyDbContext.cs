@@ -33,6 +33,8 @@ public class MyDbContext : DbContext
     public DbSet<Title> Titles { get; set; }
 
     public DbSet<TitleExtra> TitleExtras { get; set; }
+    
+    public DbSet<TitleGenre> TitleGenres { get; set; }
 
     public DbSet<User> Users { get; set; }
 
@@ -317,6 +319,34 @@ public class MyDbContext : DbContext
                 .HasConstraintName("fk_tconst_extras");
         });
 
+        modelBuilder.Entity<TitleGenre>(entity =>
+        {
+            // Map to table
+            entity.ToTable("title_genre");
+
+            // Composite primary key
+            entity.HasKey(tg => new { tg.Tconst, tg.GenreId });
+
+            entity.Property<string>("Tconst")
+                .HasMaxLength(50)
+                .HasColumnName("tconst");
+
+            entity.Property<int>("Genre")
+                .HasColumnName("genre");
+            
+            // Relationship to Title 
+            entity.HasOne<Title>()
+                .WithMany() 
+                .HasForeignKey("Tconst")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Relationship to Genre 
+            entity.HasOne<Genre>()
+                .WithMany() 
+                .HasForeignKey("Genre")
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+        
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("users_pkey");
