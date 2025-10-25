@@ -2,5 +2,5 @@
 
 public interface IGenreData
 {
-    List<string> GetGenres();
+    List<Genre> GetGenres();
 }

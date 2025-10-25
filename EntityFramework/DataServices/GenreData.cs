@@ -5,11 +5,10 @@ namespace EntityFramework.DataServices;
 
 public class GenreData(MyDbContext db) : IGenreData // Default constructor
 {
-    public List<string> GetGenres()
+    public List<Genre> GetGenres()
     {
         return db.Genres
-            .Select(g => g.GenreName)
-            .Where(n => !string.IsNullOrEmpty(n))
+            .Where(g => !string.IsNullOrEmpty(g.GenreName))
             .ToList();
     }
 }

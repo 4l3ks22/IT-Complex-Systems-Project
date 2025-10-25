@@ -8,3 +8,8 @@ Accept: application/json
 
 GET {{WebLayer_HostAddress}}/api/genres/1
 Accept: application/json
+
+###
+
+GET {{WebLayer_HostAddress}}/api/episodes
+Accept: application/json

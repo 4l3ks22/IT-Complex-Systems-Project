@@ -1,11 +1,27 @@
-// csharp
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using EntityFramework.Models;
 using EntityFramework.Models.Interfaces;
+using WebLayer.Dtos;
 
-[ApiController]
-[Route("api/[controller]")]
-public class EpisodesController(IEpisodeData episodes) : ControllerBase
+namespace Controllers
 {
-    
+    [ApiController]
+    [Route("api/episodes")]
+    public class EpisodesController(IEpisodeData episodeData) : ControllerBase
+    {
+        
+        [HttpGet]
+        public ActionResult<IEnumerable<Episode>> getEpisodes()
+        {
+            var episodes = episodeData.GetEpisodes();
+
+            var dtos = episodes.Select(e => new EpisodeDto()
+            {
+                Season = e.Seasonnumber,
+                Episode = e.Episodenumber
+            }).ToList();
+
+            return Ok(dtos);
+        }
+    }
 }
