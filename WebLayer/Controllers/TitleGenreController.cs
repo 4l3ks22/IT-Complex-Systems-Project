@@ -11,23 +11,18 @@ public class TitleGenreController(MyDbContext context) : ControllerBase
     [HttpGet("{titleId}")]
     public ActionResult<TitleGenreDto> GetTitle(string titleId)
     {
-        // Query to get title by name and it's genres
-        var query = from tg in context.TitleGenres
-            join t in context.Titles on tg.Tconst equals t.Tconst
-            join g in context.Genres on tg.GenreId equals g.GenreId
-            where tg.Tconst == titleId
-            select new { t.Originaltitle, g.GenreName };
+        var title = context.Titles
+            .Include(t => t.TitleGenres)
+            .ThenInclude(tg => tg.Genre)
+            .FirstOrDefault(t => t.Tconst == titleId);
 
-        var list = query.ToList();
-
-        if (!list.Any())
+        if (title == null)
             return NotFound();
 
-        // Build DTO
         var dto = new TitleGenreDto
         {
-            TitleName = list.First().Originaltitle,             // all rows have same title
-            Genres = list.Select(x => x.GenreName).ToList() // collect all genres
+            TitleName = title.Originaltitle,
+            Genres = title.TitleGenres.Select(tg => tg.Genre.GenreName).ToList()
         };
 
         return Ok(dto);
