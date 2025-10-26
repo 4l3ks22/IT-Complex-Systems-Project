@@ -1,5 +1,5 @@
+using EntityFramework.Interfaces;
 using EntityFramework.Models;
-using EntityFramework.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntityFramework.DataServices;

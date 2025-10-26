@@ -1,6 +1,7 @@
+using EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework.DataServices;
-using EntityFramework.Models.Interfaces;
+using EntityFramework.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Logging.AddConsole();
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
 // register entity framework with the db context 
-builder.Services.AddDbContext<EntityFramework.Models.MyDbContext>(options =>
+builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // register controllers and services

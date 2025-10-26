@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EntityFramework.Models;
 using Microsoft.EntityFrameworkCore;
+using Version = EntityFramework.Models.Version;
 
-namespace EntityFramework.Models;
+namespace EntityFramework;
 
 /// <summary>
 /// Generated database entities, relations and context using dotnet ef scaffold 

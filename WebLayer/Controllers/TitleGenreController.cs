@@ -1,6 +1,6 @@
+using EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 using EntityFramework.Models;
-using EntityFramework.Models.Interfaces;
 using WebLayer.Dtos;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +11,7 @@ public class TitleGenreController(MyDbContext context) : ControllerBase
     [HttpGet("{titleId}")]
     public ActionResult<TitleGenreDto> GetTitle(string titleId)
     {
-        // Join TitleGenres -> Titles -> Genres to get names
+        // Query to get title by name and it's genres
         var query = from tg in context.TitleGenres
             join t in context.Titles on tg.Tconst equals t.Tconst
             join g in context.Genres on tg.GenreId equals g.GenreId

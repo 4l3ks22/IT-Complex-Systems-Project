@@ -1,4 +1,6 @@
-namespace EntityFramework.Models.Interfaces;
+using EntityFramework.Models;
+
+namespace EntityFramework.Interfaces;
 
 public interface ITitleGenreData
 {

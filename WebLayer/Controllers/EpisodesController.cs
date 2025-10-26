@@ -1,6 +1,6 @@
+using EntityFramework.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EntityFramework.Models;
-using EntityFramework.Models.Interfaces;
 using WebLayer.Dtos;
 
 namespace WebLayer.Controllers
