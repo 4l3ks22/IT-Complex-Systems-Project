@@ -40,4 +40,6 @@ public class Title
     public virtual ICollection<Genre> GenresNavigation { get; set; } = new List<Genre>();
 
     public virtual ICollection<Person> Nconsts { get; set; } = new List<Person>();
+    
+    public ICollection<TitleGenre> TitleGenres { get; set; } = new List<TitleGenre>();
 }

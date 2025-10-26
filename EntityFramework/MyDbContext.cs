@@ -29,11 +29,9 @@ public class MyDbContext : DbContext
     public DbSet<Profession> Professions { get; set; }
 
     public DbSet<Rating> Ratings { get; set; }
-
     public DbSet<Title> Titles { get; set; }
 
     public DbSet<TitleExtra> TitleExtras { get; set; }
-    
     public DbSet<TitleGenre> TitleGenres { get; set; }
 
     public DbSet<User> Users { get; set; }
@@ -165,12 +163,6 @@ public class MyDbContext : DbContext
                     {
                         j.HasKey("Nconst", "Tconst").HasName("pk_nconst_tconst");
                         j.ToTable("known_for_title");
-                        j.IndexerProperty<string>("Nconst")
-                            .HasMaxLength(20)
-                            .HasColumnName("nconst");
-                        j.IndexerProperty<string>("Tconst")
-                            .HasMaxLength(20)
-                            .HasColumnName("tconst");
                     });
         });
 
@@ -275,27 +267,34 @@ public class MyDbContext : DbContext
             entity.Property(e => e.Titletype)
                 .HasMaxLength(20)
                 .HasColumnName("titletype");
+        });
 
-            entity.HasMany(d => d.GenresNavigation).WithMany(p => p.Tconsts)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TitleGenre",
-                    r => r.HasOne<Genre>().WithMany()
-                        .HasForeignKey("Genre")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_genre"),
-                    l => l.HasOne<Title>().WithMany()
-                        .HasForeignKey("Tconst")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_tconst_genre"),
-                    j =>
-                    {
-                        j.HasKey("Tconst", "Genre").HasName("pk_tconst_genre");
-                        j.ToTable("title_genre");
-                        j.IndexerProperty<string>("Tconst")
-                            .HasMaxLength(50)
-                            .HasColumnName("tconst");
-                        j.IndexerProperty<int>("Genre").HasColumnName("genre");
-                    });
+        modelBuilder.Entity<TitleGenre>(tg =>
+        {
+            tg.ToTable("title_genre");
+
+            tg.HasKey(x => new { x.Tconst, x.GenreId })
+                .HasName("pk_tconst_genre");
+
+            tg.Property(x => x.Tconst)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("tconst");
+
+            tg.Property(x => x.GenreId)
+                .HasColumnName("genre");
+
+            tg.HasOne(x => x.Title)                   // navigation property in TitleGenre
+                .WithMany(t => t.TitleGenres)         // collection in Title
+                .HasForeignKey(x => x.Tconst)         // foreign key in TitleGenre
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_tconst_genre");
+
+            tg.HasOne(x => x.Genre)                   // navigation property in TitleGenre
+                .WithMany(g => g.TitleGenres)         // collection in Genre
+                .HasForeignKey(x => x.GenreId)        // foreign key in TitleGenre
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_genre");
         });
         
         modelBuilder.Entity<TitleExtra>(entity =>
@@ -317,34 +316,6 @@ public class MyDbContext : DbContext
                 .HasForeignKey(d => d.Tconst)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_tconst_extras");
-        });
-
-        modelBuilder.Entity<TitleGenre>(entity =>
-        {
-            // Map to table
-            entity.ToTable("title_genre");
-
-            // Composite primary key
-            entity.HasKey(tg => new { tg.Tconst, tg.GenreId });
-
-            entity.Property<string>("Tconst")
-                .HasMaxLength(50)
-                .HasColumnName("tconst");
-
-            entity.Property<int>("Genre")
-                .HasColumnName("genre");
-            
-            // Relationship to Title 
-            entity.HasOne<Title>()
-                .WithMany() 
-                .HasForeignKey("Tconst")
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // Relationship to Genre 
-            entity.HasOne<Genre>()
-                .WithMany() 
-                .HasForeignKey("Genre")
-                .OnDelete(DeleteBehavior.Cascade);
         });
         
         modelBuilder.Entity<User>(entity =>

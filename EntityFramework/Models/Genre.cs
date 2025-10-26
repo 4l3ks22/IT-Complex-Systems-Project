@@ -9,5 +9,7 @@ public class Genre
 
     public string GenreName { get; set; } = null!;
 
-    public virtual ICollection<Title> Tconsts { get; set; } = new List<Title>();
+    public ICollection<Title> Tconsts { get; set; } = new List<Title>();
+    
+    public ICollection<TitleGenre> TitleGenres { get; set; } = new List<TitleGenre>();
 }

@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
+
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
 // register entity framework with the db context 
@@ -19,6 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
 builder.Services.AddScoped<IEpisodeData, EpisodeData>();
 builder.Services.AddScoped<ITitleData, TitleData>();
+
 
 var app = builder.Build();
 
