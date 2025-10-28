@@ -2,6 +2,7 @@ using EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework.DataServices;
 using EntityFramework.Interfaces;
+using Mapster;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,9 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnCh
 // register entity framework with the db context 
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//add Mapster
+    builder.Services.AddMapster();
 
 // register controllers and services
 builder.Services.AddControllers();

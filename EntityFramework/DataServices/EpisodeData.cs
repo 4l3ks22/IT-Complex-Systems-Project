@@ -8,16 +8,16 @@ public class EpisodeData(MyDbContext db) : IEpisodeData
 {
    public List<Episode> GetEpisodes()
    {
-      return db.Episodes
-         .Where(e => !string.IsNullOrEmpty(e.Tconst))
-         .ToList();
+       var episodes = db.Episodes.Include(e => e.ParenttconstNavigation).Where(e => !string.IsNullOrEmpty(e.Tconst))
+           .ToList();
+       return episodes;
    }
    
-   public Episode GetById(int id)
+   public Episode GetById(string tconst)
    {
        return db.Episodes
            .Where(e => !string.IsNullOrEmpty(e.Tconst))
            .Include(t => t.Parenttconst)
-           .FirstOrDefault(e => e.Tconst == id.ToString())!;
+           .FirstOrDefault(e => e.Tconst == tconst.ToString())!;
    }
 }

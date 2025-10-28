@@ -5,6 +5,6 @@ namespace EntityFramework.Interfaces;
 public interface IEpisodeData
 {
     List<Episode> GetEpisodes();
-    Episode GetById(int id);
+    Episode GetById(string id);
 }
 
