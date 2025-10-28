@@ -2,6 +2,7 @@ namespace WebLayer.Dtos;
 
 public class TitleDto
 {
+    public string? Url { get; set; } // to obtain the URL in the weblayer.http
     public string PrimaryName { get; set; } 
     public string OriginalName { get; set; }
     public string? Type { get; set;}
