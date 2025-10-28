@@ -2,7 +2,7 @@ using EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework.DataServices;
 using EntityFramework.Interfaces;
-using Mapster;
+using Mapster; //only this was added in Program
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +25,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
 builder.Services.AddScoped<IEpisodeData, EpisodeData>();
 builder.Services.AddScoped<ITitleData, TitleData>();
-
+builder.Services.AddMapster(); //only this was added in Program
 
 var app = builder.Build();
 
