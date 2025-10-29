@@ -30,3 +30,8 @@ GET {{WebLayer_HostAddress}}/api/titles/tt0108778
 Accept: application/json
 
 ###
+
+GET {{WebLayer_HostAddress}}/api/persons
+Accept: application/json
+
+###

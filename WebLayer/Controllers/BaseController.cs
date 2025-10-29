@@ -51,11 +51,13 @@ namespace WebLayer.Controllers;
 }*/
 
 
-public abstract class BaseController<TDataService> : ControllerBase where TDataService : class //  ControllerBase is the interface provided by Asp.net 
+public abstract class BaseController<TDataService> : ControllerBase
+    where TDataService : class //  ControllerBase is the interface provided by Asp.net 
 {
     protected readonly TDataService _dataService;
     protected readonly LinkGenerator _generator;
     protected readonly IMapper _mapper;
+
     public BaseController(
         TDataService dataService,
         LinkGenerator generator,
@@ -65,7 +67,9 @@ public abstract class BaseController<TDataService> : ControllerBase where TDataS
         _generator = generator;
         _mapper = mapper;
     }
-    protected object CreatePaging<T>(string endpointName, IEnumerable<T> items, int numberOfItems, QueryParams queryParams)
+
+    protected object CreatePaging<T>(string endpointName, IEnumerable<T> items, int numberOfItems,
+        QueryParams queryParams)
     {
         var numberOfPages = (int)Math.Ceiling((double)numberOfItems / queryParams.PageSize);
 

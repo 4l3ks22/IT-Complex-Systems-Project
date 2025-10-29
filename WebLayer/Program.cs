@@ -25,6 +25,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
 builder.Services.AddScoped<IEpisodeData, EpisodeData>();
 builder.Services.AddScoped<ITitleData, TitleData>();
+builder.Services.AddScoped<IPersonData, PersonData>();
 
 var app = builder.Build();
 
