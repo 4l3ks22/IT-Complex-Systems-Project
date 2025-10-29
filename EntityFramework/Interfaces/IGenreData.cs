@@ -4,8 +4,10 @@ namespace EntityFramework.Interfaces;
 
 public interface IGenreData
 {
-    List<Genre> GetGenres();
-    
-   Genre GetById(int id);
+
+     int GetGenresCount();
+     IList<Genre> GetGenres(int page, int pageSize);
+     Genre? GetGenreById(int genreId); 
+
 }
 

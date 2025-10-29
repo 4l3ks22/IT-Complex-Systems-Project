@@ -11,8 +11,10 @@ namespace WebLayer.Controllers;
 
 [ApiController]
 [Route("api/titles")]
-public class TitlesController: BaseController
+public class TitlesController: BaseController<ITitleData>
 {
+    protected ITitleData _titleData => _dataService;
+    
     public TitlesController(
         ITitleData titleData,
         LinkGenerator generator,

@@ -51,18 +51,17 @@ namespace WebLayer.Controllers;
 }*/
 
 
-public class BaseController : ControllerBase //  ControllerBase is the interface provided by Asp.net 
+public abstract class BaseController<TDataService> : ControllerBase where TDataService : class //  ControllerBase is the interface provided by Asp.net 
 {
-
-    protected readonly ITitleData _titleData;
+    protected readonly TDataService _dataService;
     protected readonly LinkGenerator _generator;
     protected readonly IMapper _mapper;
     public BaseController(
-        ITitleData titleData,
+        TDataService dataService,
         LinkGenerator generator,
         IMapper mapper)
     {
-        _titleData = titleData; // this are the parameters of the base to be mapped in TitlesController
+        _dataService = dataService; // these are the parameters of the base to be mapped in TitlesController
         _generator = generator;
         _mapper = mapper;
     }
