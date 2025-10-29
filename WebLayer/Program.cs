@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using EntityFramework.DataServices;
 using EntityFramework.Interfaces;
 using Mapster;
+using MapsterMapper;
 using WebLayer.Mappings; //only this was added in Program
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,7 @@ builder.Services.AddMapster();
 
 // Mapster configuration 
 var config = TypeAdapterConfig.GlobalSettings;
-MappingConfig.Register(config); 
+MappingConfig.Register(config);
 
 // register controllers and services
 builder.Services.AddControllers();

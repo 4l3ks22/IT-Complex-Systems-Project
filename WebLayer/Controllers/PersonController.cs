@@ -34,10 +34,21 @@ public class PersonController : BaseController<IPersonData>
         return Ok(result);
     }
 
+    [HttpGet("{personId}", Name = nameof(GetPersonById))]
+    public IActionResult GetPersonById(string personId)
+    {
+        var person = _personData.GetById(personId);
+        if (person == null) return NotFound();
+
+        var result = CreatePersonDto(person);
+        return Ok(result);
+    }
+
     private PersonDto CreatePersonDto(Person person)
     {
-        // Uses your global Mapster configuration automatically
         var modeldto = _mapper.Map<PersonDto>(person);
+        modeldto.Url = GetUrl(nameof(GetPersonById), new { personId = person.Nconst });
+        
         return modeldto;
     }
 }

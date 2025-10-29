@@ -5,9 +5,10 @@ namespace EntityFramework.Models;
 
 public class PersonDto
 {
-    public string? PrimaryName { get; set; }
-    public string? BirthYear { get; set; }
-    public string? DeathYear { get; set; }
+    public string? Url { get; set; }
+    public string? Primaryname { get; set; }
+    public string? Birthyear { get; set; }
+    public string? Deathyear { get; set; }
 
     
     public List<TitleDto> Titles { get; set; } = new();
@@ -15,4 +16,5 @@ public class PersonDto
     public List<string> Professions { get; set; } = new();
 
     public double Rating { get; set; }
+    
 }

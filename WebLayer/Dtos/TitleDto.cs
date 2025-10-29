@@ -1,5 +1,9 @@
+using System.Text.Json.Serialization;
+
 public class TitleDto
 {
+    [JsonIgnore]
+    public string Tconst { get; set; }
     public string? Url { get; set; } // to obtain the URL in the weblayer.http
     public string Primarytitle { get; set; }
     public string Originaltitle { get; set; }
