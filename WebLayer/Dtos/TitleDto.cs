@@ -8,4 +8,6 @@ public class TitleDto
     public string? Startyear { get; set; }
     public string? Endyear { get; set; }
     public int? Runtimeminutes { get; set; }
+    public List<string> genres { get; set; }
+    
 }

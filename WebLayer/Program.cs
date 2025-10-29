@@ -2,7 +2,8 @@ using EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework.DataServices;
 using EntityFramework.Interfaces;
-using Mapster; //only this was added in Program
+using Mapster;
+using WebLayer.Mappings; //only this was added in Program
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +21,17 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 //add Mapster
 builder.Services.AddMapster();
 
+// Mapster configuration 
+var config = TypeAdapterConfig.GlobalSettings;
+MappingConfig.Register(config); 
+
 // register controllers and services
 builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
 builder.Services.AddScoped<IEpisodeData, EpisodeData>();
 builder.Services.AddScoped<ITitleData, TitleData>();
 builder.Services.AddScoped<IPersonData, PersonData>();
+builder.Services.AddScoped<IUserData, UserData>();
 
 var app = builder.Build();
 

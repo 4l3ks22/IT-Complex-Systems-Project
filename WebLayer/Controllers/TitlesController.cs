@@ -71,6 +71,10 @@ public class TitlesController: BaseController<ITitleData>
         return Ok(modeldto);
     }
     
+  
+    
+    
+    
     private TitleDto CreateTitleDto(Title title)
     {
         var modeldto = _mapper.Map<TitleDto>(title); //Using MapsterMapper dependency injection

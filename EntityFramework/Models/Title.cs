@@ -22,6 +22,8 @@ public class Title
     public int? Runtimeminutes { get; set; }
 
     public string? Genres { get; set; }
+    
+    
 
     public virtual ICollection<Episode> Episodes { get; set; } = new List<Episode>();
 
