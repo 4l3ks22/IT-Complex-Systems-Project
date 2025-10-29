@@ -6,6 +6,6 @@ public interface IGenreData
 {
     List<Genre> GetGenres();
     
-    Genre GetById(int id);
+   Genre GetById(int id);
 }
 

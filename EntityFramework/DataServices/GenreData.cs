@@ -1,6 +1,7 @@
 ﻿using EntityFramework.Interfaces;
 using EntityFramework.Models;
 
+
 namespace EntityFramework.DataServices;
 
 public class GenreData(MyDbContext db) : IGenreData 
@@ -11,11 +12,10 @@ public class GenreData(MyDbContext db) : IGenreData
             .Where(g => !string.IsNullOrEmpty(g.GenreName))
             .ToList();
     }
-    
+
     public Genre GetById(int id)
     {
-        return db.Genres
-            .Where(g => !string.IsNullOrEmpty(g.GenreName))
-            .FirstOrDefault(g => g.GenreId == id);
+        return db.Genres.Find(id);
     }
+    
 }

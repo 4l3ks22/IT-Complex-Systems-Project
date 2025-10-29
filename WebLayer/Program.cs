@@ -18,14 +18,13 @@ builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //add Mapster
-    builder.Services.AddMapster();
+builder.Services.AddMapster();
 
 // register controllers and services
 builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
 builder.Services.AddScoped<IEpisodeData, EpisodeData>();
 builder.Services.AddScoped<ITitleData, TitleData>();
-builder.Services.AddMapster(); //only this was added in Program
 
 var app = builder.Build();
 

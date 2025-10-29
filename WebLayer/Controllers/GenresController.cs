@@ -1,5 +1,4 @@
 ﻿using EntityFramework.Interfaces;
-using EntityFramework.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebLayer.Dtos;
 
@@ -7,42 +6,26 @@ namespace WebLayer.Controllers;
 
 [ApiController]
 [Route("api/genres")]
-public class GenresController : ControllerBase
+public class GenresController(IGenreData genreData) : ControllerBase
 {
-    IGenreData _genreData;
-    private readonly LinkGenerator _generator;
-    public GenresController(IGenreData genreData, LinkGenerator generator)
-    {
-     _genreData = genreData;
-    _generator = generator;
-    }
     [HttpGet]
     public ActionResult<IEnumerable<GenreDto>> GetGenres()
     {
-        var genres = _genreData.GetGenres().Select(x => CreateGenreDto(x));
-        return Ok(genres);
+        var genreNames = genreData.GetGenres();
+
+        var genreDtos = genreNames
+            .Select(g => new GenreDto { Name = g.GenreName })
+            .ToList();
+
+        return Ok(genreDtos);
     }
 
-    [HttpGet("{id}", Name = nameof(GetById))]
+    [HttpGet("{id}")]
     public ActionResult<GenreDto> GetById(int id)
     {
-        var genre = _genreData.GetById(id);
-        var genreDto = CreateGenreDto(genre);
-        return Ok(genreDto);
-    }
+        var genre = genreData.GetById(id);
 
-    private GenreDto CreateGenreDto(Genre genre)
-    {
-        return new GenreDto
-        {
-            Url = GetUrl(nameof(GetById), new { id = genre.GenreId }),
-            Name = genre.GenreName
-        };
-    }
-
-    private string? GetUrl(string endpointName, object values)
-    {
-         return _generator.GetUriByName(HttpContext,endpointName,values );
+        return Ok(new GenreDto { Name = genre.GenreName });
     }
     
 }
