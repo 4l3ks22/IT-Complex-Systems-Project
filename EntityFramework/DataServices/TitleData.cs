@@ -1,5 +1,6 @@
 using EntityFramework.Interfaces;
 using EntityFramework.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntityFramework.DataServices;
 
@@ -22,7 +23,8 @@ public class TitleData(MyDbContext db) : ITitleData // this is like having var d
 
     public Title? GetTitleById(string tconst)
     {
-        return db.Titles.FirstOrDefault(x => x.Tconst == tconst);
+        return db.Titles
+            .FirstOrDefault(x => x.Tconst == tconst);
     }
 
     public IList<Title> GetTitleByName(string primarytitle)
