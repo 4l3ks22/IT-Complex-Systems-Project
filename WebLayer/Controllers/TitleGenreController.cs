@@ -44,10 +44,10 @@ public class TitleGenreController : BaseController<ITitleGenreData>
     [HttpGet(Name = nameof(GetTitleGenre))]
     public IActionResult GetTitleGenre([FromQuery] QueryParams queryParams)
     {
-        queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
+        // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
         var titlegenre = _titlegenreData
-            .GetTitleGenre(queryParams.Page, queryParams.PageSize)
+            .GetTitleGenre(queryParams.PageNumber, queryParams.PageSize)
             .Select(x => CreateTitleGenreDto(x));
 
         var numOfItems = _titlegenreData.GetTitleGenreCount();

@@ -138,10 +138,10 @@ namespace WebLayer.Controllers
         [HttpGet(Name = nameof(GetEpisodes))]
         public IActionResult GetEpisodes([FromQuery] QueryParams queryParams)
         {
-            queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
+            // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
             var episodes = _episodeData
-                .GetEpisodes(queryParams.Page, queryParams.PageSize)
+                .GetEpisodes(queryParams.PageNumber, queryParams.PageSize)
                 .Select(x => CreateEpisodeDto(x));
 
             var numOfItems = _episodeData.GetEpisodesCount();

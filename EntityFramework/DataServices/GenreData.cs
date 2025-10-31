@@ -23,14 +23,15 @@ public class GenreData(MyDbContext db) : IGenreData
     {
         return db.Genres.Count(); // Genres is from MyDbContext
     }
-    
-    public IList<Genre> GetGenres(int page, int pageSize)
+
+
+    public IList<Genre> GetGenres(QueryParams queryParams)
     {
         
         return db.Genres
             .OrderBy(x => x.GenreId)
-            .Skip(page * pageSize)
-            .Take(pageSize)
+            .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+            .Take(queryParams.PageSize)
             .ToList();
     }
     

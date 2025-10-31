@@ -57,16 +57,13 @@ public class GenresController: BaseController<IGenreData>
     [HttpGet(Name = nameof(GetGenres))]
     public ActionResult<IEnumerable<GenreDto>> GetGenres([FromQuery] QueryParams queryParams)
     {
-        queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
+        // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
         // this piece of code runs fine with _dataService.GetGenres as below with _genreData.GetGenres
         //var genres = _dataService.GetGenres(queryParams.Page, queryParams.PageSize) //GetGenres here is the method from GenreData
         //    .Select(x => CreateGenreDto(x));
         
-        var genres =_genreData.GetGenres(queryParams.Page, queryParams.PageSize).Select(x => CreateGenreDto(x));  //GetGenres here is the method from GenreData
-            
-
-        
+        var genres =_genreData.GetGenres(queryParams).Select(x => CreateGenreDto(x));  //GetGenres here is the method from GenreData
         
         var numOfItems = _genreData.GetGenresCount();
 

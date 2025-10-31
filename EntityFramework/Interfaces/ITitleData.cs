@@ -14,7 +14,7 @@ public interface ITitleData
 {
 
     int GetTitlesCount();
-    IList<Title> GetTitles(int page, int pageSize);
+    IList<Title> GetTitles(QueryParams queryParams);
     Title? GetTitleById(string tconst); 
     
 }

@@ -11,13 +11,13 @@ public class TitleData(MyDbContext db) : ITitleData // this is like having var d
         return db.Titles.Count(); // Titles is from MyDbContext
     }
 
-    public IList<Title> GetTitles(int page, int pageSize)
+    public IList<Title> GetTitles(QueryParams queryParams)
     {
 
         return db.Titles
         .OrderBy(x => x.Tconst)
-        .Skip(page * pageSize)
-        .Take(pageSize)
+        .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+        .Take(queryParams.PageSize)
         .ToList();
     }
 

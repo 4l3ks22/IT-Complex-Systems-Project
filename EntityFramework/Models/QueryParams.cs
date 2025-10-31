@@ -3,12 +3,15 @@ namespace EntityFramework.Models;
 public class QueryParams
 {
     private const int MaxPageSize = 25;
-    public int PageSize { get; set; } = 5;
+    public int PageNumber { get; set; } = 1;
 
-    private int page = 0;
+    private int _pageSize = 10;
 
-    public int Page {
-        get { return page; }
-        set { page = value > MaxPageSize ? MaxPageSize : value; } 
+    public int PageSize
+    {
+        get { return _pageSize; }
+        set { _pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
     }
 }
+
+    

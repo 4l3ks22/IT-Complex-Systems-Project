@@ -5,7 +5,13 @@ GET {{WebLayer_HostAddress}}/api/genres
 Accept: application/json
 
 ###
+GET {{WebLayer_HostAddress}}/api/genres?PageNumber=0&PagesSize=12
+Accept: application/json
+###
 
+GET {{WebLayer_HostAddress}}/api/genres?PageNumber=2&PagesSize=4
+Accept: application/json
+###
 GET {{WebLayer_HostAddress}}/api/genres/4
 Accept: application/json
 

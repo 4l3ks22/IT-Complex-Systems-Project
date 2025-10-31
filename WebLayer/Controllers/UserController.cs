@@ -22,9 +22,9 @@ public UserController(
 [HttpGet(Name = nameof(GetUsers))]
 public ActionResult<IEnumerable<UserDto>> GetUsers([FromQuery] QueryParams queryParams)
 {
-    queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
+    // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
-    var users = _userData.GetUsers(queryParams.Page, queryParams.PageSize) .Select(x => CreateUsersDto(x));
+    var users = _userData.GetUsers(queryParams.PageNumber, queryParams.PageSize) .Select(x => CreateUsersDto(x));
 
     var numOfItems = _userData.GetUsersCount();
 

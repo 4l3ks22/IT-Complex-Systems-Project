@@ -6,7 +6,7 @@ public interface IGenreData
 {
 
      int GetGenresCount();
-     IList<Genre> GetGenres(int page, int pageSize);
+     IList<Genre> GetGenres(QueryParams queryParams);
      Genre? GetGenreById(int genreId); 
 
 }

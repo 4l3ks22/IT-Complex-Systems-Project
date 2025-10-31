@@ -28,10 +28,10 @@ public class TitlesController: BaseController<ITitleData>
                                         // to build a URL
     public IActionResult GetTitles([FromQuery] QueryParams queryParams) //GetTitles here is the endpoint name
     {
-        queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
+        // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
         var titles = _titleData
-            .GetTitles(queryParams.Page, queryParams.PageSize) //GetTitles here is the method from TitleData
+            .GetTitles(queryParams) //GetTitles here is the method from TitleData
             .Select(x => CreateTitleDto(x));
 
         var numOfItems = _titleData.GetTitlesCount();
@@ -46,7 +46,7 @@ public class TitlesController: BaseController<ITitleData>
     {
         queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
-        var titles = _titleData.GetTitles(queryParams.Page, queryParams.PageSize) //GetTitles here is the method from TitleData
+        var titles = _titleData.GetTitles(queryParams) //GetTitles here is the method from TitleData
             .Select(x => CreateTitleDto(x));
 
         var numOfItems = _titleData.GetTitlesCount();
