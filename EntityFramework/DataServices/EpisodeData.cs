@@ -29,7 +29,9 @@ namespace EntityFramework.DataServices;
 
 public class EpisodeData(MyDbContext db) : IEpisodeData // this is like having var db = new MyDbContext
 {
-    public int GetEpisodesCount()
+    //This approach was working but a little wrong 31-10-2025 5:37pm, because seriename and titleurl = null
+    
+    /*public int GetEpisodesCount()
     {
         return db.Episodes.Count(); // Titles is from MyDbContext
     }
@@ -38,7 +40,10 @@ public class EpisodeData(MyDbContext db) : IEpisodeData // this is like having v
     {
 
         return db.Episodes
-            .OrderBy(x => x.Tconst)
+            .Include(x => x.ParenttconstNavigation)// Added by cesar. Including the navigation in titles
+            .ThenInclude(x => x.Episodes )// Added by cesar
+            //.OrderBy(x => x.Tconst)
+            .OrderBy(x => x.Parenttconst)
             .Skip(page * pageSize)
             .Take(pageSize)
             .ToList();
@@ -47,8 +52,36 @@ public class EpisodeData(MyDbContext db) : IEpisodeData // this is like having v
     public Episode GetEpisodesById(string tconst)
     {
         return db.Episodes
-            .FirstOrDefault(x => x.Tconst == tconst);
+            .Include(x => x.ParenttconstNavigation)// Added by cesar. Including the navigation in titles
+            //.FirstOrDefault(x => x.Tconst == tconst);
+            .ThenInclude(x => x.Episodes )// Added by cesar
+            .FirstOrDefault(x => x.Parenttconst == tconst);
+    }*/
+    
+    // this is ok
+    public int GetEpisodesCount()
+    {
+        return db.Episodes.Count();
     }
 
+    public IList<Episode> GetEpisodes(int page, int pageSize)
+    {
+        return db.Episodes
+            .Include(x => x.ParenttconstNavigation) // Include the parent Title (the series)
+            .OrderBy(x => x.Parenttconst)
+            .Skip(page * pageSize)
+            .Take(pageSize)
+            .ToList();
+    }
+
+    public Episode GetEpisodesById(string tconst)
+    {
+        // Filtering by Tconst (the episode's own ID). Do not get confused to filter with Parenttconst
+        return db.Episodes
+            .Include(x => x.ParenttconstNavigation)
+            .FirstOrDefault(x => x.Tconst == tconst);
+    }
+    
+    
     
 }

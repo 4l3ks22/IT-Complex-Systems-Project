@@ -14,10 +14,14 @@ public class EpisodeDto
     public string Tconst { get; set; } = null!;
 
     public string? Parenttconst { get; set; }
+    public string SerieName { get; set; }// added by cesar
 
     public int? Seasonnumber { get; set; }
 
     public int? Episodenumber { get; set; }
+    
+    
+    public string? TitleUrl { get; set; }
     
     
 }

@@ -49,7 +49,7 @@ public class MyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+         
         modelBuilder.Entity<Episode>(entity =>
         {
             entity.HasKey(e => e.Tconst).HasName("pk_tconst_episode");
@@ -58,12 +58,12 @@ public class MyDbContext : DbContext
 
             entity.Property(e => e.Tconst)
                 .HasMaxLength(10)
-                .IsFixedLength()
+                //.IsFixedLength() //causing a mismatch
                 .HasColumnName("tconst");
             entity.Property(e => e.Episodenumber).HasColumnName("episodenumber");
             entity.Property(e => e.Parenttconst)
                 .HasMaxLength(10)
-                .IsFixedLength()
+                //.IsFixedLength() //causing a mismatch
                 .HasColumnName("parenttconst");
             entity.Property(e => e.Seasonnumber).HasColumnName("seasonnumber");
 
@@ -72,6 +72,8 @@ public class MyDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_tconst_episode");
         });
+        
+
 
         modelBuilder.Entity<Genre>(entity =>
         {

@@ -16,6 +16,11 @@ Accept: application/json
 
 ###
 
+GET {{WebLayer_HostAddress}}/api/episodes/tt0734542
+Accept: application/json
+
+###
+
 GET {{WebLayer_HostAddress}}/api/titles
 Accept: application/json
 
