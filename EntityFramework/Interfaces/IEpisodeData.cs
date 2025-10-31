@@ -4,7 +4,9 @@ namespace EntityFramework.Interfaces;
 
 public interface IEpisodeData
 {
-    List<Episode> GetEpisodes();
-    Episode GetById(string id);
+    
+    int GetEpisodesCount();
+    IList<Episode> GetEpisodes(int page, int pageSize);
+    Episode GetEpisodesById(string id);
 }
 

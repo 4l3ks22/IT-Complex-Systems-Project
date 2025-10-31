@@ -71,9 +71,6 @@ public class TitlesController: BaseController<ITitleData>
         return Ok(modeldto);
     }
     
-  
-    
-    
     
     private TitleDto CreateTitleDto(Title title)
     {

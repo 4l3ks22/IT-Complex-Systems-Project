@@ -59,9 +59,15 @@ public class GenresController: BaseController<IGenreData>
     {
         queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
-        var genres = _dataService.GetGenres(queryParams.Page, queryParams.PageSize) //GetGenres here is the method from TitleData
-            .Select(x => CreateGenreDto(x));
+        // this piece of code runs fine with _dataService.GetGenres as below with _genreData.GetGenres
+        //var genres = _dataService.GetGenres(queryParams.Page, queryParams.PageSize) //GetGenres here is the method from GenreData
+        //    .Select(x => CreateGenreDto(x));
+        
+        var genres =_genreData.GetGenres(queryParams.Page, queryParams.PageSize).Select(x => CreateGenreDto(x));  //GetGenres here is the method from GenreData
+            
 
+        
+        
         var numOfItems = _genreData.GetGenresCount();
 
         var result = CreatePaging(nameof(GetGenres), genres, numOfItems, queryParams);

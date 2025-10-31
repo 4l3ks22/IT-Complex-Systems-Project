@@ -63,7 +63,7 @@ public abstract class BaseController<TDataService> : ControllerBase
         LinkGenerator generator,
         IMapper mapper)
     {
-        _dataService = dataService; // these are the parameters of the base to be mapped in TitlesController
+        _dataService = dataService; // these are the parameters of the base to be mapped in all Controllers
         _generator = generator;
         _mapper = mapper;
     }
