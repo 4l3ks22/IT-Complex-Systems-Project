@@ -71,7 +71,7 @@ public abstract class BaseController<TDataService> : ControllerBase
     protected object CreatePaging<T>(string endpointName, IEnumerable<T> items, int numberOfItems,
         QueryParams queryParams)
     {
-        var pageSize = Math.Max(1, queryParams.PageSize); // ensures that we at least have 1 page size
+        
         var numberOfPages = (int)Math.Ceiling((double)numberOfItems / queryParams.PageSize);
 
         var prev = queryParams.PageNumber > 0

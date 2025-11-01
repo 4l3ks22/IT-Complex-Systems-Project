@@ -5,11 +5,11 @@ GET {{WebLayer_HostAddress}}/api/genres
 Accept: application/json
 
 ###
-GET {{WebLayer_HostAddress}}/api/genres?PageNumber=0&PagesSize=12
+GET {{WebLayer_HostAddress}}/api/genres?PageNumber=0&PageSize=4
 Accept: application/json
 ###
 
-GET {{WebLayer_HostAddress}}/api/genres?PageNumber=2&PagesSize=4
+GET {{WebLayer_HostAddress}}/api/genres?PageNumber=2&PageSize=4
 Accept: application/json
 ###
 GET {{WebLayer_HostAddress}}/api/genres/4
