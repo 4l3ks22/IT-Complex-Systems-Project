@@ -71,19 +71,20 @@ public abstract class BaseController<TDataService> : ControllerBase
     protected object CreatePaging<T>(string endpointName, IEnumerable<T> items, int numberOfItems,
         QueryParams queryParams)
     {
+        var pageSize = Math.Max(1, queryParams.PageSize); // ensures that we at least have 1 page size
         var numberOfPages = (int)Math.Ceiling((double)numberOfItems / queryParams.PageSize);
 
         var prev = queryParams.PageNumber > 0
             ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber - 1, queryParams.PageSize })
             : null;
 
-        var next = queryParams.PageNumber < numberOfPages - 1
+        var next = (numberOfPages > 0 && queryParams.PageNumber < numberOfPages - 1)
             ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber + 1, queryParams.PageSize })
             : null;
 
-        var first = GetUrl(endpointName, new { PageNumber = 0, queryParams.PageSize });
+        var first = numberOfPages > 0 ? GetUrl(endpointName, new { PageNumber = 0, queryParams.PageSize }) : null;
         var cur = GetUrl(endpointName, new { queryParams.PageNumber, queryParams.PageSize });
-        var last = GetUrl(endpointName, new { PageNumber = numberOfPages - 1, queryParams.PageSize });
+        var last = numberOfPages > 0 ? GetUrl(endpointName, new { PageNumber = numberOfPages - 1, queryParams.PageSize }) : null;
 
         return new
         {
