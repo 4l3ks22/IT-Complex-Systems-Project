@@ -17,26 +17,27 @@ public class VersionController : BaseController<IVersionData>
     {
     }
     
-    [HttpGet(Name = nameof(GetVersions))]
+    [HttpGet("{id}", Name = nameof(GetVersions))]
     
-    public IActionResult GetVersions([FromQuery] QueryParams queryParams)
+    public IActionResult GetVersions([FromQuery] QueryParams queryParams, string titleId)
     {
         
         var versions = _versionData
-            .GetVersions(queryParams)
+            .GetVersions(queryParams, titleId)
             .Select(x => CreateVersionDto(x));
 
         var numOfItems = versions.Count();
         
         var result = CreatePaging(nameof(GetVersions), versions, numOfItems, queryParams);
         
-        return Ok(versions);
+        return Ok(result);
     }
-
+    
 
     public VersionDto CreateVersionDto(Version version)
     {
         var modeldto = _mapper.Map<VersionDto>(version);
+        modeldto.Url = GetUrl(nameof(GetVersions), new { id = version.Tconst});
         return modeldto;
     }
 }

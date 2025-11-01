@@ -2,7 +2,8 @@ namespace WebLayer.Dtos;
 
 public class VersionDto
 {
-
+    public string? Url {get; set;}
+    
     public string? Title { get; set; }
 
     public string? Region { get; set; }

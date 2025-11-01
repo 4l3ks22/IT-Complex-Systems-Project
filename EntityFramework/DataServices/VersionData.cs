@@ -1,5 +1,6 @@
 using EntityFramework.Interfaces;
 using EntityFramework.Models;
+using Microsoft.EntityFrameworkCore;
 using Version = EntityFramework.Models.Version;
 
 namespace EntityFramework.DataServices;
@@ -11,7 +12,7 @@ public class VersionData(MyDbContext db) : IVersionData
         return db.Versions.Count();
     }
 
-    public IList<Version> GetVersions(QueryParams queryParams)
+    public IList<Version> GetVersions(QueryParams queryParams, string titleId)
     {
         return db.Versions
             .OrderBy(x => x.Tconst)
@@ -20,4 +21,14 @@ public class VersionData(MyDbContext db) : IVersionData
             .Take(queryParams.PageSize)
             .ToList();
     }
+
+    public Version GetVersionByTitleId(string id)
+    {
+
+        return db.Versions
+            .Include(x =>  x.TconstNavigation)
+            .FirstOrDefault(x => x.Tconst == id);
+        
+    }
+
 }
