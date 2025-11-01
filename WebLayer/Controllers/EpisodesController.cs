@@ -138,7 +138,7 @@ namespace WebLayer.Controllers
         [HttpGet(Name = nameof(GetEpisodes))]
         public IActionResult GetEpisodes([FromQuery] QueryParams queryParams)
         {
-            // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
+            //queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
 
             var episodes = _episodeData
                 .GetEpisodes(queryParams.PageNumber, queryParams.PageSize)
@@ -169,11 +169,11 @@ namespace WebLayer.Controllers
             var modeldto = _mapper.Map<EpisodeDto>(episode); 
 
             // Building the episode’s own URL  using LinkGenerator
-            modeldto.Url = GetUrl(nameof(GetEpisodesById), new { id = episode.Tconst.Trim() });
+            modeldto.EpisodeUrl = GetUrl(nameof(GetEpisodesById), new { id = episode.Tconst.Trim() });
 
             // Building the related Title URL 
 
-            modeldto.TitleUrl = GetUrl(
+            modeldto.SerieUrl = GetUrl(
                 nameof(TitlesController.GetTitleById),
                 new { id = episode.ParenttconstNavigation.Tconst.Trim() }); 
             

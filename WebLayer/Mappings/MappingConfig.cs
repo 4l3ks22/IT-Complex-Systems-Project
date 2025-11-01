@@ -29,7 +29,8 @@ namespace WebLayer.Mappings
                 .Map(dest => dest, src => src);
 
             config.NewConfig<Episode, EpisodeDto>()
-                .Map(dest => dest.SerieName, src => src.ParenttconstNavigation.Primarytitle);
+                .Map(dest => dest.SerieName, src => src.ParenttconstNavigation.Primarytitle)
+                .Map(dest => dest.Genres, src => src.ParenttconstNavigation.Genres);
             //.Map(dest => dest.TitleUrl, src => $"/api/titles/{src.ParenttconstNavigation.Tconst.Trim()}"); // this one is not necessary now,
                                                                                                             //but works in case we wanted a relative and not absolute titleurl
                                                                                                             //without implementing it in the Episodedcontroller in CreateEpisodeDto method
