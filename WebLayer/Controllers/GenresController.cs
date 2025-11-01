@@ -6,41 +6,6 @@ using WebLayer.Dtos;
 
 namespace WebLayer.Controllers;
 
-/*[ApiController]
-[Route("api/genres")]
-public class GenresController : BaseController
-{
-    
-    public GenresController (
-     IGenreData genreData, 
-     LinkGenerator generator, 
-     IMapper mapper) : base (genreData, generator, mapper)
-    
-
-    [HttpGet(Name = nameof(GetGenres))]
-
-    public ActionResult<IEnumerable<GenreDto>> GetGenres()
-    {
-        var genreNames = genreData.GetGenres();
-
-        var genreDtos = genreNames
-            .Select(g => new GenreDto { Name = g.GenreName })
-            .ToList();
-
-        return Ok(genreDtos);
-    }
-
-    [HttpGet("{id}")]
-    public ActionResult<GenreDto> GetById(int id)
-    {
-        var genre = genreData.GetById(id);
-
-        return Ok(new GenreDto { Name = genre.GenreName });
-    }
-    
-}*/
-
-
 [ApiController]
 [Route("api/genres")]
 public class GenresController: BaseController<IGenreData> 
@@ -57,11 +22,6 @@ public class GenresController: BaseController<IGenreData>
     [HttpGet(Name = nameof(GetGenres))]
     public ActionResult<IEnumerable<GenreDto>> GetGenres([FromQuery] QueryParams queryParams)
     {
-        // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
-
-        // this piece of code runs fine with _dataService.GetGenres as below with _genreData.GetGenres
-        //var genres = _dataService.GetGenres(queryParams.Page, queryParams.PageSize) //GetGenres here is the method from GenreData
-        //    .Select(x => CreateGenreDto(x));
         
         var genres =_genreData.GetGenres(queryParams).Select(x => CreateGenreDto(x));  //GetGenres here is the method from GenreData
         

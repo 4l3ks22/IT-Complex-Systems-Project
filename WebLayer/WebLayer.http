@@ -61,3 +61,7 @@ Accept: application/json
 
 ###
 
+GET {{WebLayer_HostAddress}}/api/versions
+Accept: application/json
+
+###

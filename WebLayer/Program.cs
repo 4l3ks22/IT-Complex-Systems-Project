@@ -33,6 +33,7 @@ builder.Services.AddScoped<IEpisodeData, EpisodeData>();
 builder.Services.AddScoped<ITitleData, TitleData>();
 builder.Services.AddScoped<IPersonData, PersonData>();
 builder.Services.AddScoped<IUserData, UserData>();
+builder.Services.AddScoped<IVersionData, VersionData>();
 
 var app = builder.Build();
 
