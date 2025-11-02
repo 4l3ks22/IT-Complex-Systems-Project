@@ -37,7 +37,7 @@ public class VersionController : BaseController<IVersionData>
     public VersionDto CreateVersionDto(Version version)
     {
         var modeldto = _mapper.Map<VersionDto>(version);
-        modeldto.Url = GetUrl(nameof(GetVersions), new { id = version.Tconst});
+        
         return modeldto;
     }
 }
