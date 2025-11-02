@@ -17,16 +17,17 @@ public class VersionController : BaseController<IVersionData>
     {
     }
     
-    [HttpGet("{id}", Name = nameof(GetVersions))]
+    [HttpGet("{titleId}", Name = nameof(GetVersions))]
     
     public IActionResult GetVersions([FromQuery] QueryParams queryParams, string titleId)
     {
-        
+
         var versions = _versionData
             .GetVersions(queryParams, titleId)
-            .Select(x => CreateVersionDto(x));
+            .Select(x => CreateVersionDto(x))
+            .ToList();
 
-        var numOfItems = versions.Count();
+        var numOfItems = _versionData.GetVersionsCount(titleId);
         
         var result = CreatePaging(nameof(GetVersions), versions, numOfItems, queryParams);
         

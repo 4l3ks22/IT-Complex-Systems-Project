@@ -7,14 +7,15 @@ namespace EntityFramework.DataServices;
 
 public class VersionData(MyDbContext db) : IVersionData
 {
-    public int GetVersionsCount()
+    public int GetVersionsCount(string titleId)
     {
-        return db.Versions.Count();
+        return db.Versions.Count(x => x.Tconst == titleId);
     }
 
     public IList<Version> GetVersions(QueryParams queryParams, string titleId)
     {
         return db.Versions
+            .Where(x => x.Tconst == titleId)
             .OrderBy(x => x.Tconst)
             .ThenBy(x => x.Ordering)
             .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)

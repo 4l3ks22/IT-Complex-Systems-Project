@@ -1,6 +1,7 @@
 using EntityFramework.Models;
 using WebLayer.Dtos;
 using Mapster;
+using Version = EntityFramework.Models.Version;
 
 
 namespace WebLayer.Mappings
@@ -38,6 +39,9 @@ namespace WebLayer.Mappings
             //.Map(dest => dest.TitleUrl, src => $"/api/titles/{src.ParenttconstNavigation.Tconst.Trim()}"); // this one is not necessary now,
                                                                                                             //but works in case we wanted a relative and not absolute titleurl
                                                                                                             //without implementing it in the Episodedcontroller in CreateEpisodeDto method
+                                                                                                            
+            // config.NewConfig<Version, VersionDto>()
+            //     .Map(dest => dest.Isoriginaltitle, src => src.Tconst);
             
         }
     }
