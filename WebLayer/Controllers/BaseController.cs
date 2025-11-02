@@ -78,13 +78,13 @@ public abstract class BaseController<TDataService> : ControllerBase
             ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber - 1, queryParams.PageSize })
             : null;
 
-        var next = (numberOfPages > 0 && queryParams.PageNumber < numberOfPages - 1)
+        var next = (numberOfPages > 0 && queryParams.PageNumber < numberOfPages)
             ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber + 1, queryParams.PageSize })
             : null;
 
         var first = numberOfPages > 1 ? GetUrl(endpointName, new { PageNumber = 1, queryParams.PageSize }) : null;
         var cur = GetUrl(endpointName, new { queryParams.PageNumber, queryParams.PageSize });
-        var last = numberOfPages > 0 ? GetUrl(endpointName, new { PageNumber = numberOfPages - 1, queryParams.PageSize }) : null;
+        var last = numberOfPages > 0 ? GetUrl(endpointName, new { PageNumber = numberOfPages, queryParams.PageSize }) : null;
 
         return new
         {
