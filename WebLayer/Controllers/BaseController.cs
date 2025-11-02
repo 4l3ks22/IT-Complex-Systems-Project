@@ -74,7 +74,7 @@ public abstract class BaseController<TDataService> : ControllerBase
         
         var numberOfPages = (int)Math.Ceiling((double)numberOfItems / queryParams.PageSize);
 
-        var prev = queryParams.PageNumber > 0
+        var prev = queryParams.PageNumber > 1
             ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber - 1, queryParams.PageSize })
             : null;
 
@@ -82,7 +82,7 @@ public abstract class BaseController<TDataService> : ControllerBase
             ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber + 1, queryParams.PageSize })
             : null;
 
-        var first = numberOfPages > 0 ? GetUrl(endpointName, new { PageNumber = 0, queryParams.PageSize }) : null;
+        var first = numberOfPages > 1 ? GetUrl(endpointName, new { PageNumber = 1, queryParams.PageSize }) : null;
         var cur = GetUrl(endpointName, new { queryParams.PageNumber, queryParams.PageSize });
         var last = numberOfPages > 0 ? GetUrl(endpointName, new { PageNumber = numberOfPages - 1, queryParams.PageSize }) : null;
 
