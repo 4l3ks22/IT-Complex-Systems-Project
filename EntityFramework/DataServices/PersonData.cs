@@ -37,6 +37,8 @@ public class PersonData : IPersonData
         return db.Persons
             .Include(p => p.ParticipatesInTitles)
             .ThenInclude(pt => pt.TconstNavigation)
+            .Include(kt => kt.KnownForTitles)
+            .ThenInclude(kt => kt.TconstNavigation)
             .Include(p => p.PersonProfessions)
             .Include(p => p.PersonRating)
             .FirstOrDefault(p => p.Nconst == id);

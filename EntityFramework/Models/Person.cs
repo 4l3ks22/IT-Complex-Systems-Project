@@ -14,6 +14,8 @@ public class Person
     public string? Deathyear { get; set; }
 
     public virtual ICollection<ParticipatesInTitle> ParticipatesInTitles { get; set; } = new List<ParticipatesInTitle>();
+    
+    public virtual ICollection<KnownForTitle> KnownForTitles { get; set; } = new List<KnownForTitle>();
 
     public virtual ICollection<PersonProfession> PersonProfessions { get; set; } = new List<PersonProfession>();
 

@@ -40,16 +40,18 @@ public class MyDbContext : DbContext
 
     public DbSet<UserRatingHistory> UserRatingHistories { get; set; }
 
-    public  DbSet<UserSearchHistory> UserSearchHistories { get; set; }
+    public DbSet<UserSearchHistory> UserSearchHistories { get; set; }
 
     public DbSet<Version> Versions { get; set; }
 
     public DbSet<WordIndex> WordIndices { get; set; }
     
+    public DbSet<KnownForTitle> KnownForTitles { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-         
+
         modelBuilder.Entity<Episode>(entity =>
         {
             entity.HasKey(e => e.Tconst).HasName("pk_tconst_episode");
@@ -72,7 +74,7 @@ public class MyDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_tconst_episode");
         });
-        
+
 
 
         modelBuilder.Entity<Genre>(entity =>
@@ -95,7 +97,8 @@ public class MyDbContext : DbContext
 
             entity.ToTable("participates_in_title");
 
-            entity.HasIndex(e => new { e.Tconst, e.Nconst, e.ProfessionId, e.Ordering }, "unique_participation").IsUnique();
+            entity.HasIndex(e => new { e.Tconst, e.Nconst, e.ProfessionId, e.Ordering }, "unique_participation")
+                .IsUnique();
 
             entity.Property(e => e.ParticipationId).HasColumnName("participation_id");
             entity.Property(e => e.Category)
@@ -152,19 +155,22 @@ public class MyDbContext : DbContext
                 .HasMaxLength(256)
                 .HasColumnName("primaryname");
 
-            entity.HasMany(d => d.Tconsts).WithMany(p => p.Nconsts)
-                .UsingEntity<Dictionary<string, object>>(
-                    "KnownForTitle",
-                    r => r.HasOne<Title>().WithMany()
-                        .HasForeignKey("Tconst")
+            entity.HasMany(p => p.Tconsts).WithMany(t => t.Nconsts)
+                .UsingEntity<KnownForTitle>(
+                    r => r.HasOne(k => k.TconstNavigation)
+                        .WithMany(t => t.KnownForTitles)
+                        .HasForeignKey(k => k.Tconst)
                         .HasConstraintName("fk_tconst_known_for_title"),
-                    l => l.HasOne<Person>().WithMany()
-                        .HasForeignKey("Nconst")
+                    l => l.HasOne(k => k.NconstNavigation)
+                        .WithMany(p => p.KnownForTitles)
+                        .HasForeignKey(k => k.Nconst)
                         .HasConstraintName("fk_nconst_known_for_title"),
                     j =>
                     {
-                        j.HasKey("Nconst", "Tconst").HasName("pk_nconst_tconst");
+                        j.HasKey(k => new { k.Nconst, k.Tconst }).HasName("pk_nconst_tconst");
                         j.ToTable("known_for_title");
+                        j.Property(k => k.Nconst).HasColumnName("nconst").HasMaxLength(10);
+                        j.Property(k => k.Tconst).HasColumnName("tconst").HasMaxLength(10);
                     });
         });
 
@@ -269,7 +275,7 @@ public class MyDbContext : DbContext
             entity.Property(e => e.Titletype)
                 .HasMaxLength(20)
                 .HasColumnName("titletype");
-            
+
 
         });
 
@@ -288,19 +294,19 @@ public class MyDbContext : DbContext
             tg.Property(x => x.GenreId)
                 .HasColumnName("genre");
 
-            tg.HasOne(x => x.Title)                   // navigation property in TitleGenre
-                .WithMany(t => t.TitleGenres)         // collection in Title
-                .HasForeignKey(x => x.Tconst)         // foreign key in TitleGenre
+            tg.HasOne(x => x.Title) // navigation property in TitleGenre
+                .WithMany(t => t.TitleGenres) // collection in Title
+                .HasForeignKey(x => x.Tconst) // foreign key in TitleGenre
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_tconst_genre");
 
-            tg.HasOne(x => x.Genre)                   // navigation property in TitleGenre
-                .WithMany(g => g.TitleGenres)         // collection in Genre
-                .HasForeignKey(x => x.GenreId)        // foreign key in TitleGenre
+            tg.HasOne(x => x.Genre) // navigation property in TitleGenre
+                .WithMany(g => g.TitleGenres) // collection in Genre
+                .HasForeignKey(x => x.GenreId) // foreign key in TitleGenre
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_genre");
         });
-        
+
         modelBuilder.Entity<TitleExtra>(entity =>
         {
             entity
@@ -321,17 +327,17 @@ public class MyDbContext : DbContext
                 .HasForeignKey(d => d.Tconst)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_tconst_extras");*/ // this was originallly from scaffold model
-            
-            
+
+
             // But the relation is not one to many, but one to one relation with Title
             entity.HasOne(e => e.Title)
                 .WithOne(t => t.TitleExtra)
                 .HasForeignKey<TitleExtra>(e => e.Tconst)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_titleextra_title");
-            
+
         });
-        
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("users_pkey");
@@ -491,7 +497,24 @@ public class MyDbContext : DbContext
             entity.HasOne(d => d.TconstNavigation).WithMany(p => p.WordIndices)
                 .HasForeignKey(d => d.Tconst)
                 .HasConstraintName("fk_tconst_word_index");
+
+            modelBuilder.Entity<KnownForTitle>(x =>
+            {
+                x.ToTable("known_for_title");
+                x.HasKey(x => new { x.Nconst, x.Tconst });
+                x.Property(x => x.Nconst).HasColumnName("nconst");
+                x.Property(x => x.Tconst).HasColumnName("tconst");
+
+                x.HasOne(x => x.NconstNavigation)
+                    .WithMany(x => x.KnownForTitles)
+                    .HasForeignKey(x => x.Nconst);
+
+                x.HasOne(x => x.TconstNavigation)
+                    .WithMany(x => x.KnownForTitles)
+                    .HasForeignKey(x => x.Tconst);
+
+
+            });
         });
-        
     }
 }

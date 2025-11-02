@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using WebLayer.Dtos;
 
 namespace EntityFramework.Models;
 
@@ -12,6 +13,7 @@ public class PersonDto
 
     
     public List<TitleDto> Titles { get; set; } = new();
+    public List<KnownForTitleDto> KnownForTitles { get; set; } = new();
     
     public List<string> Professions { get; set; } = new();
 
