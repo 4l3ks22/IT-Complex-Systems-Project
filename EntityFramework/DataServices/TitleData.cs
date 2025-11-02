@@ -15,7 +15,10 @@ public class TitleData(MyDbContext db) : ITitleData // this is like having var d
     {
 
         return db.Titles
-        .OrderBy(x => x.Tconst)
+            .Include(t => t.TitleExtra) // TitleExtra is navigation path in Title model, defined there as attribute 
+            .Include(t => t.Rating)// Rating is navigation path in Title model, defined there as attribute 
+            .Include(t => t.Versions)// Versions is navigation path in Title model, defined there as attribute 
+            .OrderBy(x => x.Tconst)
         .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
         .Take(queryParams.PageSize)
         .ToList();
@@ -24,6 +27,9 @@ public class TitleData(MyDbContext db) : ITitleData // this is like having var d
     public Title? GetTitleById(string tconst)
     {
         return db.Titles
+            .Include(t => t.TitleExtra) 
+            .Include(t => t.Rating)
+            .Include(t => t.Versions)
             .FirstOrDefault(x => x.Tconst == tconst);
     }
 

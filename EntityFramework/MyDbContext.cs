@@ -269,6 +269,8 @@ public class MyDbContext : DbContext
             entity.Property(e => e.Titletype)
                 .HasMaxLength(20)
                 .HasColumnName("titletype");
+            
+
         });
 
         modelBuilder.Entity<TitleGenre>(tg =>
@@ -302,8 +304,9 @@ public class MyDbContext : DbContext
         modelBuilder.Entity<TitleExtra>(entity =>
         {
             entity
-                .HasNoKey()
-                .ToTable("title_extras");
+                //.HasNoKey()
+                .HasKey(e => e.Tconst).HasName("pk_tconst_extras");
+            entity.ToTable("title_extras");
 
             entity.Property(e => e.Awards).HasColumnName("awards");
             entity.Property(e => e.Plot).HasColumnName("plot");
@@ -314,10 +317,19 @@ public class MyDbContext : DbContext
                 .HasMaxLength(20)
                 .HasColumnName("tconst");
 
-            entity.HasOne(d => d.TconstNavigation).WithMany()
+            /*entity.HasOne(d => d.TconstNavigation).WithMany()
                 .HasForeignKey(d => d.Tconst)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("fk_tconst_extras");
+                .HasConstraintName("fk_tconst_extras");*/ // this was originallly from scaffold model
+            
+            
+            // But the relation is not one to many, but one to one relation with Title
+            entity.HasOne(e => e.Title)
+                .WithOne(t => t.TitleExtra)
+                .HasForeignKey<TitleExtra>(e => e.Tconst)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_titleextra_title");
+            
         });
         
         modelBuilder.Entity<User>(entity =>
@@ -437,7 +449,7 @@ public class MyDbContext : DbContext
 
             entity.Property(e => e.Tconst)
                 .HasMaxLength(10)
-                .IsFixedLength()
+                //.IsFixedLength()
                 .HasColumnName("tconst");
             entity.Property(e => e.Ordering).HasColumnName("ordering");
             entity.Property(e => e.Attributes)

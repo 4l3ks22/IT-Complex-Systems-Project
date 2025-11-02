@@ -20,5 +20,5 @@ public class Version
 
     public bool? Isoriginaltitle { get; set; }
 
-    public virtual Title TconstNavigation { get; set; } = null!;
+    public virtual Title TconstNavigation { get; set; } = null!; //The navigation path of Title in Version model
 }

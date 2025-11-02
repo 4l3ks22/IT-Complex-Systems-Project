@@ -11,6 +11,6 @@ public class TitleExtra
     public string? Poster { get; set; }
 
     public string? Plot { get; set; }
-
-    public virtual Title? TconstNavigation { get; set; }
+    
+    public virtual Title Title { get; set; } = null!; //The navigation path of Title in TitleExtra model
 }

@@ -75,7 +75,7 @@ public class TitlesController: BaseController<ITitleData>
     private TitleDto CreateTitleDto(Title title)
     {
         var modeldto = _mapper.Map<TitleDto>(title); //Using MapsterMapper dependency injection
-        modeldto.Url = GetUrl(nameof(GetTitleById), new { id = title.Tconst }); // //GetTitles here is the endpoint name
+        modeldto.Url = GetUrl(nameof(GetTitleById), new { id = title.Tconst.Trim() }); // //GetTitles here is the endpoint name
         
         return modeldto;
     }
