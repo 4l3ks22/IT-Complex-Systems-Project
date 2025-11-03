@@ -28,7 +28,6 @@ namespace WebLayer.Mappings
 
             config.NewConfig<Title, TitleDto>()
                 .Map(dest => dest, src => src)
-            
                 .Map(dest => dest.TitleExtras, src => src.TitleExtra.Adapt<TitleExtraDto>())
                 .Map(dest => dest.TitleRating, src => src.Rating.Adapt<RatingDto>())
                 .Map(dest => dest.Versions, src => src.Versions.Adapt<List<VersionDto>>());
@@ -48,6 +47,10 @@ namespace WebLayer.Mappings
             
             config.NewConfig<KnownForTitle, KnownForTitleDto>()
                 .Map(dest => dest.TconstNavigation, src => src.TconstNavigation.Primarytitle);
+
+            config.NewConfig<TitleDto, PersonTitlesDto>()
+                .Map(dest => dest.Url, src => src.Url)
+                .Map(dest => dest.Title, src => src.Primarytitle);
         }
     }
 }
