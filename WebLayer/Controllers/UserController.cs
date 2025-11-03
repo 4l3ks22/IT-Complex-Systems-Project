@@ -23,7 +23,7 @@ public UserController(
 [HttpGet(Name = nameof(GetUsers))]
 public ActionResult<IEnumerable<UserDto>> GetUsers([FromQuery] QueryParams queryParams)
 {
-    var users = _userData.GetUsers(queryParams.PageNumber, queryParams.PageSize) .Select(x => CreateUsersDto(x));
+    var users = _userData.GetUsers(queryParams) .Select(x => CreateUsersDto(x));
 
     var numOfItems = _userData.GetUsersCount();
 
@@ -42,10 +42,10 @@ return Ok(CreateUsersDto(user));
 [HttpPost]
 public IActionResult CreateUser ([FromBody]UserCreationDto userCreationDto)
 {
-    // if (userCreationDto == null)
-    // {
-    //     return BadRequest("Owner object is null");
-    // }
+    if (userCreationDto == null)
+    {
+        return BadRequest("Owner object is null");
+    }
     var user = userCreationDto.Adapt<User>();
     _userData.AddUser(user);
     return Created();

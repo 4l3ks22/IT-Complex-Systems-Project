@@ -12,13 +12,13 @@ public class UserData(MyDbContext db) : IUserData
         return db.Users.Count();
     }
 
-    public List<User> GetUsers(int page, int pageSize)
+    public List<User> GetUsers(QueryParams queryParams)
     {
         return db.Users
-            .OrderBy(x => x.UserId)
-            .Skip(page * pageSize)
-            .Take(pageSize)
-            .ToList();
+        .OrderBy(x => x.UserId)
+        .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+        .Take(queryParams.PageSize)
+        .ToList();
     }
 
     public User GetUserByUsername(string username)
