@@ -58,6 +58,7 @@ public IActionResult DeleteUser([FromBody] UserDeletionDto userDeletionDto)
         return BadRequest("Wrong ID or user does not exist");
     }
     var user = userDeletionDto.Adapt<User>();
+    _userData.GetUserById(user.UserId);
     _userData.DeleteUser(user);
     return NoContent();
 }
