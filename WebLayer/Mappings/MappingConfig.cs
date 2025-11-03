@@ -22,7 +22,7 @@ namespace WebLayer.Mappings
                 .Map(dest => dest.Professions, src => src.PersonProfessions
                     .Where(pp => pp.Profession != null)
                     .Select(pp => pp.Profession.Profession1))
-                .Map(dest => dest.Rating, src => src.PersonRating != null
+                .Map(dest => dest.PersonRating, src => src.PersonRating != null
                     ? src.PersonRating.WeightedRating
                     : 0);
 
