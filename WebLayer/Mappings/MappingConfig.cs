@@ -16,6 +16,9 @@ namespace WebLayer.Mappings
                 .Map(dest => dest.Titles, src => src.ParticipatesInTitles
                     .Where(pt => pt.TconstNavigation != null)
                     .Select(pt => pt.TconstNavigation.Adapt<TitleDto>()))
+                .Map(dest => dest.KnownForTitles, src => src.KnownForTitles
+                    .Where(kt => kt.TconstNavigation != null)
+                    .Select(kt => kt.TconstNavigation.Adapt<TitleDto>()))
                 .Map(dest => dest.Professions, src => src.PersonProfessions
                     .Where(pp => pp.Profession != null)
                     .Select(pp => pp.Profession.Profession1))
@@ -43,6 +46,8 @@ namespace WebLayer.Mappings
             // config.NewConfig<Version, VersionDto>()
             //     .Map(dest => dest.Isoriginaltitle, src => src.Tconst);
             
+            config.NewConfig<KnownForTitle, KnownForTitleDto>()
+                .Map(dest => dest.TconstNavigation, src => src.TconstNavigation.Primarytitle);
         }
     }
 }
