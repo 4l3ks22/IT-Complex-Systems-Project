@@ -21,11 +21,11 @@ public class PersonData : IPersonData
     public IList<Person> GetPersons(int page, int pageSize)
     {
         return db.Persons
+            .Include(p => p.PersonProfessions)
+            .ThenInclude(pp => pp.Profession)
+            .Include(p => p.PersonRating)
             .Include(p => p.ParticipatesInTitles)
             .ThenInclude(pt => pt.TconstNavigation)
-            .Include(p => p.PersonProfessions)
-            .ThenInclude(pp => pp.Profession) 
-            .Include(p => p.PersonRating)
             .OrderBy(x => x.Nconst)
             .Skip(page * pageSize)
             .Take(pageSize)
@@ -35,10 +35,13 @@ public class PersonData : IPersonData
     public Person? GetById(string id)
     {
         return db.Persons
+            .Include(p => p.PersonProfessions)
+            .ThenInclude(pp => pp.Profession)
+            .Include(p => p.PersonRating)
             .Include(p => p.ParticipatesInTitles)
             .ThenInclude(pt => pt.TconstNavigation)
-            .Include(p => p.PersonProfessions)
-            .Include(p => p.PersonRating)
+            .Include(kt => kt.KnownForTitles)
+            .ThenInclude(kt => kt.TconstNavigation)
             .FirstOrDefault(p => p.Nconst == id);
     }
 }
