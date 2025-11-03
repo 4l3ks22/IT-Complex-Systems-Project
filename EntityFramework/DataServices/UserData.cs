@@ -29,4 +29,10 @@ public class UserData(MyDbContext db) : IUserData
     {
         return db.Users.FirstOrDefault(x => x.UserId == userId);
     }
+
+    public void AddUser(User user)
+    {
+        db.Users.Add(user);
+        db.SaveChanges();
+    }
 }

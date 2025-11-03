@@ -1,5 +1,6 @@
 using EntityFramework.Interfaces;
 using EntityFramework.Models;
+using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebLayer.Dtos;
@@ -22,8 +23,6 @@ public UserController(
 [HttpGet(Name = nameof(GetUsers))]
 public ActionResult<IEnumerable<UserDto>> GetUsers([FromQuery] QueryParams queryParams)
 {
-    // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
-
     var users = _userData.GetUsers(queryParams.PageNumber, queryParams.PageSize) .Select(x => CreateUsersDto(x));
 
     var numOfItems = _userData.GetUsersCount();
@@ -39,10 +38,23 @@ public IActionResult GetUserById(int userId)
 var user = _userData.GetUserById(userId);
 return Ok(CreateUsersDto(user));
 }
+
+[HttpPost]
+public IActionResult CreateUser ([FromBody]UserCreationDto userCreationDto)
+{
+    if (userCreationDto == null)
+    {
+        return BadRequest("Owner object is null");
+    }
+    var user = userCreationDto.Adapt<User>();
+    _userData.AddUser(user);
+    return Created();
+}
 private UserDto CreateUsersDto(User user)
 {
     var modeldto = _mapper.Map<UserDto>(user); //Using MapsterMapper dependency injection
     modeldto.Url = GetUrl(nameof(GetUserById),new{userId = user.UserId});
     return modeldto;
 }
- }
+}
+ 
