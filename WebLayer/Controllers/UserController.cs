@@ -50,6 +50,18 @@ public IActionResult CreateUser ([FromBody]UserCreationDto userCreationDto)
     _userData.AddUser(user);
     return Created();
 }
+[HttpDelete("{UserId}")]
+public IActionResult DeleteUser([FromBody] UserDeletionDto userDeletionDto)
+{
+    if (userDeletionDto == null)
+    {
+        return BadRequest("Wrong ID or user does not exist");
+    }
+    var user = userDeletionDto.Adapt<User>();
+    _userData.DeleteUser(user);
+    return NoContent();
+}
+
 private UserDto CreateUsersDto(User user)
 {
     var modeldto = _mapper.Map<UserDto>(user); //Using MapsterMapper dependency injection

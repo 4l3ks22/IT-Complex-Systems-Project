@@ -35,4 +35,11 @@ public class UserData(MyDbContext db) : IUserData
     {
         db.Users.Add(user);
         db.SaveChanges(); }
+    
+    public void DeleteUser(User user)
+    {
+        db.Users.Find(user);
+        db.Users.Remove(user);
+        db.SaveChanges();
+    }
 }

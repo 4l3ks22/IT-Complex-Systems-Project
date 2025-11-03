@@ -66,3 +66,16 @@ Accept: application/json
 
 ###
 
+POST {{WebLayer_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+	"Username": "Test2",
+    "Email":"emsffaal@emal.com",
+    "PasswordHash":"Pasfsrd"
+}
+
+###
+
+DELETE {{WebLayer_HostAddress}}/api/users/22
+Content-Type: application/json

@@ -9,5 +9,7 @@ public interface IUserData
     public User GetUserByUsername(string username);
     public User GetUserById(int userId);
     void AddUser(User user);
+    
+    void DeleteUser(User user);
 
 }
