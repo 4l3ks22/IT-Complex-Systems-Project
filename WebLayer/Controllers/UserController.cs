@@ -42,10 +42,10 @@ return Ok(CreateUsersDto(user));
 [HttpPost]
 public IActionResult CreateUser ([FromBody]UserCreationDto userCreationDto)
 {
-    if (userCreationDto == null)
-    {
-        return BadRequest("Owner object is null");
-    }
+    // if (userCreationDto == null)
+    // {
+    //     return BadRequest("Owner object is null");
+    // }
     var user = userCreationDto.Adapt<User>();
     _userData.AddUser(user);
     return Created();

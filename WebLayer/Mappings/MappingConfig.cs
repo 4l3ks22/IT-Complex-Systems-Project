@@ -53,9 +53,9 @@ namespace WebLayer.Mappings
                 .Map(dest => dest.Title, src => src.Primarytitle);
 
             config.NewConfig<User, UserCreationDto>()
-                .Map(dest => dest.UserName, src => src.Username)
+                .Map(dest => dest.Username, src => src.Username)
                 .Map(dest => dest.Email, src => src.Email)
-                .Map(dest => dest.Password, src => src.PasswordHash);
+                .Map(dest => dest.PasswordHash, src => src.PasswordHash);
         }
     }
 }

@@ -1,5 +1,6 @@
 using EntityFramework.Interfaces;
 using EntityFramework.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntityFramework.DataServices;
 
@@ -33,6 +34,5 @@ public class UserData(MyDbContext db) : IUserData
     public void AddUser(User user)
     {
         db.Users.Add(user);
-        db.SaveChanges();
-    }
+        db.SaveChanges(); }
 }
