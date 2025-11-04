@@ -39,7 +39,7 @@ var user = _userData.GetUserById(userId);
 return Ok(CreateUsersDto(user));
 }
 
-[HttpPost]
+[HttpPost(Name = nameof(CreateUser))]
 public IActionResult CreateUser ([FromBody]UserCreationDto userCreationDto)
 {
     if (userCreationDto == null)
@@ -50,15 +50,29 @@ public IActionResult CreateUser ([FromBody]UserCreationDto userCreationDto)
     _userData.AddUser(user);
     return Created();
 }
-[HttpDelete("{UserId}")]
-public IActionResult DeleteUser([FromBody] UserDeletionDto userDeletionDto)
+
+[HttpPost( Name = nameof(LoginUser))]
+public IActionResult LoginUser([FromBody] LoginRequestDto loginRequestDto)
 {
-    if (userDeletionDto == null)
+    if (loginRequestDto == null)
+    {
+        return BadRequest("User object is null");
+    }
+    
+    var user = _userData.LoginUser(loginRequestDto.Username, loginRequestDto.Password);
+    if (user == null)
+        return BadRequest("Invalid username or password");
+    return Ok(user);
+}
+
+[HttpDelete("{UserId}")]
+public IActionResult DeleteUser(int UserId)
+{
+    if (_userData.GetUserById(UserId) == null)
     {
         return BadRequest("Wrong ID or user does not exist");
     }
-    var user = userDeletionDto.Adapt<User>();
-    _userData.GetUserById(user.UserId);
+    var user = _userData.GetUserById(UserId);
     _userData.DeleteUser(user);
     return NoContent();
 }

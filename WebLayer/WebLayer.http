@@ -5,11 +5,11 @@ GET {{WebLayer_HostAddress}}/api/genres
 Accept: application/json
 
 ###
-GET {{WebLayer_HostAddress}}/api/genres?PageNumber=0&PageSize=4
+GET {{WebLayer_HostAddress}}/api/genres?PageNumber=1&PageSize=4
 Accept: application/json
 ###
 
-GET {{WebLayer_HostAddress}}/api/genres?PageNumber=2&PageSize=4
+GET {{WebLayer_HostAddress}}/api/genres?PageNumber=2&PageSize=27
 Accept: application/json
 ###
 GET {{WebLayer_HostAddress}}/api/genres/4
@@ -29,15 +29,6 @@ Accept: application/json
 
 GET {{WebLayer_HostAddress}}/api/titles
 Accept: application/json
-
-###
-
-GET {{WebLayer_HostAddress}}/api/titlegenre
-Accept: application/json
-
-###
-
-GET {{WebLayer_HostAddress}}/api/titlegenre/tt0108778
 
 ###
 
@@ -70,12 +61,12 @@ POST {{WebLayer_HostAddress}}/api/users
 Content-Type: application/json
 
 {
-	"Username": "Test2",
-    "Email":"emsffaal@emal.com",
-    "PasswordHash":"Pasfsrd"
+	"Username": "Test3",
+    "Email":"emsffaasl@emal.com",
+    "PasswordHash":"Psasfsrd"
 }
 
 ###
 
-DELETE {{WebLayer_HostAddress}}/api/users/22
+DELETE {{WebLayer_HostAddress}}/api/users/25
 Content-Type: application/json

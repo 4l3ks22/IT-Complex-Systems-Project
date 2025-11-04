@@ -12,4 +12,5 @@ public interface IUserData
     
     void DeleteUser(User user);
 
+    User LoginUser(string username, string password);
 }

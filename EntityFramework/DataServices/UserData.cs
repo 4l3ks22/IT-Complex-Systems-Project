@@ -1,6 +1,7 @@
 using EntityFramework.Interfaces;
 using EntityFramework.Models;
 using Microsoft.EntityFrameworkCore;
+using EntityFramework.DataServices;
 
 namespace EntityFramework.DataServices;
 
@@ -33,13 +34,31 @@ public class UserData(MyDbContext db) : IUserData
 
     public void AddUser(User user)
     {
+        user.PasswordHash = DataServices.PasswordHasher.Hash(user.PasswordHash);
         db.Users.Add(user);
         db.SaveChanges(); }
     
     public void DeleteUser(User user)
     {
-        db.Users.Find(user);
         db.Users.Remove(user);
         db.SaveChanges();
     }
+
+        public User LoginUser(string username, string password)
+        {
+            User? user = GetUserByUsername(username);
+            if (user is null)
+            {
+                throw new Exception(@"User not found");
+            }
+
+            bool verified = DataServices.PasswordHasher.Verify(password, user.PasswordHash);
+            if (!verified)
+            {
+                throw new Exception("Password is incorrect");
+            }
+
+            return user;
+        }
+    // }
 }
