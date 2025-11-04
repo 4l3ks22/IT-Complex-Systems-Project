@@ -20,65 +20,45 @@ public class TitleGenreController : BaseController<ITitleGenreData>
     
     }
     
-
-    /*[HttpGet("{titleId}")]
-    public ActionResult<TitleGenreDto> GetTitle(string titleId)
-    {
-        var title = context.Titles
-            .Include(t => t.TitleGenres)
-            .ThenInclude(tg => tg.Genre)
-            .FirstOrDefault(t => t.Tconst == titleId);
-
-        if (title == null)
-            return NotFound();
-
-        var dto = new TitleGenreDto
-        {
-            TitleName = title.Originaltitle,
-            Genres = title.TitleGenres.Select(tg => tg.Genre.GenreName).ToList()
-        };
-
-        return Ok(dto);
-    }*/
     
     [HttpGet(Name = nameof(GetTitleGenre))]
     public IActionResult GetTitleGenre([FromQuery] QueryParams queryParams)
     {
-        // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
-
-        var titlegenre = _titlegenreData
-            .GetTitleGenre(queryParams.PageNumber, queryParams.PageSize)
-            .Select(x => CreateTitleGenreDto(x));
+        var data = _titlegenreData
+            .GetTitleGenre(queryParams)
+            .GroupBy(x => x.Tconst)
+            .Select(g => new TitleGenreDto
+            {
+                Url = GetUrl(nameof(GetTitleGenreById), new { id = g.Key }),
+                Tconst = g.Key,
+                Title = g.First().Title.Primarytitle ?? "",
+                Genres = g.Select(x => x.Genre.GenreName).Distinct().ToList()
+            });
 
         var numOfItems = _titlegenreData.GetTitleGenreCount();
-        
-        var result = CreatePaging(nameof(GetTitleGenre), titlegenre, numOfItems, queryParams); 
-
+        var result = CreatePaging(nameof(GetTitleGenre), data, numOfItems, queryParams);
         return Ok(result);
     }
 
     [HttpGet("{id}", Name = nameof(GetTitleGenreById))]
-    public IActionResult GetTitleGenreById(string titleId)
+    public IActionResult GetTitleGenreById(string id)
     {
-        var titlegenre = _titlegenreData.GetTitleGenreById(titleId);
+        var records = _titlegenreData
+            .GetTitleGenreById(id);
+            
 
-        if (titlegenre == null)
-        {
+        if (!records.Any())
             return NotFound();
-        }
 
-        var modeldto = CreateTitleGenreDto(titlegenre);
+        var modeldto = new TitleGenreDto
+        {
+            Url = GetUrl(nameof(GetTitleGenreById), new { id }),
+            Tconst = id,
+            Title = records.First().Title.Primarytitle ?? "",
+            Genres = records.Select(x => x.Genre.GenreName).Distinct().ToList()
+        };
 
         return Ok(modeldto);
-    }
-
-    
-    private TitleGenreDto CreateTitleGenreDto(TitleGenre titleGenre)
-    {
-        var modeldto = _mapper.Map<TitleGenreDto>(titleGenre); //Using MapsterMapper dependency injection
-        modeldto.Url = GetUrl(nameof(GetTitleGenreById), new { id = titleGenre.Tconst}); // //GetTitles here is the endpoint name
-        
-        return modeldto;
     }
     
 }

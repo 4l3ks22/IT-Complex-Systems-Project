@@ -4,13 +4,11 @@ namespace EntityFramework.Interfaces;
 
 public interface ITitleGenreData
 {
-    /*List<TitleGenre> GetTitleGenres();
     
-    List<TitleGenre> GetTitleGenresByTitleId(string titleId);*/
-
-
     int GetTitleGenreCount();
-    public IList<TitleGenre> GetTitleGenre(int page, int pageSize);
-    TitleGenre? GetTitleGenreById(string titleId); 
+    public IList<TitleGenre> GetTitleGenre(QueryParams queryParams);
+    IList<TitleGenre> GetTitleGenreById(string titleId);
 }
+
+
 

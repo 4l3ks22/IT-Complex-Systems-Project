@@ -34,7 +34,7 @@ builder.Services.AddScoped<ITitleData, TitleData>();
 builder.Services.AddScoped<IPersonData, PersonData>();
 builder.Services.AddScoped<IUserData, UserData>();
 builder.Services.AddScoped<IVersionData, VersionData>();
-
+builder.Services.AddScoped<ITitleGenreData, TitleGenreData>();
 
 
 var app = builder.Build();

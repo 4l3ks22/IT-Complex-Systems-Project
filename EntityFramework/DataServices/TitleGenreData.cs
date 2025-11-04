@@ -7,37 +7,31 @@ namespace EntityFramework.DataServices;
 
 public class TitleGenreData(MyDbContext db) : ITitleGenreData
 {
-    /*public List<TitleGenre> GetTitleGenres()
-    {
-        return db.TitleGenres
-            .ToList();
-    }
-
-    public List<TitleGenre> GetTitleGenresByTitleId(string titleId)
-    {
-        return db.TitleGenres
-            .Where(tg => tg.Tconst == titleId)
-            .ToList();
-    }*/
-    
+  
     
     public int GetTitleGenreCount()
     {
-        return db.TitleGenres.Count(); // Titles is from MyDbContext
+        return db.TitleGenres.Count(); // TitlesGenres is from MyDbContext
     }
-    public IList<TitleGenre> GetTitleGenre(int page, int pageSize)
+    public IList<TitleGenre> GetTitleGenre(QueryParams queryParams)
     {
         
         return db.TitleGenres
-            //.Include(t => t.Genres)
+            
+            .Include(x => x.Title)
+            .Include(x => x.Genre)
             .OrderBy(x => x.Tconst)
-            .Skip(page* pageSize)
-            .Take(pageSize)
+            .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+            .Take(queryParams.PageSize)
             .ToList();
     }
     
-    public TitleGenre? GetTitleGenreById(string titleId)
+    public IList<TitleGenre> GetTitleGenreById(string titleId)
     {
-        return db.TitleGenres.FirstOrDefault(x => x.Tconst == titleId );
+        return db.TitleGenres
+            .Include(x => x.Title)
+            .Include(x => x.Genre)
+            .Where(x => x.Tconst == titleId)
+            .ToList();;
     }
 }
