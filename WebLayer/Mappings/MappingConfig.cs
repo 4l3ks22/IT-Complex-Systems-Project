@@ -27,7 +27,6 @@ namespace WebLayer.Mappings
                 .Map(dest => dest, src => src)
                 .Map(dest => dest.TitleExtras, src => src.TitleExtra.Adapt<TitleExtraDto>())
                 .Map(dest => dest.TitleRating, src => src.Rating.Adapt<RatingDto>());
-                // .Map(dest => dest.Versions, src => src.Versions.Adapt<List<VersionDto>>());
             
             config.NewConfig<Genre, GenreDto>()
                 .Map(dest => dest, src => src);

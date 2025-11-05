@@ -19,7 +19,4 @@ public class TitleDto
     public TitleExtraDto? TitleExtras { get; set; }  // This is the whole TitleExtra object to adapt to TitleDto
     
     public RatingDto? TitleRating { get; set; }  // This is the whole TitleRating object to adapt to TitleDto
-    
-    // public List<VersionDto>? Versions { get; set; } // This is the whole Version object to adapt to TitleDto
-
 }

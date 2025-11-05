@@ -323,12 +323,6 @@ public class MyDbContext : DbContext
                 .HasMaxLength(20)
                 .HasColumnName("tconst");
 
-            /*entity.HasOne(d => d.TconstNavigation).WithMany()
-                .HasForeignKey(d => d.Tconst)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("fk_tconst_extras");*/ // this was originallly from scaffold model
-
-
             // But the relation is not one to many, but one to one relation with Title
             entity.HasOne(e => e.Title)
                 .WithOne(t => t.TitleExtra)

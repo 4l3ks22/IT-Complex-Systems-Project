@@ -28,8 +28,6 @@ public class TitlesController: BaseController<ITitleData>
                                         // to build a URL
     public IActionResult GetTitles([FromQuery] QueryParams queryParams) //GetTitles here is the endpoint name
     {
-        // queryParams.PageSize = Math.Min(queryParams.PageSize, 3);
-
         var titles = _titleData
             .GetTitles(queryParams) //GetTitles here is the method from TitleData
             .Select(x => CreateTitleDto(x));
