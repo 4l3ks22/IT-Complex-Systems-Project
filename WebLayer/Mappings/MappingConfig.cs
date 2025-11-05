@@ -10,18 +10,19 @@ namespace WebLayer.Mappings
     {
         public static void Register(TypeAdapterConfig config)
         {
-           
+
             config.NewConfig<Person, PersonDto>()
                 .Map(dest => dest, src => src)
                 .Map(dest => dest.Titles, src => src.ParticipatesInTitles
                     .Where(pt => pt.TconstNavigation != null)
-                    .Select(pt => pt.TconstNavigation.Adapt<PersonTitlesDto>()))
+                    .Select(pt => pt.Adapt<PersonTitlesDto>())) 
                 .Map(dest => dest.Professions, src => src.PersonProfessions
                     .Where(pp => pp.Profession != null)
                     .Select(pp => pp.Profession.Profession1))
                 .Map(dest => dest.PersonRating, src => src.PersonRating != null
                     ? src.PersonRating.WeightedRating
                     : 0);
+                
 
             config.NewConfig<Title, TitleDto>()
                 .Map(dest => dest, src => src)
@@ -38,6 +39,12 @@ namespace WebLayer.Mappings
             config.NewConfig<Title, PersonTitlesDto>()
                 .Map(dest => dest.Title, src => src.Primarytitle)
                 .Map(dest => dest.Tconst, src => src.Tconst);
+
+            config.NewConfig<ParticipatesInTitle, PersonTitlesDto>()
+                .Map(dest => dest.Title, src => src.TconstNavigation.Primarytitle)
+                .Map(dest => dest.Tconst, src => src.TconstNavigation.Tconst)
+                .Map(dest => dest.Category, src => src.Category);
+            
  
             config.NewConfig<User, UserCreationDto>()
                 .Map(dest => dest.Username, src => src.Username)

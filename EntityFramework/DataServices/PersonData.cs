@@ -40,6 +40,8 @@ public class PersonData : IPersonData
             .Include(p => p.PersonRating)
             .Include(p => p.ParticipatesInTitles)
             .ThenInclude(pt => pt.TconstNavigation)
+            .Include(p => p.ParticipatesInTitles)
+            .ThenInclude(p => p.PersonProfession)
             .Include(kt => kt.KnownForTitles)
             .ThenInclude(kt => kt.TconstNavigation)
             .FirstOrDefault(p => p.Nconst == id);
