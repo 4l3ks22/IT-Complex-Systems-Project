@@ -48,6 +48,10 @@ public class PersonController : BaseController<IPersonData>
     {
         var modeldto = _mapper.Map<PersonDto>(person);
         modeldto.Url = GetUrl(nameof(GetPersonById), new { personId = person.Nconst });
+        foreach (var titleDto in modeldto.Titles)
+        {
+            titleDto.Url = GetUrl(nameof(TitlesController.GetTitleById), new { id = titleDto.Tconst});
+        }
         
         return modeldto;
     }

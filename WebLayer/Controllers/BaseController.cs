@@ -3,6 +3,7 @@ using EntityFramework.Interfaces;
 using EntityFramework.Models;
 using Microsoft.AspNetCore.Mvc;
 using MapsterMapper;
+using WebLayer.Dtos;
 
 namespace WebLayer.Controllers;
 
@@ -99,7 +100,7 @@ public abstract class BaseController<TDataService> : ControllerBase
         };
     }
 
-    protected string? GetUrl(string endpointName, object values)
+    protected string GetUrl(string endpointName, object values)
     {
         return _generator.GetUriByName(HttpContext, endpointName, values);
     }

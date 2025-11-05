@@ -15,10 +15,7 @@ namespace WebLayer.Mappings
                 .Map(dest => dest, src => src)
                 .Map(dest => dest.Titles, src => src.ParticipatesInTitles
                     .Where(pt => pt.TconstNavigation != null)
-                    .Select(pt => pt.TconstNavigation.Adapt<TitleDto>()))
-                .Map(dest => dest.KnownForTitles, src => src.KnownForTitles
-                    .Where(kt => kt.TconstNavigation != null)
-                    .Select(kt => kt.TconstNavigation.Adapt<TitleDto>()))
+                    .Select(pt => pt.TconstNavigation.Adapt<PersonTitlesDto>()))
                 .Map(dest => dest.Professions, src => src.PersonProfessions
                     .Where(pp => pp.Profession != null)
                     .Select(pp => pp.Profession.Profession1))
@@ -39,13 +36,10 @@ namespace WebLayer.Mappings
                 .Map(dest => dest.SerieName, src => src.ParenttconstNavigation.Primarytitle)
                 .Map(dest => dest.Genres, src => src.ParenttconstNavigation.Genres);
             
-            config.NewConfig<KnownForTitle, KnownForTitleDto>()
-                .Map(dest => dest.TconstNavigation, src => src.TconstNavigation.Primarytitle);
-
-            config.NewConfig<TitleDto, PersonTitlesDto>()
-                .Map(dest => dest.Url, src => src.Url)
-                .Map(dest => dest.Title, src => src.Primarytitle);
-
+            config.NewConfig<Title, PersonTitlesDto>()
+                .Map(dest => dest.Title, src => src.Primarytitle)
+                .Map(dest => dest.Tconst, src => src.Tconst);
+ 
             config.NewConfig<User, UserCreationDto>()
                 .Map(dest => dest.Username, src => src.Username)
                 .Map(dest => dest.Email, src => src.Email)
