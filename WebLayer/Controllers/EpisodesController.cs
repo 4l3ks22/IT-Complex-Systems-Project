@@ -2,8 +2,6 @@ using EntityFramework.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EntityFramework.Models;
 using MapsterMapper;
-using Mapster;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using WebLayer.Dtos;
 
 namespace WebLayer.Controllers
@@ -48,16 +46,13 @@ namespace WebLayer.Controllers
             return Ok(modeldto);
         }
         
-        
         private EpisodeDto CreateEpisodeDto(Episode episode)
         {
             var modeldto = _mapper.Map<EpisodeDto>(episode); 
 
-            // Building the episode’s own URL  using LinkGenerator
+           
             modeldto.EpisodeUrl = GetUrl(nameof(GetEpisodesById), new { id = episode.Tconst.Trim() });
-
-            // Building the related Title URL 
-
+            
             modeldto.SerieUrl = GetUrl(
                 nameof(TitlesController.GetTitleById),
                 new { id = episode.ParenttconstNavigation.Tconst.Trim() }); 

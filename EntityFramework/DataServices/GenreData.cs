@@ -8,7 +8,7 @@ public class GenreData(MyDbContext db) : IGenreData
 {
     public int GetGenresCount()
     {
-        return db.Genres.Count(); // Genres is from MyDbContext
+        return db.Genres.Count(); 
     }
 
 

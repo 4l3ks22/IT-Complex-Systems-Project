@@ -19,16 +19,17 @@ public class PersonData : IPersonData
     }
 
     public IList<Person> GetPersons(int page, int pageSize)
-    {
+    { // Include all necessary navigation properties that are used in the DTO
         return db.Persons
             .Include(p => p.PersonProfessions)
             .ThenInclude(pp => pp.Profession)
             .Include(p => p.PersonRating)
             .Include(p => p.ParticipatesInTitles)
             .ThenInclude(pt => pt.TconstNavigation)
-            .OrderBy(x => x.Nconst)
-            .Skip(page * pageSize)
-            .Take(pageSize)
+            .Include(p => p.ParticipatesInTitles)
+            .ThenInclude(p => p.PersonProfession)
+            .Include(kt => kt.KnownForTitles)
+            .ThenInclude(kt => kt.TconstNavigation)
             .ToList();
     }
 

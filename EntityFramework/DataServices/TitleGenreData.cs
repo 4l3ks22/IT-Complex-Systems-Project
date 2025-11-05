@@ -11,7 +11,7 @@ public class TitleGenreData(MyDbContext db) : ITitleGenreData
     
     public int GetTitleGenreCount()
     {
-        return db.TitleGenres.Count(); // TitlesGenres is from MyDbContext
+        return db.TitleGenres.Count(); 
     }
     public IList<TitleGenre> GetTitleGenre(QueryParams queryParams)
     {

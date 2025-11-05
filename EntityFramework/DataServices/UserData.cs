@@ -29,8 +29,8 @@ public class UserData(MyDbContext db) : IUserData
 
     public void AddUser(User user)
     {
-        user.PasswordHash = PasswordHasher.Hash(user.PasswordHash);
-        db.Users.Add(user);
+        user.PasswordHash = PasswordHasher.Hash(user.PasswordHash); // Using hasher method to hash the password
+        db.Users.Add(user); 
         db.SaveChanges(); }
 
     public void UpdateUser(User user)
@@ -47,20 +47,20 @@ public class UserData(MyDbContext db) : IUserData
     }
 
     
-    public User GetUserByEmail(string email)
+    public User GetUserByEmail(string email) // Supplementary method to get user by email for logging in
     {
-        return db.Users.FirstOrDefault(x => x.Email == email);
+        return db.Users.FirstOrDefault(x => x.Email == email); 
     }
     
-    public User LoginUser(string email, string password)
+    public User LoginUser(string email, string password) // Make user login with email and password
     {
-        User? user = GetUserByEmail(email);
+        User? user = GetUserByEmail(email); // making sure user exists
         if (user is null)
         {
             throw new Exception(@"User not found");
         }
 
-        bool verified = PasswordHasher.Verify(password, user.PasswordHash);
+        bool verified = PasswordHasher.Verify(password, user.PasswordHash); // checking if the password is correct
         if (!verified)
         {
             throw new Exception("Password is incorrect");

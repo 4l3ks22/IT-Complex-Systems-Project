@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityFramework.DataServices;
 
-public class TitleData(MyDbContext db) : ITitleData // this is like having var db = new MyDbContext
+public class TitleData(MyDbContext db) : ITitleData 
 {
     public int GetTitlesCount()
     {
-        return db.Titles.Count(); // Titles is from MyDbContext
+        return db.Titles.Count(); 
     }
 
     public IList<Title> GetTitles(QueryParams queryParams)

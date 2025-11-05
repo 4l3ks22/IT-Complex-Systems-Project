@@ -9,6 +9,7 @@ namespace WebLayer.Controllers;
 
 public abstract class BaseController<TDataService> : ControllerBase
     where TDataService : class //  ControllerBase is the interface provided by Asp.net 
+                               // Setting up are own base controller to control pagging and link generation
 {
     protected readonly TDataService _dataService;
     protected readonly LinkGenerator _generator;
@@ -28,21 +29,21 @@ public abstract class BaseController<TDataService> : ControllerBase
         QueryParams queryParams)
     {
         
-        var numberOfPages = (int)Math.Ceiling((double)numberOfItems / queryParams.PageSize);
+        var numberOfPages = (int)Math.Ceiling((double)numberOfItems / queryParams.PageSize); // makes sure to round up when more pages are needed
 
         var prev = queryParams.PageNumber > 1
-            ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber - 1, queryParams.PageSize })
+            ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber - 1, queryParams.PageSize }) // checking if we have previous page then it generates url
             : null;
 
         var next = (numberOfPages > 0 && queryParams.PageNumber < numberOfPages)
-            ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber + 1, queryParams.PageSize })
+            ? GetUrl(endpointName, new { PageNumber = queryParams.PageNumber + 1, queryParams.PageSize }) // checking if we have next page then it generates url
             : null;
 
-        var first = numberOfPages > 1 ? GetUrl(endpointName, new { PageNumber = 1, queryParams.PageSize }) : null;
+        var first = numberOfPages > 1 ? GetUrl(endpointName, new { PageNumber = 1, queryParams.PageSize }) : null; 
         var cur = GetUrl(endpointName, new { queryParams.PageNumber, queryParams.PageSize });
         var last = numberOfPages > 0 ? GetUrl(endpointName, new { PageNumber = numberOfPages, queryParams.PageSize }) : null;
 
-        return new
+        return new // return object to be returned in JSON response
         {
             First = first,
             Prev = prev,
@@ -55,7 +56,7 @@ public abstract class BaseController<TDataService> : ControllerBase
         };
     }
 
-    protected string GetUrl(string endpointName, object values)
+    protected string GetUrl(string endpointName, object values) // Method to generate links
     {
         return _generator.GetUriByName(HttpContext, endpointName, values);
     }

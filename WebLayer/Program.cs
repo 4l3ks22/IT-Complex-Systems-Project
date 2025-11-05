@@ -12,11 +12,11 @@ using WebLayer.Mappings; //only this was added in Program
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Basic logging
+// Configure logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
-
+// add appsettings.json to be used to configure the db connection
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
 // register entity framework with the db context 
@@ -40,6 +40,7 @@ builder.Services.AddScoped<IUserData, UserData>();
 builder.Services.AddScoped<IVersionData, VersionData>();
 builder.Services.AddScoped<ITitleGenreData, TitleGenreData>();
 
+// Add authentication using JWT 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -57,13 +58,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// Add authorization so [Authorize] works on methods if someone needs to be logged in to access them
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
 app.MapGet("/", () => Results.Text("Web app running"));
 
-// enable attribute-routed controllers (api/genres)
+// Add controllers
 app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();

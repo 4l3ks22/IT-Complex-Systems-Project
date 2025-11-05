@@ -14,7 +14,7 @@ public class EpisodeData(MyDbContext db) : IEpisodeData // this is like having v
     public IList<Episode> GetEpisodes(QueryParams queryParams)
     {
         return db.Episodes
-            .Include(x => x.ParenttconstNavigation) // Include the parent Title (the series)
+            .Include(x => x.ParenttconstNavigation) // Include navigation to the parent title
             .OrderBy(x => x.Parenttconst)
             .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
             .Take(queryParams.PageSize)
