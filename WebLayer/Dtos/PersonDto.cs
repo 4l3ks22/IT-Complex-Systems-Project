@@ -11,6 +11,5 @@ public class PersonDto
     
     public double PersonRating { get; set; }
     public List<PersonTitlesDto> Titles { get; set; } = new();
-    public List<KnownForTitleDto> KnownForTitles { get; set; } = new();
     
 }

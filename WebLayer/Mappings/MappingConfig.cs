@@ -33,8 +33,8 @@ namespace WebLayer.Mappings
                 .Map(dest => dest, src => src);
 
             config.NewConfig<Episode, EpisodeDto>()
-                .Map(dest => dest.SerieName, src => src.ParenttconstNavigation.Primarytitle)
-                .Map(dest => dest.Genres, src => src.ParenttconstNavigation.Genres);
+                .Map(dest => dest.SerieName, src => src.ParenttconstNavigation.Primarytitle);
+               
             
             config.NewConfig<Title, PersonTitlesDto>()
                 .Map(dest => dest.Title, src => src.Primarytitle)

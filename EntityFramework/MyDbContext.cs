@@ -261,9 +261,6 @@ public class MyDbContext : DbContext
                 .HasMaxLength(4)
                 .IsFixedLength()
                 .HasColumnName("endyear");
-            entity.Property(e => e.Genres)
-                .HasMaxLength(256)
-                .HasColumnName("genres");
             entity.Property(e => e.Isadult).HasColumnName("isadult");
             entity.Property(e => e.Originaltitle).HasColumnName("originaltitle");
             entity.Property(e => e.Primarytitle).HasColumnName("primarytitle");

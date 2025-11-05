@@ -1,5 +1,5 @@
 # http
-@WebLayer_HostAddress = http://localhost:5000
+@WebLayer_HostAddress = http://localhost:5220
 
 GET {{WebLayer_HostAddress}}/api/genres
 Accept: application/json
@@ -37,11 +37,6 @@ Accept: application/json
 
 ###
 
-GET {{WebLayer_HostAddress}}/api/persons
-Accept: application/json
-
-###
-
 GET {{WebLayer_HostAddress}}/api/persons/nm0000206
 Accept: application/json
 
@@ -73,7 +68,7 @@ Content-Type: application/json
 
 ###
 
-DELETE {{WebLayer_HostAddress}}/api/users/
+DELETE {{WebLayer_HostAddress}}/api/users/47
 Content-Type: application/json
 
 ### 
@@ -107,7 +102,7 @@ Content-Type: application/json
 GET {{WebLayer_HostAddress}}/api/users/50
 Accept: application/json
 #Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGV4YW5kZXIiLCJlbWFpbCI6ImFsZXhhbmRlckB0ZXN0LmNvbSIsIlVzZXJJZCI6IjQ5IiwiZXhwIjoxNzYyMzU1OTQ5LCJpc3MiOiJNeVdlYkFwaSIsImF1ZCI6Ik15V2ViQ2xpZW50In0.zKBtrK423Z3BlOiX_qpf8EHeaC4qovOv9AYTvdLb4YI
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0aW5ndGhpcyIsImVtYWlsIjoiZmFzZmFzZmFmQHRlc3QuY29tIiwiVXNlcklkIjoiNTAiLCJleHAiOjE3NjIzNjIzMTksImlzcyI6Ik15V2ViQXBpIiwiYXVkIjoiTXlXZWJDbGllbnQifQ.i8T0lhevL5107x76pQqqLrcdEqt-7LqUhpba1xU9fBA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0aW5ndGhpcyIsImVtYWlsIjoiZmFzZmFzZmFmQHRlc3QuY29tIiwiVXNlcklkIjoiNTAiLCJleHAiOjE3NjIzODAyMzksImlzcyI6Ik15V2ViQXBpIiwiYXVkIjoiTXlXZWJDbGllbnQifQ.xzUleuY8To1SiLOENarbTTb6xnRJT8mDxcUlhslzew4
 
 ###
 

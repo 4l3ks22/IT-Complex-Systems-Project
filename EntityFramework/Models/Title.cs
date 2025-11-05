@@ -20,8 +20,6 @@ public class Title
     public string? Endyear { get; set; }
 
     public int? Runtimeminutes { get; set; }
-
-    public string? Genres { get; set; }
     
     
 

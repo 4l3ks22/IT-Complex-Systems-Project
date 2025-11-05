@@ -125,8 +125,7 @@ public class UserController : BaseController<IUserData>
         _userData.UpdateUser(existingUser);
         return NoContent();
     }
-
-    [Authorize]
+    
     [HttpDelete("{userId}")]
     public IActionResult DeleteUser(int userId)
     {
