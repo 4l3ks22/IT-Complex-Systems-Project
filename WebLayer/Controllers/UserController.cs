@@ -48,8 +48,7 @@ public class UserController : BaseController<IUserData>
             user.Username
         });
     }
-
-    // ✅ JWT token generator
+    
     private string GenerateJwtToken(User user)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
@@ -67,7 +66,7 @@ public class UserController : BaseController<IUserData>
             issuer: jwtSettings["Issuer"],
             audience: jwtSettings["Audience"],
             claims: claims,
-            expires: DateTime.UtcNow.AddHours(2),
+            expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: creds
         );
 
