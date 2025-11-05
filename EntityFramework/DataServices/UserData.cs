@@ -22,11 +22,6 @@ public class UserData(MyDbContext db) : IUserData
         .ToList();
     }
 
-    public User GetUserByUsername(string username)
-    {
-        return db.Users.FirstOrDefault(x => x.Username == username);
-    }
-
     public User GetUserById(int userId)
     {
         return db.Users.FirstOrDefault(x => x.UserId == userId);
@@ -51,20 +46,26 @@ public class UserData(MyDbContext db) : IUserData
         db.SaveChanges();
     }
 
-        public User LoginUser(string username, string password)
+    
+    public User GetUserByEmail(string email)
+    {
+        return db.Users.FirstOrDefault(x => x.Email == email);
+    }
+    
+    public User LoginUser(string email, string password)
+    {
+        User? user = GetUserByEmail(email);
+        if (user is null)
         {
-            User? user = GetUserByUsername(username);
-            if (user is null)
-            {
-                throw new Exception(@"User not found");
-            }
-
-            bool verified = PasswordHasher.Verify(password, user.PasswordHash);
-            if (!verified)
-            {
-                throw new Exception("Password is incorrect");
-            }
-
-            return user;
+            throw new Exception(@"User not found");
         }
+
+        bool verified = PasswordHasher.Verify(password, user.PasswordHash);
+        if (!verified)
+        {
+            throw new Exception("Password is incorrect");
+        }
+
+        return user;
+    }
 }

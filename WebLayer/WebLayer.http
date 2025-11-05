@@ -66,9 +66,9 @@ POST {{WebLayer_HostAddress}}/api/users
 Content-Type: application/json
 
 {
-	"Username": "Cesarrua",
-    "Email":"cesarrua@gmail.com",
-    "PasswordHash":"whichever"
+	"Username": "alexander",
+    "Email":"alexander@test.com",
+    "PasswordHash":"password"
 }
 
 ###
@@ -91,3 +91,19 @@ Content-Type: application/json
     "Email":"testingputting@gmail.com",
     "PasswordHash":"hahahha"
 }
+
+###
+
+POST {{WebLayer_HostAddress}}/api/users/login
+Content-Type: application/json
+
+{
+    "Email": "alexander@test.com",
+    "Password":"password"
+}
+
+###
+
+GET {{WebLayer_HostAddress}}/api/users/49
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGV4YW5kZXIiLCJlbWFpbCI6ImFsZXhhbmRlckB0ZXN0LmNvbSIsIlVzZXJJZCI6IjQ5IiwiZXhwIjoxNzYyMzU1OTQ5LCJpc3MiOiJNeVdlYkFwaSIsImF1ZCI6Ik15V2ViQ2xpZW50In0.zKBtrK423Z3BlOiX_qpf8EHeaC4qovOv9AYTvdLb4YI
