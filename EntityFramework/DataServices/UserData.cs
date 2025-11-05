@@ -37,6 +37,13 @@ public class UserData(MyDbContext db) : IUserData
         user.PasswordHash = PasswordHasher.Hash(user.PasswordHash);
         db.Users.Add(user);
         db.SaveChanges(); }
+
+    public void UpdateUser(User user)
+    {
+        user.PasswordHash = PasswordHasher.Hash(user.PasswordHash);
+        db.Users.Update(user);
+        db.SaveChanges();
+    }
     
     public void DeleteUser(User user)
     {

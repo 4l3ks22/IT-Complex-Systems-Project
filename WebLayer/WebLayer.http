@@ -66,16 +66,28 @@ POST {{WebLayer_HostAddress}}/api/users
 Content-Type: application/json
 
 {
-	"Username": "Cesahhfahro",
-    "Email":"cesarruac@hg.jcom",
-    "PasswordHash":"Putamadre"
+	"Username": "Cesarrua",
+    "Email":"cesarrua@gmail.com",
+    "PasswordHash":"whichever"
 }
 
 ###
 
-DELETE {{WebLayer_HostAddress}}/api/users/33
+DELETE {{WebLayer_HostAddress}}/api/users/
 Content-Type: application/json
 
 ### 
 
 GET {{WebLayer_HostAddress}}/api/titlegenre
+Content-Type: application/json
+
+### 
+
+PUT {{WebLayer_HostAddress}}/api/users/47
+Content-Type: application/json
+
+{
+	"Username": "Cesarruac",
+    "Email":"testingputting@gmail.com",
+    "PasswordHash":"hahahha"
+}
