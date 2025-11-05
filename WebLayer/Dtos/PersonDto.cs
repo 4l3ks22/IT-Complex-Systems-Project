@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using WebLayer.Dtos;
-
-namespace EntityFramework.Models;
+namespace WebLayer.Dtos;
 
 public class PersonDto
 {

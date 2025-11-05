@@ -47,12 +47,17 @@ Accept: application/json
 
 ###
 
+GET {{WebLayer_HostAddress}}/api/versions/tt0063929
+Accept: application/json
+
+###
+
 GET {{WebLayer_HostAddress}}/api/users
 Accept: application/json
 
 ###
 
-GET {{WebLayer_HostAddress}}/api/versions/tt0063929
+GET {{WebLayer_HostAddress}}/api/users/28
 Accept: application/json
 
 ###
@@ -61,12 +66,16 @@ POST {{WebLayer_HostAddress}}/api/users
 Content-Type: application/json
 
 {
-	"Username": "Test3",
-    "Email":"emsffaasl@emal.com",
-    "PasswordHash":"Psasfsrd"
+	"Username": "Cesahhfahro",
+    "Email":"cesarruac@hg.jcom",
+    "PasswordHash":"Putamadre"
 }
 
 ###
 
-DELETE {{WebLayer_HostAddress}}/api/users/25
+DELETE {{WebLayer_HostAddress}}/api/users/33
 Content-Type: application/json
+
+### 
+
+GET {{WebLayer_HostAddress}}/api/titlegenre

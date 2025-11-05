@@ -51,19 +51,19 @@ public IActionResult CreateUser ([FromBody]UserCreationDto userCreationDto)
     return Created();
 }
 
-[HttpPost( Name = nameof(LoginUser))]
-public IActionResult LoginUser([FromBody] LoginRequestDto loginRequestDto)
-{
-    if (loginRequestDto == null)
-    {
-        return BadRequest("User object is null");
-    }
-    
-    var user = _userData.LoginUser(loginRequestDto.Username, loginRequestDto.Password);
-    if (user == null)
-        return BadRequest("Invalid username or password");
-    return Ok(user);
-}
+// [HttpPost( Name = nameof(LoginUser))]
+// public IActionResult LoginUser([FromBody] LoginRequestDto loginRequestDto)
+// {
+//     if (loginRequestDto == null)
+//     {
+//         return BadRequest("User object is null");
+//     }
+//     
+//     var user = _userData.LoginUser(loginRequestDto.Username, loginRequestDto.Password);
+//     if (user == null)
+//         return BadRequest("Invalid username or password");
+//     return Ok(user);
+// }
 
 [HttpDelete("{UserId}")]
 public IActionResult DeleteUser(int UserId)

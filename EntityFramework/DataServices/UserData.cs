@@ -34,7 +34,7 @@ public class UserData(MyDbContext db) : IUserData
 
     public void AddUser(User user)
     {
-        user.PasswordHash = DataServices.PasswordHasher.Hash(user.PasswordHash);
+        user.PasswordHash = PasswordHasher.Hash(user.PasswordHash);
         db.Users.Add(user);
         db.SaveChanges(); }
     
@@ -52,7 +52,7 @@ public class UserData(MyDbContext db) : IUserData
                 throw new Exception(@"User not found");
             }
 
-            bool verified = DataServices.PasswordHasher.Verify(password, user.PasswordHash);
+            bool verified = PasswordHasher.Verify(password, user.PasswordHash);
             if (!verified)
             {
                 throw new Exception("Password is incorrect");
@@ -60,5 +60,4 @@ public class UserData(MyDbContext db) : IUserData
 
             return user;
         }
-    // }
 }

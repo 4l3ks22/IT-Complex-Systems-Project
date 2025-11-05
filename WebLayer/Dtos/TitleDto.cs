@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
-using WebLayer.Dtos;
+
+namespace WebLayer.Dtos;
 
 public class TitleDto
 {
@@ -13,14 +14,12 @@ public class TitleDto
     public string? Startyear { get; set; }
     public string? Endyear { get; set; }
     public int? Runtimeminutes { get; set; }
-    //public List<string> genres { get; set; } // to show genres in titles intead of null
-    public string? Genres { get; set; } // to show genres in titles intead of null
-    
+
+    public List<String>? TitleGenres { get; set; }
     public TitleExtraDto? TitleExtras { get; set; }  // This is the whole TitleExtra object to adapt to TitleDto
     
     public RatingDto? TitleRating { get; set; }  // This is the whole TitleRating object to adapt to TitleDto
-    //public VersionDto? Versions { get; set; }  // This is the whole TitleRating object to adapt to TitleDto
     
-    public List<VersionDto>? Versions { get; set; } // This is the whole Version object to adapt to TitleDto
+    // public List<VersionDto>? Versions { get; set; } // This is the whole Version object to adapt to TitleDto
 
 }

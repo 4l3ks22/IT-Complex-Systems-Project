@@ -5,7 +5,7 @@ namespace WebLayer.Dtos;
 public class UserCreationDto
 {
     [Required(ErrorMessage = "Username is required")]
-    [StringLength(40, MinimumLength = 5, ErrorMessage = "Username must be between 3 and 40 characters")]
+    [StringLength(40, MinimumLength = 5, ErrorMessage = "Username must be between 5 and 40 characters")]
     public string Username { get; set; }
     
     [Required(ErrorMessage = "Email is required")]
