@@ -47,5 +47,4 @@ public class Title
     
     public virtual TitleExtra? TitleExtra { get; set; } = new (); //The navigation path of TitleExtra in Title model
     public virtual Rating? Rating { get; set; } = new (); //The navigation path of Rating in Title model
-    //public virtual Version? Versions { get; set; } = new (); //The navigation path of Rating in Title model
 }

@@ -11,13 +11,13 @@ public class EpisodeData(MyDbContext db) : IEpisodeData // this is like having v
         return db.Episodes.Count();
     }
 
-    public IList<Episode> GetEpisodes(int page, int pageSize)
+    public IList<Episode> GetEpisodes(QueryParams queryParams)
     {
         return db.Episodes
             .Include(x => x.ParenttconstNavigation) // Include the parent Title (the series)
             .OrderBy(x => x.Parenttconst)
-            .Skip(page * pageSize)
-            .Take(pageSize)
+            .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+            .Take(queryParams.PageSize)
             .ToList();
     }
 

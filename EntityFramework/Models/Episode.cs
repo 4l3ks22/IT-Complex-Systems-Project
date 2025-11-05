@@ -14,7 +14,5 @@ public class Episode
     public int? Episodenumber { get; set; }
     
     public virtual Title ParenttconstNavigation { get; set; }
-    //public virtual ICollection<Title> ParenttconstNavigation { get; set; } = new List<Title>();
-    //public Title ParenttconstNavigation { get; set; } // trying by cesar
-    
+
 }
