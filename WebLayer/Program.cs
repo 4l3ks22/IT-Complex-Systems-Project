@@ -8,7 +8,7 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using WebLayer.Mappings; //only this was added in Program
+using WebLayer.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,21 +16,32 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
-// add appsettings.json to be used to configure the db connection
+// Load appsettings.json
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-// register entity framework with the db context 
+// ➤ Add CORS so React can call your API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+        policy.WithOrigins(
+            "http://localhost:5173"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials()
+    );
+});
+
+// DbContext
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//add Mapster
+// Mapster
 builder.Services.AddMapster();
-
-// Mapster configuration 
 var config = TypeAdapterConfig.GlobalSettings;
 MappingConfig.Register(config);
 
-// register controllers and services
+// Controllers & Services
 builder.Services.AddControllers();
 builder.Services.AddScoped<IGenreData, GenreData>();
 builder.Services.AddScoped<IEpisodeData, EpisodeData>();
@@ -40,7 +51,7 @@ builder.Services.AddScoped<IUserData, UserData>();
 builder.Services.AddScoped<IVersionData, VersionData>();
 builder.Services.AddScoped<ITitleGenreData, TitleGenreData>();
 
-// Add authentication using JWT 
+// JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -58,19 +69,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Add authorization so [Authorize] works on methods if someone needs to be logged in to access them
 builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
 app.MapGet("/", () => Results.Text("Web app running"));
 
-// Add controllers
-app.MapControllers();
+// ➤ Important order: CORS must be BEFORE auth & controllers
+app.UseCors("AllowFrontend");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapControllers();
+
 Console.WriteLine("Starting web host...");
-Console.WriteLine("Listening on: " + (app.Urls.Count > 0 ? string.Join(", ", app.Urls) : "no explicit URLs (check ASPNETCORE_URLS or Kestrel config)"));
+Console.WriteLine("Listening on: " + 
+    (app.Urls.Count > 0 ? string.Join(", ", app.Urls) : "no explicit URLs"));
 
 app.Run();
