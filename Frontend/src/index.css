@@ -1,16 +1,33 @@
 :root {
+  /* Colours for light mode */
+  --bg: #ffffff;
+  --text: #000000;
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  
+  background-color: var(--bg);
+  color: var(--text);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* dark mode style */
+html.dark {
+  --bg: #242424;
+  --text: rgba(255, 255, 255, 0.87);
+}
+
+/* setting up page body style */
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 a {
