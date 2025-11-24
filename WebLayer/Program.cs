@@ -19,7 +19,7 @@ builder.Logging.AddConsole();
 // Load appsettings.json
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-// ➤ Add CORS so React can call your API
+// Add CORS so React can call your API
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>

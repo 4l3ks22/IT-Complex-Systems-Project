@@ -1,17 +1,13 @@
-import { useState, useEffect } from "react";
-import './App.css'
-import ThemeButton from "./components/themeButton";
+import HomePage from "./pages/Homepage.jsx";
+import ThemeButton from "./components/ThemeButton.jsx";
 
 function App() {
-    
     return (
         <div>
-            <ThemeButton />
-            <h1>What genre is on number 4?</h1>
-            <p>{genre}</p>
+            <ThemeButton/>
+            <HomePage/>
         </div>
     );
-    
 }
 
-export default App
+export default App;
