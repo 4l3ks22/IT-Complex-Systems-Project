@@ -1,4 +1,4 @@
-﻿const BASE_URL = "http://localhost:5220/api/titles";
+﻿const BASE_URL = "http://localhost:5000/api/titles";
 
 export function getAllTitles() {
     return fetch(BASE_URL)
