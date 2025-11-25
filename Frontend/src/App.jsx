@@ -15,14 +15,16 @@ export default App;*/
 import { Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/Homepage.jsx";
 import TitlePage from "./pages/TitlePage.jsx";
-
+import './App.css'
 import ThemeButton from "./components/ThemeButton.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 export default function App() {
     return (
-        <div className="container mt-3">
+        <div className="container-mt-3">
+            <Navbar />
             <ThemeButton />
-
+            
             <nav className="mb-3">
                 <Link to="/" className="btn btn-primary me-2">Home</Link>
             </nav>
