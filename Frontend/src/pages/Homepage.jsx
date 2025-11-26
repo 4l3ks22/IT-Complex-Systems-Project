@@ -21,6 +21,7 @@ export default function HomePage() {
 
 import React from "react";
 import { usePaginatedTitles } from "../hooks/usePaginatedTitles";
+import { usePersons } from "../hooks/usePersons";
 
 
 export default function HomePage() {
@@ -32,7 +33,6 @@ export default function HomePage() {
     return (
         <div>
             <h1>All Titles</h1>
-
             <ul className="list-group mb-3">
                 {titles.map(t => (
                     <li key={t.url} className="list-group-item">
@@ -59,6 +59,7 @@ export default function HomePage() {
                 >
                     Next
                 </button>
+                
             </div>
         </div>
     );

@@ -18,12 +18,15 @@ import TitlePage from "./pages/TitlePage.jsx";
 import './App.css'
 import ThemeButton from "./components/ThemeButton.jsx";
 import Navbar from "./components/Navbar.jsx";
+import PersonsTable from "./components/PersonsTable.jsx";
+import GenresDropdown from "./components/GenresDropDown";
 
 export default function App() {
     return (
         <div className="container-mt-3">
             <Navbar />
             <ThemeButton />
+            <GenresDropdown />
             
             <nav className="mb-3">
                 <Link to="/" className="btn btn-primary me-2">Home</Link>
@@ -34,6 +37,7 @@ export default function App() {
                 <Route path="/titles/:id" element={<TitlePage />} />
 
             </Routes>
+            
         </div>
     );
 }

@@ -1,4 +1,4 @@
-﻿const BASE_URL = "http://localhost:5220/api/genres";
+﻿const BASE_URL = "http://localhost:5000/api/genres";
 
 export function getAllGenres() {
     return fetch(BASE_URL)

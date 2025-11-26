@@ -42,6 +42,11 @@ Accept: application/json
 
 ###
 
+GET {{WebLayer_HostAddress}}/api/persons/
+Accept: application/json
+
+###
+
 GET {{WebLayer_HostAddress}}/api/versions/tt0063929
 Accept: application/json
 
