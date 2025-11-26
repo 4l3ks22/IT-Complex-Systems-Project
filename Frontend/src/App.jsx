@@ -24,9 +24,7 @@ import GenresDropdown from "./components/GenresDropDown";
 export default function App() {
     return (
         <div className="container-mt-3">
-            <Navbar />
-            <ThemeButton />
-            <GenresDropdown />
+           
             
             <nav className="mb-3">
                 <Link to="/" className="btn btn-primary me-2">Home</Link>

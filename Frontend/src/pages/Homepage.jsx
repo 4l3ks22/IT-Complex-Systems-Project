@@ -23,10 +23,16 @@ import React from "react";
 import { usePaginatedTitles } from "../hooks/usePaginatedTitles";
 import { usePersons } from "../hooks/usePersons";
 import PaginatedTitles from "../components/PaginatedTitles";
+import Navbar from "../components/Navbar.jsx";
+import ThemeButton from "../components/ThemeButton.jsx";
+import GenresDropdown from "../components/GenresDropDown.jsx";
 
 export default function HomePage() {
     return (
         <p>
+            <Navbar />
+            <ThemeButton />
+            <GenresDropdown />
             <PaginatedTitles/>
         </p>
     );
