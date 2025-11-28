@@ -69,6 +69,25 @@ public class TitlesController: BaseController<ITitleData>
         return Ok(modeldto);
     }
     
+    //New controller to search titles by name to implement request
+    
+    [HttpGet("search", Name = nameof(SearchTitles))]
+    public IActionResult SearchTitles( string name)
+    {
+        
+        var titles = _titleData.SearchTitlesByName(name);
+        
+        if (titles.Count == 0)
+            return NotFound();
+        
+        var results = titles
+            .Select(t => CreateTitleDto(t))
+            .ToList();
+        
+
+        return Ok(results);
+    }
+    
     
     private TitleDto CreateTitleDto(Title title)
     {

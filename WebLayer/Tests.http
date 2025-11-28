@@ -37,6 +37,10 @@ Accept: application/json
 
 ###
 
+GET {{WebLayer_HostAddress}}/api/titles/search?name=The civil war
+
+###
+
 GET {{WebLayer_HostAddress}}/api/persons/nm0000206
 Accept: application/json
 
