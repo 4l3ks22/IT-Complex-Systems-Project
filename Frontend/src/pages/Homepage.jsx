@@ -26,15 +26,17 @@ import PaginatedTitles from "../components/PaginatedTitles";
 import Navbar from "../components/Navbar.jsx";
 import ThemeButton from "../components/ThemeButton.jsx";
 import GenresDropdown from "../components/GenresDropDown.jsx";
+import SearchBar from "../components/SearchBar";
 
 export default function HomePage() {
     return (
-        <p>
+        <div>
             <Navbar />
             <ThemeButton />
             <GenresDropdown />
+            <SearchBar />
             <PaginatedTitles/>
-        </p>
+        </div>
     );
 }
 

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useTitle } from "../hooks/useTitleId";
 
 export default function TitlePage() {
-    const { id } = useParams();
+    const { id } = useParams(); ////Importing component hook to hook in React Router provides access to dynamic URL parameters (such as /user/:id)
     const title = useTitle(id);
 
     if (!title) return <p>Loading title...</p>;

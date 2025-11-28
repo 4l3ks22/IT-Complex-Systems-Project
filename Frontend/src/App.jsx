@@ -20,6 +20,7 @@ import ThemeButton from "./components/ThemeButton.jsx";
 import Navbar from "./components/Navbar.jsx";
 import PersonsTable from "./components/PersonsTable.jsx";
 import GenresDropdown from "./components/GenresDropDown";
+import SearchResultsPage from "./pages/SearchResultsPage.jsx";
 
 export default function App() {
     return (
@@ -33,6 +34,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/titles/:id" element={<TitlePage />} />
+                <Route path="/search" element={<SearchResultsPage />} />
 
             </Routes>
             
