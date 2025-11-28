@@ -45,8 +45,6 @@ public class TitleData(MyDbContext db) : ITitleData
     //Updated version of GetTitleByName to be active
     public IList<Title> SearchTitlesByName(string name)
     {
-        /*if (string.IsNullOrWhiteSpace(name))
-            return new List<Title>();*/
 
         return db.Titles
             .Include(t => t.TitleExtra)
