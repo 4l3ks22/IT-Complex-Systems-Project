@@ -1,44 +1,41 @@
-/*import React from "react";
+import React from "react";
 import { useTitles } from "../hooks/useTitles";
 
-export default function HomePage() {
-    const titles = useTitles();
- 
-
-    return (
-        <div>
-            <h1>All Titles</h1>
-            <ul>
-                {titles.map(title => (
-                    <li key={title.url}>
-                        {title.primarytitle} - {title.startyear}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}*/
-
-import React from "react";
-import { usePaginatedTitles } from "../hooks/usePaginatedTitles";
-import { usePersons } from "../hooks/usePersons";
 import PaginatedTitles from "../components/PaginatedTitles";
-import Navbar from "../components/Navbar.jsx";
+import MainNavbar from "../components/layout/MainNavbar.jsx";
 import ThemeButton from "../components/ThemeButton.jsx";
 import GenresDropdown from "../components/GenresDropDown.jsx";
-import SearchBar from "../components/SearchBar";
+import NewestTitlesCarousel from "../components/ui/NewestTitlesCarousel.jsx";
+import TopRatedTitlesGrid from "../components/ui/TopRatedTitlesGrid.jsx";
+import TopRatedActorsGrid from "../components/ui/TopRatedActorsGrid.jsx";
 
 export default function HomePage() {
+    const allTitles = useTitles();
+
+    // top 10 highest-rated titles for title grid
+    const topRatedTitles = allTitles
+        .filter(title => title.titleRating && typeof title.titleRating.averagerating === "number")
+        .sort((a, b) => b.titleRating.averagerating - a.titleRating.averagerating)
+        .slice(0, 10);
+
+    // newest titles for carousel
+    const newestTitles = allTitles
+        .filter(title => title.startyear)
+        .sort((a, b) => parseInt(b.startyear) - parseInt(a.startyear))
+        .slice(0, 5);
+
     return (
         <div>
-            <Navbar />
+            <MainNavbar />
+            
+            <NewestTitlesCarousel titles={newestTitles} />
+            
+            <TopRatedTitlesGrid titles={topRatedTitles} />
+            
+            <TopRatedActorsGrid />
             <ThemeButton />
             <GenresDropdown />
-            <SearchBar />
-            <PaginatedTitles/>
+            <PaginatedTitles />
         </div>
     );
 }
-
-
-

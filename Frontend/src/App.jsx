@@ -16,11 +16,9 @@ import { Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/Homepage.jsx";
 import TitlePage from "./pages/TitlePage.jsx";
 import './App.css'
-import ThemeButton from "./components/ThemeButton.jsx";
-import Navbar from "./components/Navbar.jsx";
 import PersonsTable from "./components/PersonsTable.jsx";
-import GenresDropdown from "./components/GenresDropDown";
 import SearchResultsPage from "./pages/SearchResultsPage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
 
 export default function App() {
     return (
@@ -35,7 +33,8 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/titles/:id" element={<TitlePage />} />
                 <Route path="/search" element={<SearchResultsPage />} />
-
+                <Route path="/actors" element={<PersonsTable />} />
+                <Route path="/register" element={<RegisterPage />} />
             </Routes>
             
         </div>
