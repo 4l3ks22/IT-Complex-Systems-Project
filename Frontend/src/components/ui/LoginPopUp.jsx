@@ -25,7 +25,7 @@ export default function LoginPopUp({ show, handleClose }) {
 
                     <Form.Group className="mb-3" controlId="formPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" required />
+                        <Form.Control type="password" placeholder="Enter Password" required />
                     </Form.Group>
 
                     <Button variant="primary" type="submit" className="w-100 mb-3">

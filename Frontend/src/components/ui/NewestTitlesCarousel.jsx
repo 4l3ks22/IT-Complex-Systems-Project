@@ -12,7 +12,7 @@ export default function NewestTitlesCarousel({ titles }) {
                         src={title.titleExtras?.poster}
                         alt={title.primarytitle}
                     />
-                    <Carousel.Caption className="bg-dark bg-opacity-80 rounded p-3 text-white">
+                    <Carousel.Caption className="bg-dark bg-opacity-80 rounded p-3 text-white mt-5">
                         <h3>{title.primarytitle}</h3>
                         <p>{title.titleExtras?.plot}</p>
                     </Carousel.Caption>
