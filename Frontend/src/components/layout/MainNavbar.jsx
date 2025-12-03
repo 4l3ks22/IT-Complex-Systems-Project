@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import SearchBar from '../SearchBar';
 import LoginPopUp from "../ui/LoginPopUp.jsx";
+import ThemeButton from "../ThemeButton.jsx";
 
 export default function MainNavbar() {
     const [showLogin, setShowLogin] = useState(false);
@@ -16,17 +17,17 @@ export default function MainNavbar() {
 
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary py-2">
+            <Navbar expand="lg" className="bg-body-tertiary py-1">
                 <Container fluid>
                     <Row className="w-100 align-items-center">
                         {/* Logo */}
                         <Col xs="auto">
                             <Navbar.Brand href="/">Movie DB</Navbar.Brand>
                         </Col>
-
+                        
                         {/* Search bar centered and flexible */}
                         <Col className="d-flex justify-content-center">
-                            <div className="w-100" style={{ maxWidth: "600px" }}>
+                            <div className="w-100 mt-3" style={{ maxWidth: "600px" }}>
                                 <SearchBar />
                             </div>
                         </Col>
@@ -43,6 +44,10 @@ export default function MainNavbar() {
                                     Sign In
                                 </Button>
                             </div>
+                        </Col>
+                        
+                        <Col xs="auto">
+                            <ThemeButton />
                         </Col>
                     </Row>
                 </Container>
