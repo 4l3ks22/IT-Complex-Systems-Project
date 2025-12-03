@@ -36,7 +36,7 @@ export default function MainNavbar() {
                             <div className="d-flex align-items-center">
                                 <Nav className="me-3">
                                     <Nav.Link href="/">Home</Nav.Link>
-                                    <Nav.Link href="/movies">Movies</Nav.Link>
+                                    <Nav.Link href="/titles">Titles</Nav.Link>
                                     <Nav.Link href="/actors">Actors</Nav.Link>
                                 </Nav>
                                 <Button variant="outline-primary" onClick={handleShow}>
