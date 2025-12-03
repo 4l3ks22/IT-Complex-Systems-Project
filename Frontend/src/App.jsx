@@ -19,6 +19,7 @@ import './App.css'
 import PersonsTable from "./components/PersonsTable.jsx";
 import SearchResultsPage from "./pages/SearchResultsPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
+import AllTitlesPage from "./pages/AllTitlesPage.jsx"; 
 
 export default function App() {
     return (
@@ -35,6 +36,7 @@ export default function App() {
                 <Route path="/search" element={<SearchResultsPage />} />
                 <Route path="/actors" element={<PersonsTable />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/titles" element={<AllTitlesPage/>} />
             </Routes>
             
         </div>

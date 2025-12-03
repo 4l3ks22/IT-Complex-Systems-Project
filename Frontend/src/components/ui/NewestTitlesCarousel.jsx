@@ -8,7 +8,7 @@ export default function NewestTitlesCarousel({ titles }) {
             {titles.map(title => (
                 <Carousel.Item key={title.url}>
                     <img
-                        className="d-block w-100 vh-100 p-5"
+                        className="d-block w-100 vh-100 p-2"
                         src={title.titleExtras?.poster}
                         alt={title.primarytitle}
                     />
