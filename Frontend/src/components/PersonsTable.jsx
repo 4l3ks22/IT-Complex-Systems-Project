@@ -1,4 +1,4 @@
-import {usePersons} from "../hooks/usePersons";
+/*import {usePersons} from "../hooks/usePersons";
 
 export default function PersonsTable() {
     const persons = usePersons();
@@ -15,4 +15,4 @@ export default function PersonsTable() {
             </thead>
         </table>
     )
-}
+}*/

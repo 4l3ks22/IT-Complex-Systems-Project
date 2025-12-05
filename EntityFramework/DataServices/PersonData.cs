@@ -47,4 +47,20 @@ public class PersonData : IPersonData
             .ThenInclude(kt => kt.TconstNavigation)
             .FirstOrDefault(p => p.Nconst == id);
     }
+    
+    //Updated add version of SearchPersonsByName (actors)
+    //it is more advisable to use built-in Contains method to obtain real search functionality, not just exact matching
+    public IEnumerable<Person> SearchPersonsByName(string name)
+    {
+        return db.Persons
+            .Include(p => p.PersonProfessions)
+            .ThenInclude(pp => pp.Profession)
+            .Include(p => p.PersonRating)
+            .Include(p => p.ParticipatesInTitles)
+            .ThenInclude(pt => pt.TconstNavigation)
+            .Include(p => p.KnownForTitles)
+            .ThenInclude(kt => kt.TconstNavigation)
+            .Where(p => p.Primaryname.ToLower().Contains(name.ToLower()))
+            .ToList();
+    }
 }

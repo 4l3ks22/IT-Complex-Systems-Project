@@ -1,5 +1,5 @@
 # http
-@WebLayer_HostAddress = http://localhost:5220
+@WebLayer_HostAddress = http://localhost:5000
 
 GET {{WebLayer_HostAddress}}/api/genres
 Accept: application/json
@@ -43,6 +43,10 @@ GET {{WebLayer_HostAddress}}/api/titles/search?name=The civil war
 
 GET {{WebLayer_HostAddress}}/api/persons/nm0000206
 Accept: application/json
+
+###
+
+GET http://localhost:5000/api/persons/search?name=Alan Rickman
 
 ###
 

@@ -42,6 +42,21 @@ public class PersonController : BaseController<IPersonData>
         var result = CreatePersonDto(person);
         return Ok(result);
     }
+    
+    //Adding new controller to search titles by name to implement request
+    
+    [HttpGet("search", Name = nameof(SearchPersons))]
+    public IActionResult SearchPersons(string name)
+    {
+
+        var persons = _personData.SearchPersonsByName(name);
+        if (persons == null) return NotFound();
+
+        // Map each person to PersonDto
+        var result = persons.Select(p => CreatePersonDto(p));
+
+        return Ok(result);
+    }
 
     private PersonDto CreatePersonDto(Person person)
     {
@@ -54,4 +69,6 @@ public class PersonController : BaseController<IPersonData>
         
         return modeldto;
     }
+    
+    
 }

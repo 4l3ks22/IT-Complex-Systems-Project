@@ -43,6 +43,7 @@ public class TitleData(MyDbContext db) : ITitleData
     }*/
     
     //Updated version of GetTitleByName to be active
+    //it is better to use built-in Contains method to obtain real search functionality, not just exact matching
     public IList<Title> SearchTitlesByName(string name)
     {
 

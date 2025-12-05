@@ -8,4 +8,7 @@ public interface IPersonData
     public IList<Person> GetPersons(int page, int pageSize);
     
     public Person GetById(string id);
+    
+    //Implementing new interface to search actors (persons) by name
+    IEnumerable<Person> SearchPersonsByName(string name);
 }

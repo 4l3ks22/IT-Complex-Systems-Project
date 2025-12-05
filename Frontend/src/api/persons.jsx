@@ -9,3 +9,9 @@ export function getPersonById(id) {
     return fetch(`${BASE_URL}/${id}`)
         .then(res => res.ok ? res.json() : Promise.reject("Failed to fetch"));
 }
+
+// adding search persons by name
+export function searchPersons(name) {
+    return fetch(`${BASE_URL}/search?name=${encodeURIComponent(name)}`)
+        .then(res => res.ok ? res.json() : Promise.reject("Failed to search persons"));
+}
