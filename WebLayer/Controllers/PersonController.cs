@@ -61,11 +61,12 @@ public class PersonController : BaseController<IPersonData>
     private PersonDto CreatePersonDto(Person person)
     {
         var modeldto = _mapper.Map<PersonDto>(person);
-        modeldto.Url = GetUrl(nameof(GetPersonById), new { personId = person.Nconst });
+        //OJO added trim to get rid of %20 spaces and get a clean Nconst, useful to match searches in frontend
+        modeldto.Url = GetUrl(nameof(GetPersonById), new { personId = person.Nconst.Trim() });
         foreach (var titleDto in modeldto.Titles)
         {
-            titleDto.Url = GetUrl(nameof(TitlesController.GetTitleById), new { id = titleDto.Tconst});
-        }
+            //OJO added trim to get rid of %20 for spaces and get a clean Tconst, useful to match searches in frontend
+            titleDto.Url = GetUrl(nameof(TitlesController.GetTitleById), new { id = titleDto.Tconst.Trim()});        }
         
         return modeldto;
     }

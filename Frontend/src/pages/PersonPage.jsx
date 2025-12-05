@@ -3,9 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { usePerson } from "../hooks/usePersonId";
 
+import { usePersonImages } from "../hooks/usePersonImages";
 export default function PersonPage() {
     const { id } = useParams();
     const person = usePerson(id);
+
+    const images = usePersonImages(id);
 
     if (!person) return <p>Loading person...</p>;
 
@@ -19,6 +22,20 @@ export default function PersonPage() {
             <p><strong>Professions:</strong> {person.professions.join(", ")}</p>
 
             <p><strong>Rating:</strong> {person.personRating}</p>
+
+
+            {/* ---- Images from the TMDB, part 3-D.2 ----*/}
+            <h3>Pictures</h3>
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                {images.map((img, i) => (
+                    <img
+                        key={i}
+                        src={`https://image.tmdb.org/t/p/w200${img.file_path}`}
+                        alt="profile"
+                        style={{ borderRadius: "8px" }}
+                    />
+                ))}
+            </div>
 
             <h3 className="mt-4">Known Titles</h3>
             <ul className="list-group">
