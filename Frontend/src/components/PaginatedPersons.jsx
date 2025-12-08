@@ -14,7 +14,7 @@ export default function PaginatedPersons() {
                 {persons.map(p => (
                     <li key={p.url} className="list-group-item">
                         <a href={`/persons/${p.url.split("/").pop()}`}>
-                            {p.primarytitle} ({p.startyear})
+                            {p.primaryname} ({p.birthyear})
                         </a>
                     </li>
                 ))}
