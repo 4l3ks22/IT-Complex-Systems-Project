@@ -38,7 +38,7 @@ export default function MainNavbar() {
                                 <Nav className="me-3">
                                     <Nav.Link href="/">Home</Nav.Link>
                                     <Nav.Link href="/titles">Titles</Nav.Link>
-                                    <Nav.Link href="/actors">Actors</Nav.Link>
+                                    <Nav.Link href="/persons">Actors</Nav.Link>
                                 </Nav>
                                 <Button variant="outline-primary" onClick={handleShow}>
                                     Sign In
