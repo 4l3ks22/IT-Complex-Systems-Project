@@ -40,11 +40,26 @@ export default function SearchBar() {
     const [query, setQuery] = useState("");
     const navigate = useNavigate();
 
+   // Adding a cleaning function to optimize the search to avoid several issues to the user 
+    function cleanQuery(q) {
+        return q
+            .trim()                     // remove spaces at start/end
+            .replace(/\s+/g, " ")       // collapse multiple spaces
+            .replace(/[^\w\s]/g, "")    // remove symbols such as !@#$%^&*()[]{};:'",.?
+            .toLowerCase();             // convert to lowercase to avoid case problems
+    }
+
+    //using the cleaning function before the query is sent for request to backend
     const submit = async (e) => {
         e.preventDefault();
-        if (!query.trim()) return;
 
-        const encoded = encodeURIComponent(query);
+        let cleaned = cleanQuery(query); // adding a local variable to store the clean query
+
+        //if (!query.trim()) return;
+        if (!cleaned) return;
+
+        //const encoded = encodeURIComponent(query);
+        const encoded = encodeURIComponent(cleaned);
 
         try {
             // Trying the fetch of title search first
