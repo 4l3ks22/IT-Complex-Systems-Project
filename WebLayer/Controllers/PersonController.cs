@@ -18,7 +18,7 @@ public class PersonController : BaseController<IPersonData>
         IMapper mapper) : base(personData, generator, mapper)
     { }
 
-    [HttpGet(Name = nameof(GetPersons))]
+    /*[HttpGet(Name = nameof(GetPersons))]
     public IActionResult GetPersons([FromQuery] QueryParams queryParams)
     {
 
@@ -31,7 +31,23 @@ public class PersonController : BaseController<IPersonData>
         var result = CreatePaging(nameof(GetPersons), persons, numOfItems, queryParams);
 
         return Ok(result);
+    }*/
+    // replacing above action to use pagination
+    [HttpGet(Name = nameof(GetPersons))]
+    public IActionResult GetPersons([FromQuery] QueryParams queryParams)
+    {
+
+        var persons = _personData
+            .GetPersons(queryParams)
+            .Select(x => CreatePersonDto(x));
+
+        var numOfItems = _personData.GetPersonsCount();
+
+        var result = CreatePaging(nameof(GetPersons), persons, numOfItems, queryParams);
+
+        return Ok(result);
     }
+    
 
     [HttpGet("{personId}", Name = nameof(GetPersonById))]
     public IActionResult GetPersonById(string personId)
