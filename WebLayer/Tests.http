@@ -17,6 +17,12 @@ Accept: application/json
 
 ###
 
+//updating this request to link the titles belonging to each genre
+GET {{WebLayer_HostAddress}}/api/genres/3/titles
+Accept: application/json
+
+###
+
 GET {{WebLayer_HostAddress}}/api/episodes
 Accept: application/json
 

@@ -25,6 +25,9 @@ import PersonSearchResultsPage from "./pages/PersonSearchResultsPage.jsx";
 
 import AllPersonsPage from "./pages/AllPersonsPage.jsx";
 
+import GenrePage from "./pages/GenrePage.jsx";
+import AllGenresPage from "./pages/AllGenresPage.jsx";
+
 export default function App() {
     return (
         <div className="container-mt-3">
@@ -46,6 +49,9 @@ export default function App() {
                 <Route path="/search-person" element={<PersonSearchResultsPage />} />
 
                 <Route path="/persons" element={<AllPersonsPage/>} />
+
+                <Route path="/genres/:id" element={<GenrePage />} />
+                <Route path="/genres" element={<AllGenresPage />} />
             </Routes>
             
         </div>

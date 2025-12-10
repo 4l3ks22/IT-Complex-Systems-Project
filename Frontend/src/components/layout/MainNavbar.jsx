@@ -39,6 +39,8 @@ export default function MainNavbar() {
                                     <Nav.Link href="/">Home</Nav.Link>
                                     <Nav.Link href="/titles">Titles</Nav.Link>
                                     <Nav.Link href="/persons">Actors</Nav.Link>
+
+                                    <Nav.Link href="/genres">Advanced Search</Nav.Link>
                                 </Nav>
                                 <Button variant="outline-primary" onClick={handleShow}>
                                     Sign In
