@@ -7,22 +7,20 @@ export default function TopRatedTitlesGrid({ titles }) {
     return (
         <div className="grid-container">
             <Row>
-            {titles.map(title => (
-                <Col>
-                <div key={title.url} className="grid-item">
-                    <img
-                        src={title.titleExtras?.poster}
-                        alt={title.primarytitle}
-                    />
-                    <h4>{title.primarytitle}</h4>
-                    <p>Rating: {title.titleRating?.averagerating}</p>
-                    <p>{title.startyear}</p>
-                </div>
-                </Col>
-            ))}
+                {titles.map(title => (
+                    <Col key={title.url}> {/* key moved here */}
+                        <div className="grid-item">
+                            <img
+                                src={title.titleExtras?.poster}
+                                alt={title.primarytitle}
+                            />
+                            <h4>{title.primarytitle}</h4>
+                            <p>Rating: {title.titleRating?.averagerating}</p>
+                            <p>{title.startyear}</p>
+                        </div>
+                    </Col>
+                ))}
             </Row>
         </div>
-
-        
     );
 }

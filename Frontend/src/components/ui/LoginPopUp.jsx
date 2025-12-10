@@ -1,15 +1,42 @@
-﻿import Modal from 'react-bootstrap/Modal';
+﻿import { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../../api/users';
 
-export default function LoginPopUp({ show, handleClose }) {
+export default function LoginPopUp({ show, handleClose, setUser }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // call login API 
-        console.log("Logging in...");
-        handleClose();
+        setError('');
+
+        loginUser({ email, password })
+            .then(data => {
+                console.log("Logged in!", data);
+
+                // store token and username for future API calls
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("username", data.username);
+
+                // update navbar state
+                if (setUser) setUser({ username: data.username });
+
+                // close modal
+                handleClose();
+
+                // reset form
+                setEmail('');
+                setPassword('');
+            })
+            .catch(err => {
+                console.error(err);
+                setError(err);
+            });
     };
 
     return (
@@ -17,16 +44,31 @@ export default function LoginPopUp({ show, handleClose }) {
             <Modal.Header closeButton>
                 <Modal.Title>Sign In</Modal.Title>
             </Modal.Header>
+
             <Modal.Body>
+                {error && <Alert variant="danger">{error}</Alert>}
+
                 <Form onSubmit={handleLogin}>
                     <Form.Group className="mb-3" controlId="formEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" required />
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Enter Password" required />
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
                     </Form.Group>
 
                     <Button variant="primary" type="submit" className="w-100 mb-3">
@@ -38,7 +80,7 @@ export default function LoginPopUp({ show, handleClose }) {
                             Not a user?{" "}
                             <Button
                                 as={Link}
-                                to="/register" // redirect to registration page
+                                to="/register"
                                 variant="link"
                                 className="p-0"
                             >

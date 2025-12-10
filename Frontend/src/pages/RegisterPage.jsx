@@ -5,22 +5,42 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
+import { registerUser } from '../api/users'; 
 
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     const handleRegister = (e) => {
         e.preventDefault();
+
         if (password !== confirmPassword) {
             setError("Passwords do not match!");
+            setSuccess('');
             return;
         }
+
         setError('');
-        // need api call to register user
-        console.log("Registering:", { email, password });
+        setSuccess('');
+
+        // call API to register user
+        registerUser({ email, username, passwordHash: password })
+            .then(data => {
+                console.log("User created:", data);
+                setSuccess("Registration successful!");
+                setEmail('');
+                setUsername('');
+                setPassword('');
+                setConfirmPassword('');
+            })
+            .catch(err => {
+                console.error(err);
+                setError(err);
+            });
     };
 
     return (
@@ -30,6 +50,7 @@ export default function RegisterPage() {
                     <h2 className="mb-4 text-center">Sign Up</h2>
 
                     {error && <Alert variant="danger">{error}</Alert>}
+                    {success && <Alert variant="success">{success}</Alert>}
 
                     <Form onSubmit={handleRegister}>
                         <Form.Group className="mb-3" controlId="formEmail">
@@ -39,6 +60,17 @@ export default function RegisterPage() {
                                 placeholder="Enter email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formUsername">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
                         </Form.Group>
