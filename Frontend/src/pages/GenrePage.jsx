@@ -1,6 +1,7 @@
 ﻿import { useParams } from "react-router-dom";
 import { useGenreTitles } from "../hooks/useGenreTitles";
 import MainNavbar from "../components/layout/MainNavbar";
+import { Link } from "react-router-dom";
 
 export default function GenrePage() {
     const { id } = useParams();
@@ -21,9 +22,9 @@ export default function GenrePage() {
             <ul className="list-group mb-3">
                 {titles.map(t => (
                     <li key={t.url} className="list-group-item">
-                        <a href={`/titles/${t.url.split("/").pop()}`}>
+                        <Link to={`/titles/${t.url.split("/").pop()}`}>
                             {t.primarytitle} ({t.startyear})
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>

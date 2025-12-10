@@ -1,4 +1,5 @@
 ﻿import {usePaginatedTitles} from "../hooks/usePaginatedTitles.jsx";
+import { Link } from "react-router-dom";
 import React from "react";
 
 export default function PaginatedTitles() {
@@ -13,9 +14,9 @@ export default function PaginatedTitles() {
             <ul className="list-group mb-3">
                 {titles.map(t => (
                     <li key={t.url} className="list-group-item">
-                        <a href={`/titles/${t.url.split("/").pop()}`}>
+                        <Link to={`/titles/${t.url.split("/").pop()}`}>
                             {t.primarytitle} ({t.startyear})
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>

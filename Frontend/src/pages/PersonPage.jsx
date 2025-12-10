@@ -1,8 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-
-import { useEffect, useState } from "react";
 import { usePerson } from "../hooks/usePersonId";
-
 import { usePersonImages } from "../hooks/usePersonImages";
 export default function PersonPage() {
     const { id } = useParams();

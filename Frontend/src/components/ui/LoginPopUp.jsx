@@ -1,6 +1,7 @@
 ﻿import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 
 export default function LoginPopUp({ show, handleClose }) {
 
@@ -36,8 +37,9 @@ export default function LoginPopUp({ show, handleClose }) {
                         <span>
                             Not a user?{" "}
                             <Button
+                                as={Link}
+                                to="/register" // redirect to registration page
                                 variant="link"
-                                href="/register" // redirect to registration page
                                 className="p-0"
                             >
                                 Register here

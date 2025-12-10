@@ -1,5 +1,6 @@
 ﻿import {usePaginatedPersons} from "../hooks/usePaginatedPersons.jsx";
 import React from "react";
+import {Link} from "react-router-dom";
 
 export default function PaginatedPersons() {
     const { persons, pageInfo, loading, setUrl } =
@@ -13,9 +14,9 @@ export default function PaginatedPersons() {
             <ul className="list-group mb-3">
                 {persons.map(p => (
                     <li key={p.url} className="list-group-item">
-                        <a href={`/persons/${p.url.split("/").pop()}`}>
+                        <Link to={`/persons/${p.url.split("/").pop()}`}>
                             {p.primaryname} ({p.birthyear})
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>
