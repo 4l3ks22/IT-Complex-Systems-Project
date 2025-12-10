@@ -1,47 +1,29 @@
-/*import HomePage from "./pages/Homepage.jsx";
-import ThemeButton from "./components/ThemeButton.jsx";
-
-function App() {
-    return (
-        <div>
-            <ThemeButton/>
-            <HomePage/>
-        </div>
-    );
-}
-
-export default App;*/
-
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import HomePage from "./pages/Homepage.jsx";
 import TitlePage from "./pages/TitlePage.jsx";
 import './App.css'
-//import PersonsTable from "./components/PersonsTable.jsx";
 import SearchResultsPage from "./pages/SearchResultsPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import AllTitlesPage from "./pages/AllTitlesPage.jsx";
 import PersonPage from "./pages/PersonPage.jsx";
 import PersonSearchResultsPage from "./pages/PersonSearchResultsPage.jsx";
-
 import AllPersonsPage from "./pages/AllPersonsPage.jsx";
-
 import GenrePage from "./pages/GenrePage.jsx";
 import AllGenresPage from "./pages/AllGenresPage.jsx";
+import MainNavbar from "./components/layout/MainNavbar.jsx";
 
 export default function App() {
     return (
-        <div className="container-mt-3">
-           
+        <>
             
-            <nav className="mb-3">
-                <Link to="/" className="btn btn-primary me-2">Home</Link>
-            </nav>
+            <MainNavbar/>
 
+            <div className="app-container">
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/titles/:id" element={<TitlePage />} />
                 <Route path="/search" element={<SearchResultsPage />} />
-                
+
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/titles" element={<AllTitlesPage/>} />
                 {/* Routes for Persons search */}
@@ -53,7 +35,8 @@ export default function App() {
                 <Route path="/genres/:id" element={<GenrePage />} />
                 <Route path="/genres" element={<AllGenresPage />} />
             </Routes>
-            
-        </div>
+
+            </div>
+        </>
     );
 }

@@ -5,7 +5,6 @@ import MainNavbar from "../components/layout/MainNavbar.jsx";
 export default function AllTitlesPage() {
     return (
         <div>
-            <MainNavbar/>
             <PaginatedTitles/>
         </div>
     );

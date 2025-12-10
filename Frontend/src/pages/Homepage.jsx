@@ -23,8 +23,6 @@ export default function HomePage() {
 
     return (
         <div>
-            <MainNavbar />
-            
             <NewestTitlesCarousel titles={newestTitles} />
             
             <TopRatedTitlesGrid titles={topRatedTitles} />

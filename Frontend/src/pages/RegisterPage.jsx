@@ -1,11 +1,11 @@
 ﻿import { useState } from 'react';
+import { registerUser } from '../api/users';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-import { registerUser } from '../api/users'; 
 
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
@@ -17,30 +17,23 @@ export default function RegisterPage() {
 
     const handleRegister = (e) => {
         e.preventDefault();
-
         if (password !== confirmPassword) {
             setError("Passwords do not match!");
-            setSuccess('');
             return;
         }
-
         setError('');
         setSuccess('');
 
-        // call API to register user
         registerUser({ email, username, passwordHash: password })
             .then(data => {
                 console.log("User created:", data);
-                setSuccess("Registration successful!");
+                setSuccess("Registration successful! You can now log in.");
                 setEmail('');
                 setUsername('');
                 setPassword('');
                 setConfirmPassword('');
             })
-            .catch(err => {
-                console.error(err);
-                setError(err);
-            });
+            .catch(err => setError(err));
     };
 
     return (
@@ -53,47 +46,51 @@ export default function RegisterPage() {
                     {success && <Alert variant="success">{success}</Alert>}
 
                     <Form onSubmit={handleRegister}>
-                        <Form.Group className="mb-3" controlId="formEmail">
+                        <Form.Group className="mb-3">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="Enter email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={e => setEmail(e.target.value)}
                                 required
+                                autoComplete="email"
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formUsername">
+                        <Form.Group className="mb-3">
                             <Form.Label>Username</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter username"
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={e => setUsername(e.target.value)}
                                 required
+                                autoComplete="username"
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formPassword">
+                        <Form.Group className="mb-3">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 type="password"
                                 placeholder="Password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={e => setPassword(e.target.value)}
                                 required
+                                autoComplete="new-password"
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formConfirmPassword">
+                        <Form.Group className="mb-3">
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control
                                 type="password"
                                 placeholder="Confirm Password"
                                 value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                onChange={e => setConfirmPassword(e.target.value)}
                                 required
+                                autoComplete="new-password"
                             />
                         </Form.Group>
 

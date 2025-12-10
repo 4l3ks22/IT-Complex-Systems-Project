@@ -6,7 +6,6 @@ import PaginatedPersons from "../components/PaginatedPersons.jsx";
 export default function AllPersonsPage() {
     return (
         <div>
-            <MainNavbar/>
             <PaginatedPersons/>
         </div>
     );

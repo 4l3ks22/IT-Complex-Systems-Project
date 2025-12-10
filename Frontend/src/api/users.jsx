@@ -19,3 +19,12 @@ export function loginUser(credentials) {
     })
         .then(res => res.ok ? res.json() : Promise.reject("Invalid login"));
 }
+
+// User Bookmarks
+
+export function getUserBookmarks(userId, token) {
+    return fetch(`${BASE_URL}/${userId}`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+        .then(res => res.ok ? res.json() : Promise.reject("Failed to fetch bookmarks"));
+}

@@ -15,7 +15,6 @@ export default function GenrePage() {
 
     return (
         <div>
-            <MainNavbar />
 
             <h2 className="mt-3">Titles in Genre #{id}</h2>
 

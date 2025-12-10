@@ -17,26 +17,14 @@ export default function LoginPopUp({ show, handleClose, setUser }) {
 
         loginUser({ email, password })
             .then(data => {
-                console.log("Logged in!", data);
-
-                // store token and username for future API calls
                 localStorage.setItem("token", data.token);
+                localStorage.setItem("userId", data.userId);
                 localStorage.setItem("username", data.username);
 
-                // update navbar state
-                if (setUser) setUser({ username: data.username });
-
-                // close modal
+                setUser({ username: data.username, userId: data.userId });
                 handleClose();
-
-                // reset form
-                setEmail('');
-                setPassword('');
             })
-            .catch(err => {
-                console.error(err);
-                setError(err);
-            });
+            .catch(err => setError(err));
     };
 
     return (
@@ -44,7 +32,6 @@ export default function LoginPopUp({ show, handleClose, setUser }) {
             <Modal.Header closeButton>
                 <Modal.Title>Sign In</Modal.Title>
             </Modal.Header>
-
             <Modal.Body>
                 {error && <Alert variant="danger">{error}</Alert>}
 
@@ -64,7 +51,7 @@ export default function LoginPopUp({ show, handleClose, setUser }) {
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type="password"
-                            placeholder="Enter Password"
+                            placeholder="Enter password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required

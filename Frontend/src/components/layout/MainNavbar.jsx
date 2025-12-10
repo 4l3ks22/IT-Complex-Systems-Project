@@ -1,10 +1,8 @@
 ﻿import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import SearchBar from '../SearchBar';
@@ -20,6 +18,7 @@ export default function MainNavbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("userId");
         localStorage.removeItem("username");
         setUser(null);
     };
@@ -27,60 +26,56 @@ export default function MainNavbar() {
     useEffect(() => {
         const token = localStorage.getItem("token");
         const username = localStorage.getItem("username");
-        if (token && username) setUser({ username });
+        const userId = localStorage.getItem("userId");
+        if (token && username && userId) {
+            setUser({ username, userId });
+        }
     }, []);
 
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary py-1">
-                <Container fluid>
-                    <Row className="w-100 align-items-center">
+            <Navbar expand="lg" bg="light" className="py-2 shadow-sm">
+                <Container>
+                    {/* Logo */}
+                    <Navbar.Brand as={Link} to="/">Movie DB</Navbar.Brand>
 
-                        {/* Logo */}
-                        <Col xs="auto">
-                            <Navbar.Brand as={Link} to="/">Movie DB</Navbar.Brand>
-                        </Col>
+                    {/* Search bar */}
+                    <div className="mx-auto" style={{ maxWidth: '500px', flex: 1 }}>
+                        <SearchBar />
+                    </div>
 
-                        {/* Search bar centered */}
-                        <Col className="d-flex justify-content-center">
-                            <div className="w-100 mt-3" style={{ maxWidth: "600px" }}>
-                                <SearchBar />
-                            </div>
-                        </Col>
+                    {/* Navigation links + user menu */}
+                    <Nav className="d-flex align-items-center">
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/titles">Titles</Nav.Link>
+                        <Nav.Link as={Link} to="/persons">Actors</Nav.Link>
+                        <Nav.Link as={Link} to="/genres">Advanced Search</Nav.Link>
 
-                        {/* Navigation + Login/User */}
-                        <Col xs="auto">
-                            <div className="d-flex align-items-center">
-                                <Nav className="me-3">
-                                    <Nav.Link as={Link} to="/">Home</Nav.Link>
-                                    <Nav.Link as={Link} to="/titles">Titles</Nav.Link>
-                                    <Nav.Link as={Link} to="/persons">Actors</Nav.Link>
-                                    <Nav.Link as={Link} to="/genres">Advanced Search</Nav.Link>
-                                </Nav>
+                        {user && (
+                            <Nav.Link as={Link} to={`/users/${user.userId}`}>
+                                Bookmarks
+                            </Nav.Link>
+                        )}
 
-                                {user ? (
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="outline-primary">
-                                            {user.username}
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item onClick={handleLogout}>
-                                                Logout
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                ) : (
-                                    <Button variant="outline-primary" onClick={handleShow}>
-                                        Sign In
-                                    </Button>
-                                )}
-                            </div>
-                        </Col>
+                        {user ? (
+                            <Dropdown align="end" className="ms-2">
+                                <Dropdown.Toggle variant="outline-primary">
+                                    {user.username}
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={handleLogout}>
+                                        Logout
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        ) : (
+                            <Button variant="outline-primary" className="ms-2" onClick={handleShow}>
+                                Sign In
+                            </Button>
+                        )}
 
-                        <Col xs="auto">
-                            <ThemeButton />
-                        </Col>
-                    </Row>
+                        <ThemeButton className="ms-2" />
+                    </Nav>
                 </Container>
             </Navbar>
 
