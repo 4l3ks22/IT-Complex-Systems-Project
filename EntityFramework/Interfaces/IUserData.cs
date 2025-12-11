@@ -13,4 +13,8 @@ public interface IUserData
 
     public User GetUserByEmail(string email);
     User LoginUser(string username, string password);
+    
+    // Interface to get user bookmarks with details
+    IEnumerable<UserBookmark> GetUserBookmarksWithDetails(int userId);
+
 }

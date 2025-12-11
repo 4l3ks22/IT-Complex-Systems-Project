@@ -136,6 +136,46 @@ public class UserController : BaseController<IUserData>
         _userData.DeleteUser(user);
         return NoContent();
     }
+    
+    
+    // Added user bookmarks endpoint
+    [Authorize]
+    [HttpGet("{userId}/bookmarks")]
+    public IActionResult GetUserBookmarks(int userId)
+    {
+        // Check if user exists
+        var user = _userData.GetUserById(userId);
+        if (user == null)
+            return NotFound("User not found");
+
+        // Verify the current user is accessing their own bookmarks
+        var currentUserId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+        if (currentUserId != userId)
+            return Forbid("You can only access your own bookmarks");
+
+        // Get user's bookmarks with title/person information
+        var bookmarks = _userData.GetUserBookmarksWithDetails(userId);
+        if (bookmarks == null || !bookmarks.Any())
+            return NotFound("No bookmarks found");
+
+        var response = new UserBookmarksResponseDto
+        {
+            UserId = userId,
+            Username = user.Username,
+            Bookmarks = bookmarks.Select(b => new UserBookmarkDto
+            {
+                BookmarkId = b.BookmarkId,
+                Title = b.TconstNavigation?.Primarytitle,
+                PersonName = b.NconstNavigation?.Primaryname,
+                Tconst = b.Tconst,
+                Nconst = b.Nconst,
+                BookmarkTime = b.BookmarkTime ?? DateTime.UtcNow
+            })
+        };
+
+        return Ok(response);
+    }
+
 
     // Create DTO method
     private UserDto CreateUsersDto(User user)

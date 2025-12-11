@@ -67,5 +67,17 @@ public class UserData(MyDbContext db) : IUserData
         }
 
         return user;
+
+    }
+    
+    // Method to get user bookmarks with details
+    
+    public IEnumerable<UserBookmark> GetUserBookmarksWithDetails(int userId)
+    {
+        return db.UserBookmarks
+            .Where(b => b.UserId == userId)
+            .Include(b => b.TconstNavigation)
+            .Include(b => b.NconstNavigation)
+            .ToList();
     }
 }
