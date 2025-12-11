@@ -3,6 +3,7 @@ namespace WebLayer.Dtos;
 public class UserDto
 {
     public string? Url {get; set;}
+    
     public int UserId { get; set; }
 
     public string Username { get; set; } = null!;
@@ -13,7 +14,7 @@ public class UserDto
 
 }
 
-// Added user bookmark dtos - one for each bookmark and one for the response containing user info and list of bookmarks
+// Added user bookmark dtos - one for each bookmark and one for the response containing user info and list of bookmarks 
 
 public class UserBookmarkDto
 {

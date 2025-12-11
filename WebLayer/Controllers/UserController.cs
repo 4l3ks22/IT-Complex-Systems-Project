@@ -44,8 +44,9 @@ public class UserController : BaseController<IUserData>
         return Ok(new
         {
             Token = token,
-            user.Email,
-            user.Username
+            UserId = user.UserId,      
+            Email = user.Email,
+            Username = user.Username
         });
     }
     
