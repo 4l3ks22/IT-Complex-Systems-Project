@@ -22,9 +22,16 @@ export function loginUser(credentials) {
 
 // User Bookmarks
 
-export function getUserBookmarks(userId, token) {
-    return fetch(`${BASE_URL}/${userId}`, {
-        headers: { "Authorization": `Bearer ${token}` }
+export function getUserBookmarks(userId) {
+    if (!userId) return Promise.reject("No userId provided");
+
+    const token = localStorage.getItem("token");
+    return fetch(`http://localhost:5000/api/users/${userId}/bookmarks`, {
+        headers: { Authorization: `Bearer ${token}` }
     })
-        .then(res => res.ok ? res.json() : Promise.reject("Failed to fetch bookmarks"));
+        .then(res => res.json())
+        .then(data => {
+            if (data.detail) return Promise.reject(data);
+            return data;
+        });
 }

@@ -1,55 +1,33 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg, #fff);
+  color: var(--text, #000);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
 }
 
 .card {
-  padding: 2em;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.read-the-docs {
-  color: #888;
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
-.app-container {
-  min-height: calc(100vh - 70px); /* 70px = navbar height */
-  max-width: 1200px;
-  margin: 20px auto; /* center content */
-  padding: 0 15px;
-  .container-fluid {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.col-md-3 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
-

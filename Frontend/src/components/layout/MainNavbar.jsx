@@ -36,36 +36,24 @@ export default function MainNavbar() {
         <>
             <Navbar expand="lg" bg="light" className="py-2 shadow-sm">
                 <Container>
-                    {/* Logo */}
                     <Navbar.Brand as={Link} to="/">Movie DB</Navbar.Brand>
-
-                    {/* Search bar */}
-                    <div className="mx-auto" style={{ maxWidth: '500px', flex: 1 }}>
+                    <div className="mx-auto" style={{ maxWidth: 500, flex: 1 }}>
                         <SearchBar />
                     </div>
-
-                    {/* Navigation links + user menu */}
                     <Nav className="d-flex align-items-center">
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/titles">Titles</Nav.Link>
                         <Nav.Link as={Link} to="/persons">Actors</Nav.Link>
                         <Nav.Link as={Link} to="/genres">Advanced Search</Nav.Link>
 
-                        {user && (
-                            <Nav.Link as={Link} to={`/users/${user.userId}`}>
-                                Bookmarks
-                            </Nav.Link>
-                        )}
-
                         {user ? (
                             <Dropdown align="end" className="ms-2">
-                                <Dropdown.Toggle variant="outline-primary">
-                                    {user.username}
-                                </Dropdown.Toggle>
+                                <Dropdown.Toggle variant="outline-primary">{user.username}</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={handleLogout}>
-                                        Logout
+                                    <Dropdown.Item as={Link} to={`/users/${user.userId}/bookmarks`}>
+                                        Bookmarks
                                     </Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         ) : (
@@ -79,7 +67,6 @@ export default function MainNavbar() {
                 </Container>
             </Navbar>
 
-            {/* Login modal */}
             <LoginPopUp show={showLogin} handleClose={handleClose} setUser={setUser} />
         </>
     );
