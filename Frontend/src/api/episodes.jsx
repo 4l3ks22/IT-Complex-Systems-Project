@@ -1,4 +1,4 @@
-﻿const BASE_URL = "http://localhost:5220/api/episodes";
+﻿const BASE_URL = "http://localhost:5000/api/episodes";
 
 export function getAllEpisodes() {
     return fetch(BASE_URL)
