@@ -4,9 +4,9 @@ using Version = EntityFramework.Models.Version;
 
 namespace EntityFramework;
 
-/// <summary>
+
 /// Generated database entities, relations and context using dotnet ef scaffold 
-/// </summary>
+
 public class MyDbContext : DbContext
 {
 

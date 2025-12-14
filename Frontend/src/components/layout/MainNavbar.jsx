@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
@@ -12,6 +12,7 @@ import ThemeButton from "../ThemeButton.jsx";
 export default function MainNavbar() {
     const [showLogin, setShowLogin] = useState(false);
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     const handleShow = () => setShowLogin(true);
     const handleClose = () => setShowLogin(false);
@@ -21,13 +22,17 @@ export default function MainNavbar() {
         localStorage.removeItem("userId");
         localStorage.removeItem("username");
         setUser(null);
+        navigate('/'); // redirect to main page
     };
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         const username = localStorage.getItem("username");
-        const userId = localStorage.getItem("userId");
-        if (token && username && userId) {
+        const userIdStr = localStorage.getItem("userId");
+
+        const userId = userIdStr ? parseInt(userIdStr, 10) : null;
+
+        if (token && username && userId !== null && !isNaN(userId)) {
             setUser({ username, userId });
         }
     }, []);
@@ -36,15 +41,12 @@ export default function MainNavbar() {
         <>
             <Navbar expand="lg" bg="light" className="py-2 shadow-sm">
                 <Container>
-                    {/* Logo */}
                     <Navbar.Brand as={Link} to="/">Movie DB</Navbar.Brand>
 
-                    {/* Search bar */}
                     <div className="mx-auto" style={{ maxWidth: '500px', flex: 1 }}>
                         <SearchBar />
                     </div>
 
-                    {/* Navigation links + user menu */}
                     <Nav className="d-flex align-items-center">
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/titles">Titles</Nav.Link>
@@ -52,9 +54,14 @@ export default function MainNavbar() {
                         <Nav.Link as={Link} to="/genres">Advanced Search</Nav.Link>
 
                         {user && (
-                            <Nav.Link as={Link} to={`/users/${user.userId}`}>
-                                Bookmarks
-                            </Nav.Link>
+                            <>
+                                <Nav.Link as={Link} to={`/users/${user.userId}/ratings`}>
+                                    My Ratings
+                                </Nav.Link>
+                                <Nav.Link as={Link} to={`/users/${user.userId}/bookmarks`}>
+                                    Bookmarks
+                                </Nav.Link>
+                            </>
                         )}
 
                         {user ? (
@@ -63,9 +70,7 @@ export default function MainNavbar() {
                                     {user.username}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={handleLogout}>
-                                        Logout
-                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         ) : (
@@ -79,7 +84,6 @@ export default function MainNavbar() {
                 </Container>
             </Navbar>
 
-            {/* Login modal */}
             <LoginPopUp show={showLogin} handleClose={handleClose} setUser={setUser} />
         </>
     );

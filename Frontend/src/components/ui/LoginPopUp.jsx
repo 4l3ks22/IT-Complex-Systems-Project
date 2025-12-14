@@ -18,10 +18,11 @@ export default function LoginPopUp({ show, handleClose, setUser }) {
         loginUser({ email, password })
             .then(data => {
                 localStorage.setItem("token", data.token);
-                localStorage.setItem("userId", data.userId);
+                                localStorage.setItem("userId", data.userId);
                 localStorage.setItem("username", data.username);
+                localStorage.setItem("userId", data.userId)
 
-                setUser({ username: data.username, userId: data.userId });
+                setUser({ username: data.username, userId: Number(data.userId) });
                 handleClose();
             })
             .catch(err => setError(err));

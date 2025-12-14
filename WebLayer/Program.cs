@@ -52,6 +52,8 @@ builder.Services.AddScoped<IPersonData, PersonData>();
 builder.Services.AddScoped<IUserData, UserData>();
 builder.Services.AddScoped<IVersionData, VersionData>();
 builder.Services.AddScoped<ITitleGenreData, TitleGenreData>();
+builder.Services.AddScoped<IRatingData, RatingData>();
+
 builder.Services.AddScoped<IBookmarkData, BookmarkData>();
 // JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -78,7 +80,7 @@ var app = builder.Build();
 
 app.MapGet("/", () => Results.Text("Web app running"));
 
-// ➤ Important order: CORS must be BEFORE auth & controllers
+
 app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
