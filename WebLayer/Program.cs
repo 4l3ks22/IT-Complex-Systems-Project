@@ -52,7 +52,7 @@ builder.Services.AddScoped<IPersonData, PersonData>();
 builder.Services.AddScoped<IUserData, UserData>();
 builder.Services.AddScoped<IVersionData, VersionData>();
 builder.Services.AddScoped<ITitleGenreData, TitleGenreData>();
-
+builder.Services.AddScoped<IBookmarkData, BookmarkData>();
 // JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
