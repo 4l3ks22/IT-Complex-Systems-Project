@@ -54,6 +54,7 @@ builder.Services.AddScoped<IVersionData, VersionData>();
 builder.Services.AddScoped<ITitleGenreData, TitleGenreData>();
 builder.Services.AddScoped<IRatingData, RatingData>();
 
+builder.Services.AddScoped<IBookmarkData, BookmarkData>();
 // JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
