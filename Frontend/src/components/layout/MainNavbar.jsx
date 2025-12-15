@@ -39,15 +39,15 @@ export default function MainNavbar() {
 
     return (
         <>
-            <Navbar expand="lg" bg="light" className="py-2 shadow-sm">
-                <Container>
+            <Navbar expand="lg" bg="light" className="py-2  shadow-sm fixed-top">
+                <div className="container-fluid p-2">
                     <Navbar.Brand as={Link} to="/">Movie DB</Navbar.Brand>
 
-                    <div className="mx-auto" style={{ maxWidth: '500px', flex: 1 }}>
+                    <div className="m-auto px-2" style={{ maxWidth: '500px', flex: 1 }}>
                         <SearchBar />
                     </div>
 
-                    <Nav className="d-flex align-items-center">
+                    <Nav className="d-flex align-items-center justify-content-end flex-wrap">
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/titles">Titles</Nav.Link>
                         <Nav.Link as={Link} to="/persons">Actors</Nav.Link>
@@ -81,7 +81,7 @@ export default function MainNavbar() {
 
                         <ThemeButton className="ms-2" />
                     </Nav>
-                </Container>
+                </div>
             </Navbar>
 
             <LoginPopUp show={showLogin} handleClose={handleClose} setUser={setUser} />
