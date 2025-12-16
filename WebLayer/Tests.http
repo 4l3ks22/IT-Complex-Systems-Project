@@ -143,3 +143,6 @@ Content-Type: application/json
   "Email": "fasfasfaf@test.com",
   "Password":"password"
 }
+###
+GET {{WebLayer_HostAddress}}/api/bookmarks/2
+Content-Type: application/json

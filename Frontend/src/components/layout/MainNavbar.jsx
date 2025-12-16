@@ -58,7 +58,7 @@ export default function MainNavbar() {
                                 <Nav.Link as={Link} to={`/users/${user.userId}/ratings`}>
                                     My Ratings
                                 </Nav.Link>
-                                <Nav.Link as={Link} to={`/users/${user.userId}/bookmarks`}>
+                                <Nav.Link as={Link} to={`/bookmarks/${user.userId}`}>
                                     Bookmarks
                                 </Nav.Link>
                             </>

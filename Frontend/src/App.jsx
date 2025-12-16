@@ -12,6 +12,7 @@ import GenrePage from "./pages/GenrePage.jsx";
 import AllGenresPage from "./pages/AllGenresPage.jsx";
 import RatingsPage from "./pages/RatingsPage.jsx"; // <- import RatingsPage
 import MainNavbar from "./components/layout/MainNavbar.jsx";
+import BookmarksPage from "./pages/BookmarksPage.jsx";
 
 export default function App() {
     return (
@@ -34,6 +35,8 @@ export default function App() {
 
                     <Route path="/genres/:id" element={<GenrePage />} />
                     <Route path="/genres" element={<AllGenresPage />} />
+                    
+                    <Route path="/bookmarks/:id" element={<BookmarksPage />} />
 
                     {/* Ratings page route */}
                     <Route path="/users/:userId/ratings" element={<RatingsPage />} />

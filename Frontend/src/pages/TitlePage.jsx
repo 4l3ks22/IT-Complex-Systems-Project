@@ -7,8 +7,8 @@ export default function TitlePage() {
     const { id } = useParams();
     const title = useTitle(id);
 
-    const userId = Number(localStorage.getItem("userId"));
-    const [userRating, setUserRating] = useUserRatings(userId, id, title?.primarytitle);
+    // const userId = Number(localStorage.getItem("userId"));
+    // const [userRating, setUserRating] = useUserRatings(userId, id, title?.primarytitle);
 
     if (!title) return <p>Loading title...</p>;
 
@@ -22,10 +22,10 @@ export default function TitlePage() {
             )}
             <p className="mt-3">{title.titleExtras?.plot}</p>
 
-            <div style={{ marginTop: "20px" }}>
-                <p>Your Rating:</p>
-                <StarRating initialRating={userRating} onChange={setUserRating} />
-            </div>
+            {/*<div style={{ marginTop: "20px" }}>*/}
+            {/*    <p>Your Rating:</p>*/}
+            {/*    <StarRating initialRating={userRating} onChange={setUserRating} />*/}
+            {/*</div>*/}
         </div>
     );
 }
