@@ -6,7 +6,7 @@ public class QueryParams
 {
     private const int MaxPageSize = 25;
     private int _pageNumber = 1;
-    private int _pageSize = 10;
+    private int _pageSize = 20;
 
     [Range(1, int.MaxValue, ErrorMessage = "Page numbers start at 1")] // throws an error if page number is not at least 1
     public int PageNumber

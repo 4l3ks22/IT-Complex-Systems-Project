@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { usePerson } from "../hooks/usePersonId";
 import { usePersonImages } from "../hooks/usePersonImages";
+import BookmarkButton from "../components/BookmarkButton.jsx";
 export default function PersonPage() {
     const { id } = useParams();
     const person = usePerson(id);
@@ -44,6 +45,7 @@ export default function PersonPage() {
                     </li>
                 ))}
             </ul>
+            <BookmarkButton type="person" id={id} />
         </div>
     );
 }

@@ -146,3 +146,12 @@ Content-Type: application/json
 ###
 GET {{WebLayer_HostAddress}}/api/bookmarks/2
 Content-Type: application/json
+
+###
+POST {{WebLayer_HostAddress}}/api/bookmarks
+Content-Type: application/json
+
+{
+  "userId": "56",
+  "nconst": "nm1895576"
+}

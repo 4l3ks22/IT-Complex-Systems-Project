@@ -1,7 +1,6 @@
 import React from "react";
 import { useTitles } from "../hooks/useTitles";
 import MainNavbar from "../components/layout/MainNavbar.jsx";
-import GenresDropdown from "../components/GenresDropDown.jsx";
 import NewestTitlesCarousel from "../components/ui/NewestTitlesCarousel.jsx";
 import TopRatedTitlesGrid from "../components/ui/TopRatedTitlesGrid.jsx";
 import TopRatedActorsGrid from "../components/ui/TopRatedActorsGrid.jsx";
@@ -27,8 +26,7 @@ export default function HomePage() {
             
             <TopRatedTitlesGrid titles={topRatedTitles} />
             
-            <TopRatedActorsGrid />
-            <GenresDropdown />
+            {/*<TopRatedActorsGrid />*/}
         </div>
     );
 }

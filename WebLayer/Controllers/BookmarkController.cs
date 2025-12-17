@@ -55,7 +55,7 @@ public class BookmarkController : BaseController<IBookmarkData>
             return BadRequest("Bookmark object is null");
         var bookmark = createBookmarkDto.Adapt<UserBookmark>();
         _bookmarkData.AddUserBookmark(bookmark);
-        return Ok(); //needs to be changed with CreatedAtRoute
+        return StatusCode(StatusCodes.Status201Created, bookmark);
     }
     
     [HttpDelete(Name = nameof(DeleteUserBookmark))]

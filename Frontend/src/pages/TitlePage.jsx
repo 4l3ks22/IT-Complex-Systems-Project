@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useTitle } from "../hooks/useTitleId";
 import StarRating from "../components/ui/StarRating.jsx";
 import { useUserRatings } from "../hooks/useUserRatings";
+import BookmarkButton from "../components/BookmarkButton.jsx";
 
 export default function TitlePage() {
     const { id } = useParams();
@@ -26,6 +27,8 @@ export default function TitlePage() {
             {/*    <p>Your Rating:</p>*/}
             {/*    <StarRating initialRating={userRating} onChange={setUserRating} />*/}
             {/*</div>*/}
+            <BookmarkButton type="title" id={id} />
         </div>
+
     );
 }
