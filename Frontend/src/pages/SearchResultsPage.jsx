@@ -1,33 +1,58 @@
 ﻿import React from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { useSearchTitles } from "../hooks/useSearchTitles";
+import { useSearchPersons } from "../hooks/useSearchPersons";
 
 export default function SearchResultsPage() {
-    const [params] = useSearchParams(); //Importing component hook to read an URL's query string
+    const [params] = useSearchParams();
+    const name = params.get("name");
 
-    const name = params.get("name"); //params extract the title query name
-    
-    const { results } = useSearchTitles(name); // useSearchTitles receives the name and fetches for an array of titles results
-    
-    if (!results) return <p>Loading titles...</p>;
+    const { results: titles } = useSearchTitles(name);
+    const { results: persons } = useSearchPersons(name);
 
-    // An array of results to show list and links (React Router) to TitlePage <Route path="/titles/:id" element={<TitlePage />} />
+    if (!titles || !persons) {
+        return <p>Loading search results...</p>;
+    }
+
+    if (!titles.length && !persons.length) {
+        return <p>No results found for "{name}"</p>;
+    }
+
     return (
         <div>
             <h2>Search results for "{name}"</h2>
 
-            <ul className="list-group">
-                {results.map(r => (
-                    //the results are mapped and ready to be shown in a list according to every title url for matching query name
-                    //then using Link React Router properties to link to TitlePage.jsx according to the abstracted id of the title
-                    //<Link to={`/titles/${r.url.split("/").pop()}`}> will match the <Route path="/titles/:id" element={<TitlePage />} />
-                    <li key={r.url} className="list-group-item">
-                        <Link to={`/titles/${r.url.split("/").pop()}`}>
-                            {r.primarytitle} ({r.startyear})
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            {/* Movies / Series */}
+            {titles.length > 0 && (
+                <>
+                    <h4 className="mt-4">Movies & Series</h4>
+                    <ul className="list-group mb-4">
+                        {titles.map(t => (
+                            <li key={t.url} className="list-group-item">
+                                <Link to={`/titles/${t.url.split("/").pop()}`}>
+                                    {t.primarytitle} ({t.startyear})
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
+
+            {/* Persons */}
+            {persons.length > 0 && (
+                <>
+                    <h4 className="mt-4">Persons</h4>
+                    <ul className="list-group">
+                        {persons.map(p => (
+                            <li key={p.url} className="list-group-item">
+                                <Link to={`/persons/${p.url.split("/").pop()}`}>
+                                    {p.primaryname} ({p.birthyear})
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
         </div>
     );
 }
